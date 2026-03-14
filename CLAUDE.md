@@ -109,6 +109,37 @@ npx expo start        # Iniciar app
 
 ---
 
+## Estilização — regras obrigatórias
+
+- **Styled-components** (`styled-components/native`) é o único mecanismo de estilo — nunca usar `StyleSheet.create`
+- **Todo valor de estilo deve usar tokens** de `src/tokens/` — nunca valores hardcoded:
+  - Espaçamento → `Spacing.*` (ex: `Spacing.s4`)
+  - Raio de borda → `Radius.*` (ex: `Radius.btn`)
+  - Cores → via `theme.*` recebido por prop (ex: `${({ bgColor }) => bgColor}`)
+  - Tipografia → `FontSize.*`, `FontWeight.*`, `FontFamily.*` ou preset `Typography.*`
+  - Sombras → `Shadows.*`
+- **Propriedades CSS padrão** — não usar shorthands exclusivos do React Native (`padding-vertical`, `padding-horizontal`); usar `padding-top`, `padding-bottom`, `padding-left`, `padding-right`
+- **Estilos em arquivo separado** — cada componente tem `ComponentName.styles.ts` com os styled-components; o `.tsx` importa desse arquivo
+
+### Estrutura de um componente
+
+```
+ComponentName/
+  ComponentName.styles.ts   ← styled-components (tokens, sem lógica)
+  ComponentName.tsx          ← JSX + lógica de apresentação
+  ComponentName.test.tsx     ← testes unitários
+  ComponentName.stories.tsx  ← Storybook
+  index.ts                   ← barrel export (público)
+```
+
+### UI burra
+
+- Componentes de UI **nunca decidem** — só renderizam o que recebem via props
+- Strings visíveis sempre via `t('key')` de `@/shared/i18n` — nunca hardcoded
+- Lógica de negócio fica em `domain/` ou `viewModels/`, nunca em componentes
+
+---
+
 ## Regras gerais
 
 - Nome do app em `app.json` permanece `"gymFlow"` — não alterar

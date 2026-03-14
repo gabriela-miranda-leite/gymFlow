@@ -8,6 +8,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { HomeScreen } from '@/presentation/screens/HomeScreen';
 import { LoginScreen } from '@/presentation/screens/LoginScreen';
 import { ProfileScreen } from '@/presentation/screens/ProfileScreen';
+import { useTranslation } from '@/shared/i18n';
 import { useAuthStore } from '@/store/useAuthStore';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -15,6 +16,7 @@ const Tab = createBottomTabNavigator<AppTabParamList>();
 
 function AppTabs() {
   const { theme } = useTheme();
+  const { t } = useTranslation();
 
   return (
     <Tab.Navigator
@@ -28,8 +30,12 @@ function AppTabs() {
         tabBarInactiveTintColor: theme.tabBar.inactive,
       }}
     >
-      <Tab.Screen name="Home" component={HomeScreen} options={{ title: 'Academias' }} />
-      <Tab.Screen name="Profile" component={ProfileScreen} options={{ title: 'Perfil' }} />
+      <Tab.Screen name="Home" component={HomeScreen} options={{ title: t('common.tabs.home') }} />
+      <Tab.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{ title: t('common.tabs.profile') }}
+      />
     </Tab.Navigator>
   );
 }

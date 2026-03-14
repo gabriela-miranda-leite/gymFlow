@@ -1,6 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { Config } from '@/config/env';
+import { apiClient } from '@/data/services/apiClient';
+import { useTranslation } from '@/shared/i18n';
 import type { OccupancyLevel } from '@/tokens';
 
 interface Gym {
@@ -10,18 +12,18 @@ interface Gym {
   occupancy: OccupancyLevel;
 }
 
-async function fetchGyms(): Promise<Gym[]> {
-  const response = await fetch(`${Config.apiUrl}/gyms`);
-  if (!response.ok) {
-    throw new Error('Falha ao buscar academias');
-  }
-  return response.json() as Promise<Gym[]>;
-}
-
 export function useGyms() {
+  const { t } = useTranslation();
+
   return useQuery<Gym[], Error>({
     queryKey: ['gyms'],
-    queryFn: fetchGyms,
+    queryFn: async () => {
+      try {
+        return await apiClient.get<Gym[]>('/gyms');
+      } catch {
+        throw new Error(t('errors.fetchGyms'));
+      }
+    },
     enabled: Boolean(Config.apiUrl),
   });
 }
