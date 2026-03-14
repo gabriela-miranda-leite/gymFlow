@@ -3,7 +3,9 @@
 ## Stack
 
 - Expo 55 · React Native 0.83 · TypeScript 5.9 (strict)
-- Estado: Context + hooks (sem Redux/Zustand)
+- Estado: Zustand (stores globais) + Context + hooks
+- Dados assíncronos: TanStack Query (cache, loading, error states)
+- Navegação: React Navigation (native-stack + bottom-tabs)
 - Alias `@/` → `src/`
 - Node via nvm: `export PATH="/Users/gabriela/.nvm/versions/node/v24.14.0/bin:$PATH"`
 
