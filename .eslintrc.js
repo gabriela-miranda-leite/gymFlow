@@ -30,4 +30,12 @@ module.exports = {
     ],
     'react/react-in-jsx-scope': 'off',
   },
+  overrides: [
+    {
+      files: ['**/__tests__/**/*.[jt]s?(x)', '**/*.{test,spec}.[jt]s?(x)'],
+      env: {
+        jest: true,
+      },
+    },
+  ],
 };
