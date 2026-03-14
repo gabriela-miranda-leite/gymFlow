@@ -1,0 +1,13 @@
+appId: com.gymflow.app
+---
+- launchApp
+- assertVisible: "Open up App.tsx to start working on your app!"
+# TODO: quando a UI existir, substituir pelos passos reais abaixo:
+# - tapOn:
+#     id: "checkin-open-button"
+# - tapOn:
+#     id: "occupancy-level-selector"
+# - tapOn:
+#     id: "checkin-submit-button"
+# - assertVisible:
+#     id: "checkin-success-message"
