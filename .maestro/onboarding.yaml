@@ -1,0 +1,19 @@
+appId: com.gymflow.app
+---
+- launchApp
+- assertVisible: "Open up App.tsx to start working on your app!"
+# TODO: quando a UI existir, substituir pelos passos reais abaixo:
+# - tapOn:
+#     id: "onboarding-start-button"
+# - tapOn:
+#     id: "login-email-input"
+# - inputText: "qa@gymflow.app"
+# - tapOn:
+#     id: "login-password-input"
+# - inputText: "123456"
+# - tapOn:
+#     id: "login-submit-button"
+# - tapOn:
+#     id: "gym-selection-item-0"
+# - tapOn:
+#     id: "gym-selection-confirm-button"
