@@ -36,8 +36,9 @@ module.exports = {
   overrides: [
     {
       files: ['**/__tests__/**/*.[jt]s?(x)', '**/*.{test,spec}.[jt]s?(x)'],
-      env: {
-        jest: true,
+      env: { jest: true },
+      rules: {
+        '@typescript-eslint/no-require-imports': 'off',
       },
     },
   ],
