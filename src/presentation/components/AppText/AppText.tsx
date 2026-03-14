@@ -4,10 +4,18 @@ import styled from 'styled-components/native';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Typography } from '@/tokens';
 
-type Variant = 'h1' | 'h2' | 'h3' | 'body' | 'bodyLg' | 'bodyMedium' | 'caption' | 'overline';
+export type AppTextVariant =
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'body'
+  | 'bodyLg'
+  | 'bodyMedium'
+  | 'caption'
+  | 'overline';
 
-interface AppTextProps extends TextProps {
-  variant?: Variant;
+export interface AppTextProps extends TextProps {
+  variant?: AppTextVariant;
   color?: string;
 }
 

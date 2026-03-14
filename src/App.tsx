@@ -5,7 +5,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ThemeProvider, useTheme } from '@/contexts/ThemeContext';
 import { queryClient } from '@/data/services/queryClient';
 import { useAppFonts } from '@/hooks/useFonts';
-import { ErrorBoundary } from '@/presentation/components/ErrorBoundary';
+import { ErrorBoundary } from '@/presentation/components';
 import { RootNavigator } from '@/shared/navigation/RootNavigator';
 import '@/shared/i18n';
 

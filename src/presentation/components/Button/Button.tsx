@@ -4,9 +4,9 @@ import styled from 'styled-components/native';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Radius, Spacing } from '@/tokens';
 
-type ButtonVariant = 'primary' | 'secondary' | 'ghost';
+export type ButtonVariant = 'primary' | 'secondary' | 'ghost';
 
-interface ButtonProps extends TouchableOpacityProps {
+export interface ButtonProps extends TouchableOpacityProps {
   label: string;
   variant?: ButtonVariant;
   loading?: boolean;

@@ -1,7 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 
 import { useTheme } from '@/contexts/ThemeContext';
-import { AppText } from '@/presentation/components/AppText';
+import { AppText } from '@/presentation/components';
 import { useTranslation } from '@/shared/i18n';
 import { Spacing } from '@/tokens';
 
