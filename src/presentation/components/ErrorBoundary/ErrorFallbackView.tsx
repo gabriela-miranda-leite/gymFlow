@@ -3,6 +3,7 @@ import styled from 'styled-components/native';
 import { Button } from '../Button';
 
 import { useTranslation } from '@/shared/i18n';
+import { FontSize, FontWeight, Spacing } from '@/tokens';
 
 interface Props {
   onRetry: () => void;
@@ -12,13 +13,13 @@ const Container = styled.View`
   align-items: center;
   flex: 1;
   justify-content: center;
-  padding: 24px;
+  padding: ${Spacing.s6}px;
 `;
 
 const Title = styled.Text`
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 16px;
+  font-size: ${FontSize.button}px;
+  font-weight: ${FontWeight.semiBold};
+  margin-bottom: ${Spacing.s4}px;
   text-align: center;
 `;
 

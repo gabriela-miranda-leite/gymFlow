@@ -2,7 +2,7 @@ import { ActivityIndicator, type TouchableOpacityProps } from 'react-native';
 import styled from 'styled-components/native';
 
 import { useTheme } from '@/contexts/ThemeContext';
-import { Radius, Spacing } from '@/tokens';
+import { FontSize, FontWeight, Radius, Spacing } from '@/tokens';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost';
 
@@ -26,16 +26,17 @@ const Container = styled.TouchableOpacity<ContainerProps>`
   border-radius: ${Radius.btn}px;
   border-width: ${({ bordered }) => (bordered ? '1px' : '0px')};
   justify-content: center;
-  min-height: 48px;
+  min-height: ${Spacing.s12}px;
   opacity: ${({ isDisabled }) => (isDisabled ? 0.5 : 1)};
-  padding-horizontal: ${Spacing.s5}px;
+  padding-left: ${Spacing.s5}px;
+  padding-right: ${Spacing.s5}px;
   padding-vertical: ${Spacing.s3}px;
 `;
 
 const Label = styled.Text<{ textColor: string }>`
   color: ${({ textColor }) => textColor};
-  font-size: 16px;
-  font-weight: 600;
+  font-size: ${FontSize.bodyLg}px;
+  font-weight: ${FontWeight.semiBold};
 `;
 
 export function Button({

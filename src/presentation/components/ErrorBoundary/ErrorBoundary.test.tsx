@@ -20,7 +20,7 @@ jest.mock('@/contexts/ThemeContext', () => ({
   }),
 }));
 
-function ThrowError() {
+function ThrowError(): React.ReactElement {
   throw new Error('test error');
 }
 

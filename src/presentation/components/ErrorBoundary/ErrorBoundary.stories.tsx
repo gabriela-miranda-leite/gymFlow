@@ -16,5 +16,10 @@ export const Fallback: Story = {
 };
 
 export const WithCustomFallback: Story = {
-  render: () => <Text style={{ padding: 24, textAlign: 'center' }}>Fallback customizado</Text>,
+  args: { onRetry: () => {} },
+  render: (args) => (
+    <Text style={{ padding: 24, textAlign: 'center' }} {...args}>
+      Fallback customizado
+    </Text>
+  ),
 };
