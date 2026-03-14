@@ -17,8 +17,14 @@ Você vai gerar a descrição de um PR do projeto GymFlow a partir do diff ou re
      Não precisa listar todos os arquivos — foque nas decisões não óbvias. -->
 
 ## Evidência funcionando
-<!-- Screenshots, gravação de tela ou descrição do fluxo testado manualmente.
-     Para changes de infraestrutura, cole o output dos testes/lint. -->
+
+<!-- OBRIGATÓRIO para mudanças de UI:
+     - Screenshot ou GIF de cada componente novo/alterado (todas as variantes/estados)
+     - Use o Storybook: npx storybook (ou expo start com STORYBOOK=true)
+     - Inclua: estado normal, hover/pressed, disabled, loading, dark mode se aplicável
+
+     Para changes de infraestrutura sem UI (config, hooks, stores):
+     - Cole o output de `npm test` e `npm run lint` -->
 
 ## Checklist
 - [ ] Testes unitários adicionados/atualizados
