@@ -3,6 +3,15 @@ import React from 'react';
 
 import App from '@/App';
 
+jest.mock('@/hooks/useFonts', () => ({
+  useAppFonts: () => ({ fontsLoaded: true, error: null }),
+}));
+
+jest.mock('expo-splash-screen', () => ({
+  preventAutoHideAsync: jest.fn(),
+  hideAsync: jest.fn(),
+}));
+
 describe('App sanity test', () => {
   it('renders initial template text', () => {
     const { getByText } = render(React.createElement(App));
