@@ -18,9 +18,10 @@ export const Container = styled.TouchableOpacity<ContainerProps>`
   justify-content: center;
   min-height: ${Spacing.s12}px;
   opacity: ${({ isDisabled }) => (isDisabled ? 0.5 : 1)};
+  padding-bottom: ${Spacing.s3}px;
   padding-left: ${Spacing.s5}px;
   padding-right: ${Spacing.s5}px;
-  padding-vertical: ${Spacing.s3}px;
+  padding-top: ${Spacing.s3}px;
 `;
 
 export const Label = styled.Text<{ textColor: string }>`
