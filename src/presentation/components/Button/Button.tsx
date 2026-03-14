@@ -1,8 +1,8 @@
 import { ActivityIndicator, type TouchableOpacityProps } from 'react-native';
-import styled from 'styled-components/native';
+
+import { Container, Label } from './Button.styles';
 
 import { useTheme } from '@/contexts/ThemeContext';
-import { FontSize, FontWeight, Radius, Spacing } from '@/tokens';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost';
 
@@ -11,33 +11,6 @@ export interface ButtonProps extends TouchableOpacityProps {
   variant?: ButtonVariant;
   loading?: boolean;
 }
-
-interface ContainerProps {
-  bgColor: string;
-  borderColor: string;
-  bordered: boolean;
-  isDisabled: boolean;
-}
-
-const Container = styled.TouchableOpacity<ContainerProps>`
-  align-items: center;
-  background-color: ${({ bgColor }) => bgColor};
-  border-color: ${({ borderColor }) => borderColor};
-  border-radius: ${Radius.btn}px;
-  border-width: ${({ bordered }) => (bordered ? '1px' : '0px')};
-  justify-content: center;
-  min-height: ${Spacing.s12}px;
-  opacity: ${({ isDisabled }) => (isDisabled ? 0.5 : 1)};
-  padding-left: ${Spacing.s5}px;
-  padding-right: ${Spacing.s5}px;
-  padding-vertical: ${Spacing.s3}px;
-`;
-
-const Label = styled.Text<{ textColor: string }>`
-  color: ${({ textColor }) => textColor};
-  font-size: ${FontSize.bodyLg}px;
-  font-weight: ${FontWeight.semiBold};
-`;
 
 export function Button({
   label,
