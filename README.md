@@ -1,5 +1,8 @@
 # gymflow
 
+[![CI](https://github.com/gabriela-miranda-leite/gymtime/actions/workflows/ci.yml/badge.svg)](https://github.com/gabriela-miranda-leite/gymtime/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/gabriela-miranda-leite/gymtime/branch/main/graph/badge.svg)](https://codecov.io/gh/gabriela-miranda-leite/gymtime)
+
 ## Testes
 
 ### Unitario (Jest + React Native Testing Library)
