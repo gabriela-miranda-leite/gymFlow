@@ -42,3 +42,6 @@ yarn-error.*
 
 # test artifacts
 coverage/
+
+# storybook (auto-generated)
+.rnstorybook/storybook.requires.ts
