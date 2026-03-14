@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
+import { ErrorFallbackView } from './ErrorFallbackView';
 
 interface Props {
   children: React.ReactNode;
@@ -31,54 +32,9 @@ export class ErrorBoundary extends React.Component<Props, State> {
 
   render() {
     if (this.state.hasError) {
-      if (this.props.fallback) return this.props.fallback;
-
-      return (
-        <View
-          style={styles.container}
-          accessible
-          accessibilityRole="alert"
-          accessibilityLabel="Erro inesperado"
-        >
-          <Text style={styles.title}>Algo deu errado</Text>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={this.reset}
-            accessibilityRole="button"
-            accessibilityLabel="Tentar novamente"
-          >
-            <Text style={styles.buttonText}>Tentar novamente</Text>
-          </TouchableOpacity>
-        </View>
-      );
+      return this.props.fallback ?? <ErrorFallbackView onRetry={this.reset} />;
     }
 
     return this.props.children;
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    flex: 1,
-    justifyContent: 'center',
-    padding: 24,
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: '600',
-    marginBottom: 16,
-    textAlign: 'center',
-  },
-  button: {
-    backgroundColor: '#FF6B35',
-    borderRadius: 8,
-    paddingHorizontal: 24,
-    paddingVertical: 12,
-  },
-  buttonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: '600',
-  },
-});

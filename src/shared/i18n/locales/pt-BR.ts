@@ -1,6 +1,7 @@
 const ptBR = {
   common: {
     appName: 'GymFlow',
+    retry: 'Tentar novamente',
     tabs: {
       home: 'Academias',
       profile: 'Perfil',

@@ -1,4 +1,5 @@
-import { Text, type TextProps } from 'react-native';
+import { type TextProps } from 'react-native';
+import styled from 'styled-components/native';
 
 import { useTheme } from '@/contexts/ThemeContext';
 import { Typography } from '@/tokens';
@@ -10,10 +11,18 @@ interface AppTextProps extends TextProps {
   color?: string;
 }
 
+const StyledText = styled.Text<{ textColor: string }>`
+  color: ${({ textColor }) => textColor};
+`;
+
 export function AppText({ variant = 'body', color, style, ...props }: AppTextProps) {
   const { theme } = useTheme();
 
   return (
-    <Text style={[Typography[variant], { color: color ?? theme.text.primary }, style]} {...props} />
+    <StyledText
+      textColor={color ?? theme.text.primary}
+      style={[Typography[variant], style]}
+      {...props}
+    />
   );
 }

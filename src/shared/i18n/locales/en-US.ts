@@ -1,6 +1,7 @@
 const enUS = {
   common: {
     appName: 'GymFlow',
+    retry: 'Try again',
     tabs: {
       home: 'Gyms',
       profile: 'Profile',

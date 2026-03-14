@@ -1,10 +1,5 @@
-import {
-  ActivityIndicator,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  type TouchableOpacityProps,
-} from 'react-native';
+import { ActivityIndicator, type TouchableOpacityProps } from 'react-native';
+import styled from 'styled-components/native';
 
 import { useTheme } from '@/contexts/ThemeContext';
 import { Radius, Spacing } from '@/tokens';
@@ -17,12 +12,37 @@ interface ButtonProps extends TouchableOpacityProps {
   loading?: boolean;
 }
 
+interface ContainerProps {
+  bgColor: string;
+  borderColor: string;
+  bordered: boolean;
+  isDisabled: boolean;
+}
+
+const Container = styled.TouchableOpacity<ContainerProps>`
+  align-items: center;
+  background-color: ${({ bgColor }) => bgColor};
+  border-color: ${({ borderColor }) => borderColor};
+  border-radius: ${Radius.btn}px;
+  border-width: ${({ bordered }) => (bordered ? '1px' : '0px')};
+  justify-content: center;
+  min-height: 48px;
+  opacity: ${({ isDisabled }) => (isDisabled ? 0.5 : 1)};
+  padding-horizontal: ${Spacing.s5}px;
+  padding-vertical: ${Spacing.s3}px;
+`;
+
+const Label = styled.Text<{ textColor: string }>`
+  color: ${({ textColor }) => textColor};
+  font-size: 16px;
+  font-weight: 600;
+`;
+
 export function Button({
   label,
   variant = 'primary',
   loading = false,
   disabled,
-  style,
   ...props
 }: ButtonProps) {
   const { theme } = useTheme();
@@ -37,52 +57,28 @@ export function Button({
 
   const textColor =
     variant === 'primary'
-      ? '#FFFFFF'
+      ? theme.brand.onPrimary
       : variant === 'secondary'
         ? theme.text.primary
         : theme.brand.primary;
 
   return (
-    <TouchableOpacity
-      style={[
-        styles.base,
-        { backgroundColor: bgColor, borderColor: theme.border.default },
-        variant === 'secondary' && styles.bordered,
-        isDisabled && styles.disabled,
-        style,
-      ]}
-      disabled={isDisabled}
+    <Container
+      bgColor={bgColor}
+      borderColor={theme.border.default}
+      bordered={variant === 'secondary'}
+      isDisabled={!!isDisabled}
+      disabled={!!isDisabled}
       accessibilityRole="button"
       accessibilityLabel={label}
-      accessibilityState={{ disabled: isDisabled, busy: loading }}
+      accessibilityState={{ disabled: !!isDisabled, busy: loading }}
       {...props}
     >
       {loading ? (
         <ActivityIndicator color={textColor} />
       ) : (
-        <Text style={[styles.label, { color: textColor }]}>{label}</Text>
+        <Label textColor={textColor}>{label}</Label>
       )}
-    </TouchableOpacity>
+    </Container>
   );
 }
-
-const styles = StyleSheet.create({
-  base: {
-    alignItems: 'center',
-    borderRadius: Radius.md,
-    justifyContent: 'center',
-    minHeight: 48,
-    paddingHorizontal: Spacing.s5,
-    paddingVertical: Spacing.s3,
-  },
-  bordered: {
-    borderWidth: 1,
-  },
-  disabled: {
-    opacity: 0.5,
-  },
-  label: {
-    fontSize: 16,
-    fontWeight: '600',
-  },
-});
