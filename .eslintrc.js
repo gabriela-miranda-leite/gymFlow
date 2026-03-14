@@ -4,7 +4,7 @@ module.exports = {
   parserOptions: {
     project: './tsconfig.json',
   },
-  plugins: ['@typescript-eslint', 'react', 'react-native', 'react-hooks', 'import'],
+  plugins: ['@typescript-eslint', 'react', 'react-native', 'react-hooks', 'import', 'react-native-a11y'],
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
@@ -29,6 +29,9 @@ module.exports = {
       },
     ],
     'react/react-in-jsx-scope': 'off',
+    'react-native-a11y/has-accessibility-props': 'error',
+    'react-native-a11y/has-valid-accessibility-role': 'error',
+    'react-native-a11y/has-valid-accessibility-value': 'error',
   },
   overrides: [
     {
