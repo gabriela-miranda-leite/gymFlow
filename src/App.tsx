@@ -5,7 +5,9 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ThemeProvider, useTheme } from '@/contexts/ThemeContext';
 import { queryClient } from '@/data/services/queryClient';
 import { useAppFonts } from '@/hooks/useFonts';
+import { ErrorBoundary } from '@/presentation/components/ErrorBoundary';
 import { RootNavigator } from '@/shared/navigation/RootNavigator';
+import '@/shared/i18n';
 
 function AppContent() {
   const { fontsLoaded, error } = useAppFonts();
@@ -23,12 +25,14 @@ function AppContent() {
 
 export default function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <SafeAreaProvider>
-        <ThemeProvider>
-          <AppContent />
-        </ThemeProvider>
-      </SafeAreaProvider>
-    </QueryClientProvider>
+    <ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <SafeAreaProvider>
+          <ThemeProvider>
+            <AppContent />
+          </ThemeProvider>
+        </SafeAreaProvider>
+      </QueryClientProvider>
+    </ErrorBoundary>
   );
 }

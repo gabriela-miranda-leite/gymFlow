@@ -30,7 +30,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   web: {
     favicon: './assets/favicon.png',
   },
-  plugins: ['expo-font', 'expo-asset'],
+  plugins: ['expo-font', 'expo-asset', 'expo-localization'],
   extra: {
     apiUrl: process.env.API_URL ?? '',
     googleMapsKey: process.env.GOOGLE_MAPS_KEY ?? '',
