@@ -48,3 +48,5 @@ coverage/
 
 # storybook (auto-generated)
 .rnstorybook/storybook.requires.ts
+storybook-static/
+debug-storybook.log
