@@ -3,6 +3,8 @@ import { View } from 'react-native';
 
 import { AppText } from './AppText';
 
+import { colors } from '@/tokens';
+
 const meta = {
   title: 'Components/AppText',
   component: AppText,
@@ -13,6 +15,33 @@ const meta = {
       </View>
     ),
   ],
+  argTypes: {
+    variant: {
+      control: 'select',
+      options: ['h1', 'h2', 'h3', 'body', 'bodyLg', 'bodyMedium', 'caption', 'overline'],
+    },
+    color: {
+      control: 'select',
+      options: [
+        colors.gray900,
+        colors.gray600,
+        colors.gray400,
+        colors.gray300,
+        colors.white,
+        colors.primary,
+        colors.primaryDark,
+      ],
+      labels: {
+        [colors.gray900]: 'text.primary',
+        [colors.gray600]: 'text.secondary',
+        [colors.gray400]: 'text.tertiary',
+        [colors.gray300]: 'text.disabled',
+        [colors.white]: 'text.inverse',
+        [colors.primary]: 'brand.primary',
+        [colors.primaryDark]: 'brand.primaryDark',
+      },
+    },
+  },
 } satisfies Meta<typeof AppText>;
 
 export default meta;
