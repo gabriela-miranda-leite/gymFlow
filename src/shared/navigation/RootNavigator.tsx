@@ -49,7 +49,7 @@ export function RootNavigator() {
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
-          contentStyle: { backgroundColor: theme.bg.primary },
+          contentStyle: { backgroundColor: theme.background },
         }}
       >
         {isAuthenticated ? (

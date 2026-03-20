@@ -10,9 +10,9 @@ export function LoginScreen() {
   const { t } = useTranslation();
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.bg.primary }]}>
-      <AppText variant="h1">{t('login.brand')}</AppText>
-      <AppText variant="body" color={theme.text.secondary} style={{ marginTop: Spacing.s2 }}>
+    <View style={[styles.container, { backgroundColor: theme.background }]}>
+      <AppText variant="display">{t('login.brand')}</AppText>
+      <AppText variant="body" color={theme.mutedForeground} style={{ marginTop: Spacing.s2 }}>
         {t('login.cta')}
       </AppText>
     </View>

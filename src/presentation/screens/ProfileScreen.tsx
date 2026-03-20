@@ -10,9 +10,9 @@ export function ProfileScreen() {
   const { t } = useTranslation();
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.bg.primary }]}>
-      <AppText variant="h2">{t('profile.title')}</AppText>
-      <AppText variant="body" color={theme.text.secondary} style={{ marginTop: Spacing.s2 }}>
+    <View style={[styles.container, { backgroundColor: theme.background }]}>
+      <AppText variant="heading">{t('profile.title')}</AppText>
+      <AppText variant="body" color={theme.mutedForeground} style={{ marginTop: Spacing.s2 }}>
         {t('profile.emptyState')}
       </AppText>
     </View>
