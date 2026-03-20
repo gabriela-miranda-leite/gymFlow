@@ -30,6 +30,6 @@ export const colors = {
   // Destructive
   destructive: '#EF4444',
   destructiveForeground: '#FFFFFF',
-} as const;
+} as const
 
-export type ColorKey = keyof typeof colors;
+export type ColorKey = keyof typeof colors

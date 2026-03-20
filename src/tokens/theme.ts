@@ -1,36 +1,36 @@
-import { colors } from './colors';
+import { colors } from './colors'
 
-export type OccupancyLevel = 'empty' | 'moderate' | 'busy' | 'packed';
+export type OccupancyLevel = 'empty' | 'moderate' | 'busy' | 'packed'
 
 export interface AppTheme {
-  key: 'light' | 'dark';
+  key: 'light' | 'dark'
 
-  background: string;
-  card: string;
-  foreground: string;
-  secondary: string;
-  secondaryForeground: string;
-  muted: string;
-  mutedForeground: string;
-  border: string;
-  input: string;
+  background: string
+  card: string
+  foreground: string
+  secondary: string
+  secondaryForeground: string
+  muted: string
+  mutedForeground: string
+  border: string
+  input: string
 
   brand: {
-    primary: string;
-    primaryForeground: string;
-  };
+    primary: string
+    primaryForeground: string
+  }
 
-  status: Record<OccupancyLevel, string>;
+  status: Record<OccupancyLevel, string>
 
-  destructive: string;
-  destructiveForeground: string;
+  destructive: string
+  destructiveForeground: string
 
   tabBar: {
-    bg: string;
-    border: string;
-    active: string;
-    inactive: string;
-  };
+    bg: string
+    border: string
+    active: string
+    inactive: string
+  }
 }
 
 export const lightTheme: AppTheme = {
@@ -67,7 +67,7 @@ export const lightTheme: AppTheme = {
     active: colors.primary,
     inactive: colors.mutedForegroundLight,
   },
-};
+}
 
 export const darkTheme: AppTheme = {
   key: 'dark',
@@ -103,4 +103,4 @@ export const darkTheme: AppTheme = {
     active: colors.primary,
     inactive: colors.mutedForegroundDark,
   },
-};
+}

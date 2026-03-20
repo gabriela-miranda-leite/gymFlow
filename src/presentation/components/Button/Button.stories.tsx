@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react-native';
-import { View } from 'react-native';
+import type { Meta, StoryObj } from '@storybook/react-native'
+import { View } from 'react-native'
 
-import { Button } from './Button';
+import { Button } from './Button'
 
 const meta = {
   title: 'Components/Button',
@@ -13,15 +13,15 @@ const meta = {
       </View>
     ),
   ],
-} satisfies Meta<typeof Button>;
+} satisfies Meta<typeof Button>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
-export const Primary: Story = { args: { label: 'Confirmar', variant: 'primary' } };
-export const Secondary: Story = { args: { label: 'Cancelar', variant: 'secondary' } };
-export const Ghost: Story = { args: { label: 'Saiba mais', variant: 'ghost' } };
-export const Loading: Story = { args: { label: 'Carregando', variant: 'primary', loading: true } };
+export const Primary: Story = { args: { label: 'Confirmar', variant: 'primary' } }
+export const Secondary: Story = { args: { label: 'Cancelar', variant: 'secondary' } }
+export const Ghost: Story = { args: { label: 'Saiba mais', variant: 'ghost' } }
+export const Loading: Story = { args: { label: 'Carregando', variant: 'primary', loading: true } }
 export const Disabled: Story = {
   args: { label: 'Desabilitado', variant: 'primary', disabled: true },
-};
+}

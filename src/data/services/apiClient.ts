@@ -1,9 +1,9 @@
-import { Config } from '@/config/env';
+import { Config } from '@/config/env'
 
-type RequestOptions = Omit<RequestInit, 'body'> & { body?: unknown };
+type RequestOptions = Omit<RequestInit, 'body'> & { body?: unknown }
 
 async function request<T>(path: string, options: RequestOptions = {}): Promise<T> {
-  const { body, ...rest } = options;
+  const { body, ...rest } = options
 
   const response = await fetch(`${Config.apiUrl}${path}`, {
     ...rest,
@@ -12,13 +12,13 @@ async function request<T>(path: string, options: RequestOptions = {}): Promise<T
       ...rest.headers,
     },
     ...(body !== undefined ? { body: JSON.stringify(body) } : {}),
-  });
+  })
 
   if (!response.ok) {
-    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    throw new Error(`HTTP ${response.status}: ${response.statusText}`)
   }
 
-  return response.json() as Promise<T>;
+  return response.json() as Promise<T>
 }
 
 export const apiClient = {
@@ -32,4 +32,4 @@ export const apiClient = {
 
   delete: <T>(path: string, options?: Omit<RequestOptions, 'body'>) =>
     request<T>(path, { ...options, method: 'DELETE' }),
-};
+}

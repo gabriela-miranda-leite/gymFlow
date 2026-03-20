@@ -1,22 +1,22 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-import type { AppTabParamList, RootStackParamList } from './types';
+import { useTheme } from '@/contexts/ThemeContext'
+import { HomeScreen } from '@/presentation/screens/HomeScreen'
+import { LoginScreen } from '@/presentation/screens/LoginScreen'
+import { ProfileScreen } from '@/presentation/screens/ProfileScreen'
+import { useTranslation } from '@/shared/i18n'
+import { useAuthStore } from '@/store/useAuthStore'
 
-import { useTheme } from '@/contexts/ThemeContext';
-import { HomeScreen } from '@/presentation/screens/HomeScreen';
-import { LoginScreen } from '@/presentation/screens/LoginScreen';
-import { ProfileScreen } from '@/presentation/screens/ProfileScreen';
-import { useTranslation } from '@/shared/i18n';
-import { useAuthStore } from '@/store/useAuthStore';
+import type { AppTabParamList, RootStackParamList } from './types'
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
-const Tab = createBottomTabNavigator<AppTabParamList>();
+const Stack = createNativeStackNavigator<RootStackParamList>()
+const Tab = createBottomTabNavigator<AppTabParamList>()
 
 function AppTabs() {
-  const { theme } = useTheme();
-  const { t } = useTranslation();
+  const { theme } = useTheme()
+  const { t } = useTranslation()
 
   return (
     <Tab.Navigator
@@ -37,12 +37,12 @@ function AppTabs() {
         options={{ title: t('common.tabs.profile') }}
       />
     </Tab.Navigator>
-  );
+  )
 }
 
 export function RootNavigator() {
-  const { theme } = useTheme();
-  const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
+  const { theme } = useTheme()
+  const isAuthenticated = useAuthStore((s) => s.isAuthenticated)
 
   return (
     <NavigationContainer>
@@ -59,5 +59,5 @@ export function RootNavigator() {
         )}
       </Stack.Navigator>
     </NavigationContainer>
-  );
+  )
 }

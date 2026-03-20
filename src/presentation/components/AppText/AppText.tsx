@@ -1,9 +1,9 @@
-import { StyleSheet, type TextProps } from 'react-native';
+import { StyleSheet, type TextProps } from 'react-native'
 
-import { StyledText } from './AppText.styles';
+import { useTheme } from '@/contexts/ThemeContext'
+import { Typography } from '@/tokens'
 
-import { useTheme } from '@/contexts/ThemeContext';
-import { Typography } from '@/tokens';
+import { StyledText } from './AppText.styles'
 
 export type AppTextVariant =
   | 'display'
@@ -12,21 +12,21 @@ export type AppTextVariant =
   | 'body'
   | 'caption'
   | 'micro'
-  | 'data';
+  | 'data'
 
 export interface AppTextProps extends TextProps {
-  variant?: AppTextVariant;
-  color?: string;
+  variant?: AppTextVariant
+  color?: string
 }
 
 export function AppText({ variant = 'body', color, style, children, ...props }: AppTextProps) {
-  const { theme } = useTheme();
+  const { theme } = useTheme()
 
-  const resolvedStyle = { ...Typography[variant], ...StyleSheet.flatten(style) };
+  const resolvedStyle = { ...Typography[variant], ...StyleSheet.flatten(style) }
 
   return (
     <StyledText $textColor={color ?? theme.foreground} style={resolvedStyle} {...props}>
       {children}
     </StyledText>
-  );
+  )
 }

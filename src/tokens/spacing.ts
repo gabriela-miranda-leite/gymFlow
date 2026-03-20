@@ -1,4 +1,4 @@
-import { Platform } from 'react-native';
+import { Platform } from 'react-native'
 
 export const Spacing = {
   s1: 4,
@@ -11,7 +11,7 @@ export const Spacing = {
   s10: 40,
   s12: 48,
   s16: 64,
-} as const;
+} as const
 
 export const Radius = {
   sm: 6,
@@ -19,7 +19,7 @@ export const Radius = {
   lg: 12,
   xl: 16,
   full: 9999,
-} as const;
+} as const
 
 export const Shadows = {
   none: {},
@@ -63,4 +63,4 @@ export const Shadows = {
     android: { elevation: 6 },
     default: {},
   }),
-} as const;
+} as const

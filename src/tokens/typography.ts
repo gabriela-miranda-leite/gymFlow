@@ -7,14 +7,14 @@ export const FontFamily = {
   monoMedium: 'JetBrainsMono_500Medium',
   monoSemiBold: 'JetBrainsMono_600SemiBold',
   monoBold: 'JetBrainsMono_700Bold',
-} as const;
+} as const
 
 export const FontWeight = {
   regular: '400',
   medium: '500',
   semiBold: '600',
   bold: '700',
-} as const;
+} as const
 
 export const FontSize = {
   display: 24,
@@ -24,7 +24,7 @@ export const FontSize = {
   caption: 12,
   micro: 10,
   data: 30,
-} as const;
+} as const
 
 export const Typography = {
   display: { fontFamily: FontFamily.bold, fontSize: FontSize.display },
@@ -34,4 +34,4 @@ export const Typography = {
   caption: { fontFamily: FontFamily.medium, fontSize: FontSize.caption },
   micro: { fontFamily: FontFamily.semiBold, fontSize: FontSize.micro },
   data: { fontFamily: FontFamily.monoBold, fontSize: FontSize.data },
-} as const;
+} as const

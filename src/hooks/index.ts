@@ -1,2 +1,2 @@
-export { useAppFonts } from './useFonts';
-export { useGyms } from './useGyms';
+export { useAppFonts } from './useFonts'
+export { useGyms } from './useGyms'

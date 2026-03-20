@@ -1,7 +1,7 @@
-import { fireEvent, render } from '@testing-library/react-native';
-import React from 'react';
+import { fireEvent, render } from '@testing-library/react-native'
+import React from 'react'
 
-import { Button } from './Button';
+import { Button } from './Button'
 
 jest.mock('@/contexts/ThemeContext', () => ({
   useTheme: () => ({
@@ -13,37 +13,37 @@ jest.mock('@/contexts/ThemeContext', () => ({
     },
     isDark: false,
   }),
-}));
+}))
 
 describe('Button', () => {
   it('renders label', () => {
-    const { getByText } = render(<Button label="Confirmar" />);
+    const { getByText } = render(<Button label="Confirmar" />)
 
-    expect(getByText('Confirmar')).toBeTruthy();
-  });
+    expect(getByText('Confirmar')).toBeTruthy()
+  })
 
   it('calls onPress when tapped', () => {
-    const onPress = jest.fn();
-    const { getByRole } = render(<Button label="Salvar" onPress={onPress} />);
+    const onPress = jest.fn()
+    const { getByRole } = render(<Button label="Salvar" onPress={onPress} />)
 
-    fireEvent.press(getByRole('button'));
+    fireEvent.press(getByRole('button'))
 
-    expect(onPress).toHaveBeenCalledTimes(1);
-  });
+    expect(onPress).toHaveBeenCalledTimes(1)
+  })
 
   it('does not call onPress when disabled', () => {
-    const onPress = jest.fn();
-    const { getByRole } = render(<Button label="Salvar" disabled onPress={onPress} />);
+    const onPress = jest.fn()
+    const { getByRole } = render(<Button label="Salvar" disabled onPress={onPress} />)
 
-    fireEvent.press(getByRole('button'));
+    fireEvent.press(getByRole('button'))
 
-    expect(onPress).not.toHaveBeenCalled();
-  });
+    expect(onPress).not.toHaveBeenCalled()
+  })
 
   it('shows ActivityIndicator when loading', () => {
-    const { queryByText, getByRole } = render(<Button label="Salvar" loading />);
+    const { queryByText, getByRole } = render(<Button label="Salvar" loading />)
 
-    expect(queryByText('Salvar')).toBeNull();
-    expect(getByRole('button')).toBeTruthy();
-  });
-});
+    expect(queryByText('Salvar')).toBeNull()
+    expect(getByRole('button')).toBeTruthy()
+  })
+})

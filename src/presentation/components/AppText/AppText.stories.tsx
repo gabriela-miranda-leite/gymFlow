@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react-native';
-import { View } from 'react-native';
+import type { Meta, StoryObj } from '@storybook/react-native'
+import { View } from 'react-native'
 
-import { AppText } from './AppText';
+import { colors } from '@/tokens'
 
-import { colors } from '@/tokens';
+import { AppText } from './AppText'
 
 const meta = {
   title: 'Components/AppText',
@@ -38,18 +38,18 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof AppText>;
+} satisfies Meta<typeof AppText>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
-export const Display: Story = { args: { variant: 'display', children: 'Display' } };
-export const Heading: Story = { args: { variant: 'heading', children: 'Heading' } };
-export const Subheading: Story = { args: { variant: 'subheading', children: 'Subheading' } };
-export const Body: Story = { args: { variant: 'body', children: 'Corpo de texto padrão' } };
-export const Caption: Story = { args: { variant: 'caption', children: 'Legenda' } };
-export const Micro: Story = { args: { variant: 'micro', children: 'Micro texto' } };
-export const Data: Story = { args: { variant: 'data', children: '1.234' } };
+export const Display: Story = { args: { variant: 'display', children: 'Display' } }
+export const Heading: Story = { args: { variant: 'heading', children: 'Heading' } }
+export const Subheading: Story = { args: { variant: 'subheading', children: 'Subheading' } }
+export const Body: Story = { args: { variant: 'body', children: 'Corpo de texto padrão' } }
+export const Caption: Story = { args: { variant: 'caption', children: 'Legenda' } }
+export const Micro: Story = { args: { variant: 'micro', children: 'Micro texto' } }
+export const Data: Story = { args: { variant: 'data', children: '1.234' } }
 export const CustomColor: Story = {
   args: { variant: 'body', color: colors.primary, children: 'Cor customizada' },
-};
+}

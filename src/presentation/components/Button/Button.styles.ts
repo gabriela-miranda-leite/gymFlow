@@ -1,12 +1,12 @@
-import styled from 'styled-components/native';
+import styled from 'styled-components/native'
 
-import { FontSize, FontWeight, Radius, Spacing } from '@/tokens';
+import { FontSize, FontWeight, Radius, Spacing } from '@/tokens'
 
 interface ContainerProps {
-  bgColor: string;
-  borderColor: string;
-  bordered: boolean;
-  isDisabled: boolean;
+  bgColor: string
+  borderColor: string
+  bordered: boolean
+  isDisabled: boolean
 }
 
 export const Container = styled.TouchableOpacity<ContainerProps>`
@@ -22,10 +22,10 @@ export const Container = styled.TouchableOpacity<ContainerProps>`
   padding-left: ${Spacing.s5}px;
   padding-right: ${Spacing.s5}px;
   padding-top: ${Spacing.s3}px;
-`;
+`
 
 export const Label = styled.Text<{ textColor: string }>`
   color: ${({ textColor }) => textColor};
   font-size: ${FontSize.subheading}px;
   font-weight: ${FontWeight.semiBold};
-`;
+`

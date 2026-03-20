@@ -1,2 +1,2 @@
-export { AppText } from './AppText';
-export type { AppTextProps, AppTextVariant } from './AppText';
+export { AppText } from './AppText'
+export type { AppTextProps, AppTextVariant } from './AppText'
