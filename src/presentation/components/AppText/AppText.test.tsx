@@ -5,7 +5,7 @@ import { AppText } from './AppText';
 
 jest.mock('@/contexts/ThemeContext', () => ({
   useTheme: () => ({
-    theme: { text: { primary: '#111111' } },
+    theme: { foreground: '#111111' },
     isDark: false,
   }),
 }));
@@ -19,14 +19,13 @@ describe('AppText', () => {
 
   it('renders with each variant without crashing', () => {
     const variants = [
-      'h1',
-      'h2',
-      'h3',
+      'display',
+      'heading',
+      'subheading',
       'body',
-      'bodyLg',
-      'bodyMedium',
       'caption',
-      'overline',
+      'micro',
+      'data',
     ] as const;
 
     variants.forEach((variant) => {

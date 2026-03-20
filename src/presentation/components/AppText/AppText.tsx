@@ -6,14 +6,13 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { Typography } from '@/tokens';
 
 export type AppTextVariant =
-  | 'h1'
-  | 'h2'
-  | 'h3'
+  | 'display'
+  | 'heading'
+  | 'subheading'
   | 'body'
-  | 'bodyLg'
-  | 'bodyMedium'
   | 'caption'
-  | 'overline';
+  | 'micro'
+  | 'data';
 
 export interface AppTextProps extends TextProps {
   variant?: AppTextVariant;
@@ -26,7 +25,7 @@ export function AppText({ variant = 'body', color, style, children, ...props }: 
   const resolvedStyle = { ...Typography[variant], ...StyleSheet.flatten(style) };
 
   return (
-    <StyledText $textColor={color ?? theme.text.primary} style={resolvedStyle} {...props}>
+    <StyledText $textColor={color ?? theme.foreground} style={resolvedStyle} {...props}>
       {children}
     </StyledText>
   );

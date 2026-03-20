@@ -10,7 +10,7 @@ export const Container = styled.View`
 `;
 
 export const Title = styled.Text`
-  font-size: ${FontSize.button}px;
+  font-size: ${FontSize.subheading}px;
   font-weight: ${FontWeight.semiBold};
   margin-bottom: ${Spacing.s4}px;
   text-align: center;

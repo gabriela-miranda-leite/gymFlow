@@ -13,7 +13,7 @@ export const Container = styled.TouchableOpacity<ContainerProps>`
   align-items: center;
   background-color: ${({ bgColor }) => bgColor};
   border-color: ${({ borderColor }) => borderColor};
-  border-radius: ${Radius.btn}px;
+  border-radius: ${Radius.md}px;
   border-width: ${({ bordered }) => (bordered ? '1px' : '0px')};
   justify-content: center;
   min-height: ${Spacing.s12}px;
@@ -26,6 +26,6 @@ export const Container = styled.TouchableOpacity<ContainerProps>`
 
 export const Label = styled.Text<{ textColor: string }>`
   color: ${({ textColor }) => textColor};
-  font-size: ${FontSize.bodyLg}px;
+  font-size: ${FontSize.subheading}px;
   font-weight: ${FontWeight.semiBold};
 `;

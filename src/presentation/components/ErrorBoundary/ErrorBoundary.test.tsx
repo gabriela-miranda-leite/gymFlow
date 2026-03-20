@@ -11,10 +11,10 @@ jest.mock('@/shared/i18n', () => ({
 jest.mock('@/contexts/ThemeContext', () => ({
   useTheme: () => ({
     theme: {
-      brand: { primary: '#FF6B35', onPrimary: '#FFFFFF' },
-      surface: { primary: '#FFFFFF' },
-      text: { primary: '#111111' },
-      border: { default: '#E0E0E0' },
+      brand: { primary: '#FF6B00', primaryForeground: '#FFFFFF' },
+      card: '#FFFFFF',
+      foreground: '#111111',
+      border: '#E4E4E7',
     },
     isDark: false,
   }),

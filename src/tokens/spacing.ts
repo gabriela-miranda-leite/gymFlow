@@ -8,18 +8,16 @@ export const Spacing = {
   s5: 20,
   s6: 24,
   s8: 32,
+  s10: 40,
   s12: 48,
-  s14: 56,
+  s16: 64,
 } as const;
 
 export const Radius = {
-  xs: 4,
-  sm: 8,
-  md: 12,
-  btn: 14,
-  lg: 16,
-  card: 18,
-  xl: 24,
+  sm: 6,
+  md: 8,
+  lg: 12,
+  xl: 16,
   full: 9999,
 } as const;
 
@@ -57,7 +55,7 @@ export const Shadows = {
   }),
   primary: Platform.select({
     ios: {
-      shadowColor: '#FF6B35',
+      shadowColor: '#FF6B00',
       shadowOffset: { width: 0, height: 4 },
       shadowOpacity: 0.3,
       shadowRadius: 8,

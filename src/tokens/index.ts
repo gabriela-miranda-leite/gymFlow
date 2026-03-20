@@ -1,14 +1,7 @@
 export { colors } from './colors';
 export type { ColorKey } from './colors';
 
-export {
-  FontFamily,
-  FontSize,
-  FontWeight,
-  LetterSpacing,
-  LineHeight,
-  Typography,
-} from './typography';
+export { FontFamily, FontSize, FontWeight, Typography } from './typography';
 
 export { Radius, Shadows, Spacing } from './spacing';
 

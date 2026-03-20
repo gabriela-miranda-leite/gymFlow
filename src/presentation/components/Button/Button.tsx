@@ -26,20 +26,20 @@ export function Button({
     variant === 'primary'
       ? theme.brand.primary
       : variant === 'secondary'
-        ? theme.surface.primary
+        ? theme.card
         : 'transparent';
 
   const textColor =
     variant === 'primary'
-      ? theme.brand.onPrimary
+      ? theme.brand.primaryForeground
       : variant === 'secondary'
-        ? theme.text.primary
+        ? theme.foreground
         : theme.brand.primary;
 
   return (
     <Container
       bgColor={bgColor}
-      borderColor={theme.border.default}
+      borderColor={theme.border}
       bordered={variant === 'secondary'}
       isDisabled={!!isDisabled}
       disabled={!!isDisabled}
