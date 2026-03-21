@@ -20,5 +20,6 @@ i18n.use(initReactI18next).init({
 })
 
 export { useTranslation }
+export { tk } from '@/shared/i18n/keys'
 export const changeLanguage = (lang: string) => i18n.changeLanguage(lang)
 export default i18n
