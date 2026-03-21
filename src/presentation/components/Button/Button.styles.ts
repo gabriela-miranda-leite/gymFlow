@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 
-import { FontFamily, FontSize, FontWeight, Radius, Spacing } from '@/tokens'
+import { Radius, Spacing } from '@/tokens'
 
 export enum ButtonVariant {
   Contained = 'contained',
@@ -27,11 +27,4 @@ export const Wrapper = styled.View<WrapperProps>`
   padding-left: ${Spacing.s4}px;
   padding-right: ${Spacing.s4}px;
   padding-top: ${Spacing.s3}px;
-`
-
-export const Label = styled.Text<{ color: string }>`
-  color: ${({ color }) => color};
-  font-family: ${FontFamily.medium};
-  font-size: ${FontSize.body}px;
-  font-weight: ${FontWeight.medium};
 `

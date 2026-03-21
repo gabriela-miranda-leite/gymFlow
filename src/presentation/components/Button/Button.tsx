@@ -2,14 +2,16 @@ import { ActivityIndicator, Pressable } from 'react-native'
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated'
 
 import { useTheme } from '@/contexts/ThemeContext'
-import { ButtonVariant, Label, Wrapper } from '@/presentation/components/Button/Button.styles'
+import { ButtonVariant, Wrapper } from '@/presentation/components/Button/Button.styles'
+import { Text } from '@/presentation/components/Text/Text'
 import type { AppIconName } from '@/presentation/components/icons/AppIcons'
 import { AppIcons } from '@/presentation/components/icons/AppIcons'
+import { tk, useTranslation } from '@/shared/i18n'
 import type { AppTheme } from '@/tokens'
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable)
 
-interface ButtonProps {
+type ButtonProps = {
   label: string
   onPress: () => void
   variant?: ButtonVariant
@@ -48,6 +50,7 @@ export function Button({
   leftIcon,
 }: ButtonProps) {
   const { theme } = useTheme()
+  const { t } = useTranslation()
 
   const scale = useSharedValue(1)
 
@@ -81,6 +84,8 @@ export function Button({
       disabled={isDisabled}
       accessibilityRole="button"
       accessibilityLabel={label}
+      accessibilityState={{ disabled: isDisabled, busy: isLoading }}
+      accessibilityHint={isLoading ? t(tk.common.loading) : undefined}
     >
       <Wrapper bgColor={bgColor} borderColor={borderColor} isDisabled={isDisabled}>
         {isLoading ? (
@@ -88,7 +93,9 @@ export function Button({
         ) : (
           <>
             {Icon && <Icon size={20} color={resolvedTextColor} />}
-            <Label color={resolvedTextColor}>{label}</Label>
+            <Text variant="body" color={() => resolvedTextColor}>
+              {label}
+            </Text>
           </>
         )}
       </Wrapper>
