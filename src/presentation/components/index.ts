@@ -1,10 +1,10 @@
-export { AppText } from './AppText'
-export type { AppTextProps, AppTextVariant } from './AppText'
+export { AppText } from '@/presentation/components/AppText'
+export type { AppTextProps, AppTextVariant } from '@/presentation/components/AppText'
 
-export { Button } from './Button'
-export type { ButtonProps, ButtonVariant } from './Button'
+export { Button } from '@/presentation/components/Button'
+export type { ButtonProps, ButtonVariant } from '@/presentation/components/Button'
 
-export { ErrorBoundary, ErrorFallbackView } from './ErrorBoundary'
+export { ErrorBoundary, ErrorFallbackView } from '@/presentation/components/ErrorBoundary'
 
-export { AppIcons } from './icons'
-export type { AppIconName, IconProps } from './icons'
+export { AppIcons } from '@/presentation/components/icons'
+export type { AppIconName, IconProps } from '@/presentation/components/icons'

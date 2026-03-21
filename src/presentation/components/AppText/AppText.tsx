@@ -1,9 +1,8 @@
 import { StyleSheet, type TextProps } from 'react-native'
 
 import { useTheme } from '@/contexts/ThemeContext'
+import { StyledText } from '@/presentation/components/AppText/AppText.styles'
 import { Typography } from '@/tokens'
-
-import { StyledText } from './AppText.styles'
 
 export type AppTextVariant =
   | 'display'

@@ -1,9 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-native'
 import { View } from 'react-native'
 
+import { AppText } from '@/presentation/components/AppText/AppText'
 import { colors } from '@/tokens'
-
-import { AppText } from './AppText'
 
 const meta = {
   title: 'Components/AppText',

@@ -1,8 +1,7 @@
 import { ActivityIndicator, type TouchableOpacityProps } from 'react-native'
 
 import { useTheme } from '@/contexts/ThemeContext'
-
-import { Container, Label } from './Button.styles'
+import { Container, Label } from '@/presentation/components/Button/Button.styles'
 
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost'
 

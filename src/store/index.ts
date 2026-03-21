@@ -1,2 +1,2 @@
-export { useAuthStore } from './useAuthStore'
-export { useGymStore } from './useGymStore'
+export { useAuthStore } from '@/store/useAuthStore'
+export { useGymStore } from '@/store/useGymStore'
