@@ -15,7 +15,7 @@
     "lint": "eslint src/",
     "format": "prettier --write src/",
     "format:check": "prettier --check src/",
-    "storybook": "STORYBOOK=true expo start",
+    "storybook": "EXPO_PUBLIC_STORYBOOK=true expo start",
     "storybook:generate": "sb-rn-get-stories",
     "storybook:web": "storybook dev -p 6006 --config-dir .storybook",
     "storybook:web:build": "storybook build --config-dir .storybook --output-dir storybook-static"
