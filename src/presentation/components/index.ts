@@ -5,3 +5,6 @@ export { Button } from './Button'
 export type { ButtonProps, ButtonVariant } from './Button'
 
 export { ErrorBoundary, ErrorFallbackView } from './ErrorBoundary'
+
+export { AppIcons } from './icons'
+export type { AppIconName, IconProps } from './icons'
