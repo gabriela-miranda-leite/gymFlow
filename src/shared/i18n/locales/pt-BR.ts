@@ -28,6 +28,11 @@ const ptBR = {
     generic: 'Algo deu errado. Tente novamente.',
     loginFailed: 'Email ou senha incorretos.',
   },
+  validation: {
+    emailInvalid: 'Insira um email válido.',
+    passwordRequired: 'Digite sua senha.',
+    passwordTooShort: 'A senha deve ter pelo menos 6 caracteres.',
+  },
 } as const
 
 export default ptBR

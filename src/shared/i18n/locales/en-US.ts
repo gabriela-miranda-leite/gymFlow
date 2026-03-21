@@ -28,6 +28,10 @@ const enUS = {
     generic: 'Something went wrong. Please try again.',
     loginFailed: 'Incorrect email or password.',
   },
+  validation: {
+    emailInvalid: 'Please enter a valid email.',
+    passwordTooShort: 'Password must be at least 6 characters.',
+  },
 } as const
 
 export default enUS

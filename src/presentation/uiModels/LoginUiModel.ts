@@ -3,11 +3,14 @@ export interface LoginUiModel {
   password: string
   isPasswordVisible: boolean
   isLoading: boolean
-  error: string | null
+  emailError: string | null
+  passwordError: string | null
   onEmailChange: (value: string) => void
   onPasswordChange: (value: string) => void
   onTogglePasswordVisibility: () => void
   onSubmit: () => void
   onForgotPassword: () => void
   onSignup: () => void
+  onGoogleLogin: () => void
+  onAppleLogin: () => void
 }
