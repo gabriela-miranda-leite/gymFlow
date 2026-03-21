@@ -7,21 +7,19 @@ const ptBR = {
       profile: 'Perfil',
     },
   },
-  home: {
-    title: 'Academias',
-    emptyState: 'Suas academias aparecerão aqui',
-  },
   login: {
-    brand: 'GymFlow',
-    cta: 'Faça login para continuar',
-  },
-  profile: {
-    title: 'Perfil',
-    emptyState: 'Informações do seu perfil aparecerão aqui',
-  },
-  errors: {
-    fetchGyms: 'Falha ao buscar academias',
-    generic: 'Algo deu errado. Tente novamente.',
+    title: 'Entrar',
+    subtitle: 'Bem-vindo de volta ao GymFlow',
+    googleLogin: 'Continuar com Google',
+    appleLogin: 'Continuar com Apple',
+    orLogin: 'Ou',
+    email: 'Email',
+    placeholderEmail: 'seu@email.com',
+    password: 'Senha',
+    forgotPassword: 'Esqueceu a senha?',
+    loginButton: 'Entrar',
+    signUpPrompt: 'Não tem uma conta? ',
+    signUpLink: 'Criar conta',
   },
 } as const
 
