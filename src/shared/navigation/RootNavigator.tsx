@@ -16,9 +16,7 @@ export function RootNavigator() {
           headerShown: false,
           contentStyle: { backgroundColor: theme.background },
         }}
-      >
-        {/* screens serão adicionadas aqui */}
-      </Stack.Navigator>
+      />
     </NavigationContainer>
   )
 }
