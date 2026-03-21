@@ -1,0 +1,97 @@
+import { ActivityIndicator, Pressable } from 'react-native'
+import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated'
+
+import { useTheme } from '@/contexts/ThemeContext'
+import { ButtonVariant, Label, Wrapper } from '@/presentation/components/Button/Button.styles'
+import type { AppIconName } from '@/presentation/components/icons/AppIcons'
+import { AppIcons } from '@/presentation/components/icons/AppIcons'
+import type { AppTheme } from '@/tokens'
+
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable)
+
+interface ButtonProps {
+  label: string
+  onPress: () => void
+  variant?: ButtonVariant
+  isLoading?: boolean
+  disabled?: boolean
+  textColor?: (theme: AppTheme) => string
+  leftIcon?: AppIconName
+}
+
+function resolveVariantColors(variant: ButtonVariant, theme: AppTheme) {
+  const map = {
+    [ButtonVariant.Contained]: {
+      bgColor: theme.brand.primary,
+      borderColor: theme.brand.primary,
+      textColor: theme.brand.primaryForeground,
+    },
+    [ButtonVariant.Outlined]: {
+      bgColor: 'transparent',
+      borderColor: theme.border,
+      textColor: theme.foreground,
+    },
+  }
+
+  return map[variant]
+}
+
+export { ButtonVariant }
+
+export function Button({
+  label,
+  onPress,
+  variant = ButtonVariant.Contained,
+  isLoading = false,
+  disabled = false,
+  textColor,
+  leftIcon,
+}: ButtonProps) {
+  const { theme } = useTheme()
+
+  const scale = useSharedValue(1)
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: scale.value }],
+    alignSelf: 'stretch' as const,
+  }))
+
+  const handlePressIn = () => {
+    // eslint-disable-next-line react-hooks/immutability
+    scale.value = withSpring(0.97, { damping: 15, stiffness: 400 })
+  }
+
+  const handlePressOut = () => {
+    // eslint-disable-next-line react-hooks/immutability
+    scale.value = withSpring(1, { damping: 15, stiffness: 400 })
+  }
+
+  const isDisabled = disabled || isLoading
+  const { bgColor, borderColor, textColor: defaultTextColor } = resolveVariantColors(variant, theme)
+  const resolvedTextColor = textColor ? textColor(theme) : defaultTextColor
+
+  const Icon = leftIcon ? AppIcons[leftIcon] : null
+
+  return (
+    <AnimatedPressable
+      style={animatedStyle}
+      onPress={onPress}
+      onPressIn={handlePressIn}
+      onPressOut={handlePressOut}
+      disabled={isDisabled}
+      accessibilityRole="button"
+      accessibilityLabel={label}
+    >
+      <Wrapper bgColor={bgColor} borderColor={borderColor} isDisabled={isDisabled}>
+        {isLoading ? (
+          <ActivityIndicator color={resolvedTextColor} />
+        ) : (
+          <>
+            {Icon && <Icon size={20} color={resolvedTextColor} />}
+            <Label color={resolvedTextColor}>{label}</Label>
+          </>
+        )}
+      </Wrapper>
+    </AnimatedPressable>
+  )
+}
