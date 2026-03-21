@@ -24,6 +24,11 @@ export const StyledInput = styled.TextInput<{ textColor: string }>`
   flex: 1;
   font-family: ${FontFamily.regular};
   font-size: ${FontSize.body}px;
+  margin: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
 `
 
 export const ErrorRow = styled.View`
