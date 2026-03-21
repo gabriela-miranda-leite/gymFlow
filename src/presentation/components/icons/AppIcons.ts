@@ -1,70 +1,70 @@
 import {
-  ArrowLeft,
-  Bell,
-  Camera,
-  CaretDown,
-  CaretRight,
-  ChartBar,
-  Check,
-  Clock,
-  Envelope,
-  Eye,
-  EyeSlash,
-  Heart,
-  Lock,
-  MapPin,
-  MapTrifold,
-  Moon,
-  Radio,
-  SignOut,
-  Spinner,
-  Sun,
-  TrendDown,
-  User,
-  WarningCircle,
+  ArrowLeftIcon,
+  BellIcon,
+  CameraIcon,
+  CaretDownIcon,
+  CaretRightIcon,
+  ChartBarIcon,
+  CheckIcon,
+  ClockIcon,
+  EnvelopeIcon,
+  EyeIcon,
+  EyeSlashIcon,
+  HeartIcon,
+  LockIcon,
+  MapPinIcon,
+  MapTrifoldIcon,
+  MoonIcon,
+  RadioIcon,
+  SignOutIcon,
+  SpinnerIcon,
+  SunIcon,
+  TrendDownIcon,
+  UserIcon,
+  WarningCircleIcon,
 } from 'phosphor-react-native'
 
 export type { IconProps } from 'phosphor-react-native'
 
 // Navigation
 export const AppIcons = {
-  navBack: ArrowLeft,
-  navChevron: CaretRight,
-  navChevronDown: CaretDown,
+  navBack: ArrowLeftIcon,
+  navChevron: CaretRightIcon,
+  navChevronDown: CaretDownIcon,
 
   // Tabs
-  tabMap: MapTrifold,
-  tabCheckIn: Radio,
-  tabProfile: User,
+  tabMap: MapTrifoldIcon,
+  tabCheckIn: RadioIcon,
+  tabProfile: UserIcon,
 
   // Location & time
-  location: MapPin,
-  lastUpdate: Clock,
-  bestTime: TrendDown,
+  location: MapPinIcon,
+  lastUpdate: ClockIcon,
+  bestTime: TrendDownIcon,
 
   // Actions
-  favorite: Heart,
-  notifications: Bell,
-  logout: SignOut,
-  editAvatar: Camera,
+  favorite: HeartIcon,
+  notifications: BellIcon,
+  logout: SignOutIcon,
+  editAvatar: CameraIcon,
 
   // Form fields
-  validationError: WarningCircle,
-  showPassword: Eye,
-  hidePassword: EyeSlash,
-  emailField: Envelope,
-  passwordField: Lock,
+  validationError: WarningCircleIcon,
+  showPassword: EyeIcon,
+  hidePassword: EyeSlashIcon,
+  emailField: EnvelopeIcon,
+  passwordField: LockIcon,
 
   // Theme
-  lightTheme: Sun,
-  darkTheme: Moon,
+  lightTheme: SunIcon,
+  darkTheme: MoonIcon,
 
   // Feedback
-  success: Check,
-  loading: Spinner,
+  success: CheckIcon,
+  loading: SpinnerIcon,
 
   // Reports
-  reports: ChartBar,
+  reports: ChartBarIcon,
 } as const
 
 export type AppIconName = keyof typeof AppIcons
