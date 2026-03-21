@@ -23,6 +23,6 @@ const ptBR = {
     fetchGyms: 'Falha ao buscar academias',
     generic: 'Algo deu errado. Tente novamente.',
   },
-} as const;
+} as const
 
-export default ptBR;
+export default ptBR

@@ -1,7 +1,7 @@
-export { AppText } from './AppText';
-export type { AppTextProps, AppTextVariant } from './AppText';
+export { AppText } from './AppText'
+export type { AppTextProps, AppTextVariant } from './AppText'
 
-export { Button } from './Button';
-export type { ButtonProps, ButtonVariant } from './Button';
+export { Button } from './Button'
+export type { ButtonProps, ButtonVariant } from './Button'
 
-export { ErrorBoundary, ErrorFallbackView } from './ErrorBoundary';
+export { ErrorBoundary, ErrorFallbackView } from './ErrorBoundary'

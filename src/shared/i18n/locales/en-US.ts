@@ -23,6 +23,6 @@ const enUS = {
     fetchGyms: 'Failed to fetch gyms',
     generic: 'Something went wrong. Please try again.',
   },
-} as const;
+} as const
 
-export default enUS;
+export default enUS

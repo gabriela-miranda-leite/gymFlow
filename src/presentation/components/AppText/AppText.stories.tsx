@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react-native';
-import { View } from 'react-native';
+import type { Meta, StoryObj } from '@storybook/react-native'
+import { View } from 'react-native'
 
-import { AppText } from './AppText';
+import { colors } from '@/tokens'
 
-import { colors } from '@/tokens';
+import { AppText } from './AppText'
 
 const meta = {
   title: 'Components/AppText',
@@ -18,41 +18,38 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['h1', 'h2', 'h3', 'body', 'bodyLg', 'bodyMedium', 'caption', 'overline'],
+      options: ['display', 'heading', 'subheading', 'body', 'caption', 'micro', 'data'],
     },
     color: {
       control: 'select',
       options: [
-        colors.gray900,
-        colors.gray600,
-        colors.gray400,
-        colors.gray300,
+        colors.foregroundLight,
+        colors.secondaryForegroundLight,
+        colors.mutedForegroundLight,
         colors.white,
         colors.primary,
-        colors.primaryDark,
       ],
       labels: {
-        [colors.gray900]: 'text.primary',
-        [colors.gray600]: 'text.secondary',
-        [colors.gray400]: 'text.tertiary',
-        [colors.gray300]: 'text.disabled',
-        [colors.white]: 'text.inverse',
+        [colors.foregroundLight]: 'foreground',
+        [colors.secondaryForegroundLight]: 'secondaryForeground',
+        [colors.mutedForegroundLight]: 'mutedForeground',
+        [colors.white]: 'white',
         [colors.primary]: 'brand.primary',
-        [colors.primaryDark]: 'brand.primaryDark',
       },
     },
   },
-} satisfies Meta<typeof AppText>;
+} satisfies Meta<typeof AppText>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
-export const H1: Story = { args: { variant: 'h1', children: 'Heading 1' } };
-export const H2: Story = { args: { variant: 'h2', children: 'Heading 2' } };
-export const H3: Story = { args: { variant: 'h3', children: 'Heading 3' } };
-export const Body: Story = { args: { variant: 'body', children: 'Corpo de texto padrão' } };
-export const BodyLg: Story = { args: { variant: 'bodyLg', children: 'Corpo de texto grande' } };
-export const Caption: Story = { args: { variant: 'caption', children: 'Legenda' } };
+export const Display: Story = { args: { variant: 'display', children: 'Display' } }
+export const Heading: Story = { args: { variant: 'heading', children: 'Heading' } }
+export const Subheading: Story = { args: { variant: 'subheading', children: 'Subheading' } }
+export const Body: Story = { args: { variant: 'body', children: 'Corpo de texto padrão' } }
+export const Caption: Story = { args: { variant: 'caption', children: 'Legenda' } }
+export const Micro: Story = { args: { variant: 'micro', children: 'Micro texto' } }
+export const Data: Story = { args: { variant: 'data', children: '1.234' } }
 export const CustomColor: Story = {
-  args: { variant: 'body', color: '#FF6B35', children: 'Cor customizada' },
-};
+  args: { variant: 'body', color: colors.primary, children: 'Cor customizada' },
+}

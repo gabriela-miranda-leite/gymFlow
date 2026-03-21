@@ -1,15 +1,15 @@
-import { ActivityIndicator, type TouchableOpacityProps } from 'react-native';
+import { ActivityIndicator, type TouchableOpacityProps } from 'react-native'
 
-import { Container, Label } from './Button.styles';
+import { useTheme } from '@/contexts/ThemeContext'
 
-import { useTheme } from '@/contexts/ThemeContext';
+import { Container, Label } from './Button.styles'
 
-export type ButtonVariant = 'primary' | 'secondary' | 'ghost';
+export type ButtonVariant = 'primary' | 'secondary' | 'ghost'
 
 export interface ButtonProps extends TouchableOpacityProps {
-  label: string;
-  variant?: ButtonVariant;
-  loading?: boolean;
+  label: string
+  variant?: ButtonVariant
+  loading?: boolean
 }
 
 export function Button({
@@ -19,27 +19,27 @@ export function Button({
   disabled,
   ...props
 }: ButtonProps) {
-  const { theme } = useTheme();
-  const isDisabled = disabled || loading;
+  const { theme } = useTheme()
+  const isDisabled = disabled || loading
 
   const bgColor =
     variant === 'primary'
       ? theme.brand.primary
       : variant === 'secondary'
-        ? theme.surface.primary
-        : 'transparent';
+        ? theme.card
+        : 'transparent'
 
   const textColor =
     variant === 'primary'
-      ? theme.brand.onPrimary
+      ? theme.brand.primaryForeground
       : variant === 'secondary'
-        ? theme.text.primary
-        : theme.brand.primary;
+        ? theme.foreground
+        : theme.brand.primary
 
   return (
     <Container
       bgColor={bgColor}
-      borderColor={theme.border.default}
+      borderColor={theme.border}
       bordered={variant === 'secondary'}
       isDisabled={!!isDisabled}
       disabled={!!isDisabled}
@@ -54,5 +54,5 @@ export function Button({
         <Label textColor={textColor}>{label}</Label>
       )}
     </Container>
-  );
+  )
 }

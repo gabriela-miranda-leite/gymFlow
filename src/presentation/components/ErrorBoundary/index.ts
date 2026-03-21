@@ -1,2 +1,2 @@
-export { ErrorBoundary } from './ErrorBoundary';
-export { ErrorFallbackView } from './ErrorFallbackView';
+export { ErrorBoundary } from './ErrorBoundary'
+export { ErrorFallbackView } from './ErrorFallbackView'
