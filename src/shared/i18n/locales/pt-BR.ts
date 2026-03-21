@@ -2,6 +2,9 @@ const ptBR = {
   common: {
     appName: 'GymFlow',
     retry: 'Tentar novamente',
+    loading: 'Aguarde',
+    showPassword: 'Mostrar senha',
+    hidePassword: 'Ocultar senha',
     tabs: {
       home: 'Academias',
       profile: 'Perfil',

@@ -2,6 +2,9 @@ const enUS = {
   common: {
     appName: 'GymFlow',
     retry: 'Try again',
+    loading: 'Please wait',
+    showPassword: 'Show password',
+    hidePassword: 'Hide password',
     tabs: {
       home: 'Gyms',
       profile: 'Profile',
