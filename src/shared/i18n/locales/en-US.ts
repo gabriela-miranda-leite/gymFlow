@@ -7,21 +7,19 @@ const enUS = {
       profile: 'Profile',
     },
   },
-  home: {
-    title: 'Gyms',
-    emptyState: 'Your gyms will appear here',
-  },
   login: {
-    brand: 'GymFlow',
-    cta: 'Log in to continue',
-  },
-  profile: {
-    title: 'Profile',
-    emptyState: 'Your profile information will appear here',
-  },
-  errors: {
-    fetchGyms: 'Failed to fetch gyms',
-    generic: 'Something went wrong. Please try again.',
+    title: 'Sign in',
+    subtitle: 'Welcome back to GymFlow',
+    googleLogin: 'Continue with Google',
+    appleLogin: 'Continue with Apple',
+    orLogin: 'Or',
+    email: 'Email',
+    placeholderEmail: 'your@email.com',
+    password: 'Password',
+    forgotPassword: 'Forgot your password?',
+    loginButton: 'Sign in',
+    signUpPrompt: "Don't have an account? ",
+    signUpLink: 'Create account',
   },
 } as const
 
