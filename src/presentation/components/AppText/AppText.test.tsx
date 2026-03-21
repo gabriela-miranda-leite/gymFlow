@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react-native'
 import React from 'react'
 
-import { AppText } from './AppText'
+import { AppText } from '@/presentation/components/AppText/AppText'
 
 jest.mock('@/contexts/ThemeContext', () => ({
   useTheme: () => ({

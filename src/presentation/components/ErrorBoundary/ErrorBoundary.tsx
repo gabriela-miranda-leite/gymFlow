@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { ErrorFallbackView } from './ErrorFallbackView'
+import { ErrorFallbackView } from '@/presentation/components/ErrorBoundary/ErrorFallbackView'
 
 interface Props {
   children: React.ReactNode

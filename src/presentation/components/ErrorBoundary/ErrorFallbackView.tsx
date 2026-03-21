@@ -1,8 +1,7 @@
+import { Container, Title } from '@/presentation/components/ErrorBoundary/ErrorFallbackView.styles'
 import { useTranslation } from '@/shared/i18n'
 
 import { Button } from '../Button'
-
-import { Container, Title } from './ErrorFallbackView.styles'
 
 interface Props {
   onRetry: () => void

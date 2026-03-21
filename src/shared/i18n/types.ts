@@ -1,4 +1,4 @@
-import type ptBR from './locales/pt-BR'
+import type ptBR from '@/shared/i18n/locales/pt-BR'
 
 export type I18nResources = {
   translation: typeof ptBR

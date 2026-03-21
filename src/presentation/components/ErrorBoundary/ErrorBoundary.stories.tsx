@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-native'
 import { Text } from 'react-native'
 
-import { ErrorFallbackView } from './ErrorFallbackView'
+import { ErrorFallbackView } from '@/presentation/components/ErrorBoundary/ErrorFallbackView'
 
 const meta = {
   title: 'Components/ErrorBoundary',

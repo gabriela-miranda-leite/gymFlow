@@ -1,4 +1,4 @@
-import { colors } from './colors'
+import { colors } from '@/tokens/colors'
 
 export type OccupancyLevel = 'empty' | 'moderate' | 'busy' | 'packed'
 

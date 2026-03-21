@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-native'
 import { View } from 'react-native'
 
-import { Button } from './Button'
+import { Button } from '@/presentation/components/Button/Button'
 
 const meta = {
   title: 'Components/Button',

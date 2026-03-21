@@ -1,7 +1,7 @@
 import { fireEvent, render } from '@testing-library/react-native'
 import React from 'react'
 
-import { Button } from './Button'
+import { Button } from '@/presentation/components/Button/Button'
 
 jest.mock('@/contexts/ThemeContext', () => ({
   useTheme: () => ({

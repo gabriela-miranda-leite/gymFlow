@@ -7,9 +7,8 @@ import { HomeScreen } from '@/presentation/screens/HomeScreen'
 import { LoginScreen } from '@/presentation/screens/LoginScreen'
 import { ProfileScreen } from '@/presentation/screens/ProfileScreen'
 import { useTranslation } from '@/shared/i18n'
+import type { AppTabParamList, RootStackParamList } from '@/shared/navigation/types'
 import { useAuthStore } from '@/store/useAuthStore'
-
-import type { AppTabParamList, RootStackParamList } from './types'
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
 const Tab = createBottomTabNavigator<AppTabParamList>()
