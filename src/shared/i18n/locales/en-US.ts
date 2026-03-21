@@ -21,6 +21,10 @@ const enUS = {
     signUpPrompt: "Don't have an account? ",
     signUpLink: 'Create account',
   },
+  errors: {
+    generic: 'Something went wrong. Please try again.',
+    loginFailed: 'Incorrect email or password.',
+  },
 } as const
 
 export default enUS

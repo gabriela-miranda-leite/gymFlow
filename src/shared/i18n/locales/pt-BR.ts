@@ -21,6 +21,10 @@ const ptBR = {
     signUpPrompt: 'Não tem uma conta? ',
     signUpLink: 'Criar conta',
   },
+  errors: {
+    generic: 'Algo deu errado. Tente novamente.',
+    loginFailed: 'Email ou senha incorretos.',
+  },
 } as const
 
 export default ptBR
