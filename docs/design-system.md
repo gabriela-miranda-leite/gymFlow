@@ -3,8 +3,8 @@
 Todos os tokens ficam em `src/tokens/` e são exportados pelo barrel `src/tokens/index.ts`.
 
 ```ts
-import { Typography, Spacing, Radius, Shadows } from '@/tokens';
-import { useTheme } from '@/contexts/ThemeContext';
+import { Typography, Spacing, Radius, Shadows } from '@/tokens'
+import { useTheme } from '@/contexts/ThemeContext'
 ```
 
 ---
@@ -16,12 +16,12 @@ import { useTheme } from '@/contexts/ThemeContext';
 
 ```tsx
 // ✅
-const { theme } = useTheme();
-<View style={{ backgroundColor: theme.bg.primary }} />
+const { theme } = useTheme()
+<View style={{ backgroundColor: theme.background }} />
 
 // ❌
-import { colors } from '@/tokens';
-<View style={{ backgroundColor: colors.gray100 }} />
+import { colors } from '@/tokens'
+<View style={{ backgroundColor: colors.white }} />
 ```
 
 ---
@@ -43,7 +43,7 @@ Aceita `initialMode?: 'system' | 'light' | 'dark'` (padrão: `'system'`).
 ### useTheme()
 
 ```tsx
-const { theme, isDark, themeKey, mode, setMode } = useTheme();
+const { theme, isDark, themeKey, mode, setMode } = useTheme()
 ```
 
 | Propriedade | Tipo | Descrição |
@@ -58,79 +58,61 @@ const { theme, isDark, themeKey, mode, setMode } = useTheme();
 
 ## Tokens semânticos de cor (`theme`)
 
-### `theme.bg` — fundos de tela
+### Superfícies
 
 | Token | Uso |
 |-------|-----|
-| `theme.bg.primary` | Fundo principal da tela |
-| `theme.bg.secondary` | Fundo de seções, listas |
-| `theme.bg.tertiary` | Separadores, áreas de destaque sutil |
+| `theme.background` | Fundo principal da tela |
+| `theme.card` | Fundo de cards e listas |
+| `theme.secondary` | Fundo de seções secundárias |
+| `theme.muted` | Áreas de destaque sutil, separadores |
 
-### `theme.surface` — superfícies elevadas
-
-| Token | Uso |
-|-------|-----|
-| `theme.surface.primary` | Cards, modais, bottom sheets |
-| `theme.surface.secondary` | Cards aninhados |
-| `theme.surface.elevated` | Superfícies com sombra sobre outras |
-
-### `theme.border`
+### Texto
 
 | Token | Uso |
 |-------|-----|
-| `theme.border.default` | Bordas padrão de inputs, cards |
-| `theme.border.subtle` | Divisores internos, separadores |
-| `theme.border.strong` | Bordas com ênfase |
+| `theme.foreground` | Texto principal, headings |
+| `theme.secondaryForeground` | Subtítulos, metadados |
+| `theme.mutedForeground` | Placeholders, hints, labels desabilitados |
 
-### `theme.text`
-
-| Token | Uso |
-|-------|-----|
-| `theme.text.primary` | Texto principal, headings |
-| `theme.text.secondary` | Subtítulos, metadados |
-| `theme.text.tertiary` | Placeholders, hints |
-| `theme.text.inverse` | Texto sobre fundos escuros/primários |
-| `theme.text.disabled` | Estado desabilitado |
-
-### `theme.icon`
+### Bordas e inputs
 
 | Token | Uso |
 |-------|-----|
-| `theme.icon.primary` | Ícones de ação principal |
-| `theme.icon.secondary` | Ícones de apoio |
-| `theme.icon.tertiary` | Ícones decorativos |
-| `theme.icon.inverse` | Ícones sobre fundos escuros |
+| `theme.border` | Bordas padrão de inputs e cards |
+| `theme.input` | Fundo de campos de formulário |
 
-### `theme.brand`
+### Brand
 
 | Token | Uso |
 |-------|-----|
-| `theme.brand.primary` | `#FF6B35` — botões, CTA, destaques |
-| `theme.brand.primaryDark` | `#CC4A15` — estado pressionado |
-| `theme.brand.primaryLight` | `#FFF0EA` — background de banners de marca |
-| `theme.brand.secondary` | `#1A1A2E` — cabeçalhos, nav |
-| `theme.brand.onPrimary` | Texto/ícone sobre `brand.primary` |
+| `theme.brand.primary` | `#FF6B00` — botões, CTA, destaques |
+| `theme.brand.primaryForeground` | Texto/ícone sobre `brand.primary` |
 
-### `theme.occupancy` — nível de lotação
+### Status — nível de lotação
 
 ```tsx
-const { theme } = useTheme();
-const level: OccupancyLevel = 'busy'; // 'empty' | 'moderate' | 'busy' | 'packed'
+const { theme } = useTheme()
+const level: OccupancyLevel = 'busy' // 'empty' | 'moderate' | 'busy' | 'packed'
 
-<View style={{ backgroundColor: theme.occupancy[level].bg }}>
-  <View style={{ backgroundColor: theme.occupancy[level].indicator }} /> {/* bolinha */}
-  <Text style={{ color: theme.occupancy[level].text }}>Movimentada</Text>
-</View>
+<View style={{ backgroundColor: theme.status[level] }} />
 ```
 
-| Nível | Indicador | Significado |
-|-------|-----------|-------------|
-| `empty` | verde `#22C55E` | Academia vazia |
-| `moderate` | amarelo `#F59E0B` | Moderada |
-| `busy` | laranja `#F97316` | Movimentada |
-| `packed` | vermelho `#EF4444` | Lotada |
+| Nível | Cor | Significado |
+|-------|-----|-------------|
+| `empty` | `#22C55E` verde | Academia vazia |
+| `moderate` | `#EAB308` amarelo | Moderada |
+| `busy` | `#F97316` laranja | Movimentada |
+| `packed` | `#EF4444` vermelho | Lotada |
 
-### `theme.tabBar`
+### Destructive
+
+| Token | Uso |
+|-------|-----|
+| `theme.destructive` | Ações destrutivas, erros |
+| `theme.destructiveForeground` | Texto/ícone sobre `destructive` |
+
+### Tab bar
 
 | Token | Uso |
 |-------|-----|
@@ -143,14 +125,14 @@ const level: OccupancyLevel = 'busy'; // 'empty' | 'moderate' | 'busy' | 'packed
 
 ## Tipografia
 
-Importe `Typography` de `@/tokens`. Cada estilo já inclui `fontFamily`, `fontSize`, `lineHeight` e `letterSpacing`.
+Importe `Typography` de `@/tokens`. Cada estilo já inclui `fontFamily` e `fontSize`.
 
 ```tsx
-import { Typography } from '@/tokens';
+import { Typography } from '@/tokens'
 
 <Text style={Typography.display}>GymFlow</Text>
-<Text style={Typography.h1}>Meus Treinos</Text>
-<Text style={[Typography.body, { color: theme.text.secondary }]}>
+<Text style={Typography.heading}>Meus Treinos</Text>
+<Text style={[Typography.body, { color: theme.mutedForeground }]}>
   Última sessão há 2 dias
 </Text>
 ```
@@ -159,34 +141,44 @@ import { Typography } from '@/tokens';
 
 | Token | Fonte | Tamanho | Uso |
 |-------|-------|---------|-----|
-| `Typography.display` | Barlow Condensed Black 900 | 40 | Números grandes, destaque hero |
-| `Typography.h1` | Barlow Condensed ExtraBold 800 | 32 | Título de tela |
-| `Typography.h2` | Barlow Condensed Bold 700 | 24 | Título de seção |
-| `Typography.h3` | Barlow Condensed Bold 700 | 20 | Subtítulo de seção |
-| `Typography.button` | Barlow SemiBold 600 | 18 | Labels de botão |
-| `Typography.bodyLg` | Barlow Regular 400 | 16 | Texto de destaque |
-| `Typography.body` | Barlow Regular 400 | 14 | Texto padrão |
-| `Typography.bodyMedium` | Barlow Medium 500 | 14 | Texto com ênfase média |
-| `Typography.caption` | Barlow Regular 400 | 12 | Legendas, metadados |
-| `Typography.overline` | Barlow SemiBold 600 | 11 | Labels de categoria (uppercase) |
+| `Typography.display` | Inter Bold 700 | 24 | Títulos de tela |
+| `Typography.heading` | Inter Bold 700 | 20 | Título de seção |
+| `Typography.subheading` | Inter SemiBold 600 | 16 | Subtítulo de seção |
+| `Typography.body` | Inter Medium 500 | 14 | Texto padrão |
+| `Typography.caption` | Inter Medium 500 | 12 | Legendas, metadados |
+| `Typography.micro` | Inter SemiBold 600 | 10 | Labels de categoria |
+| `Typography.data` | JetBrains Mono Bold 700 | 30 | Números grandes, métricas |
 
-### Combinar tipografia com cor
+### Famílias disponíveis
 
 ```tsx
-<Text style={[Typography.h2, { color: theme.text.primary }]}>
-  Academia Central
-</Text>
-<Text style={[Typography.caption, { color: theme.text.tertiary }]}>
-  Aberta até 22h
-</Text>
+import { FontFamily, FontSize, FontWeight } from '@/tokens'
+
+<Text style={{
+  fontFamily: FontFamily.semiBold,
+  fontSize: FontSize.subheading,
+}} />
 ```
+
+| Token | Fonte |
+|-------|-------|
+| `FontFamily.regular` | Inter 400 |
+| `FontFamily.medium` | Inter 500 |
+| `FontFamily.semiBold` | Inter 600 |
+| `FontFamily.bold` | Inter 700 |
+| `FontFamily.monoRegular` | JetBrains Mono 400 |
+| `FontFamily.monoMedium` | JetBrains Mono 500 |
+| `FontFamily.monoSemiBold` | JetBrains Mono 600 |
+| `FontFamily.monoBold` | JetBrains Mono 700 |
+
+As fontes são carregadas pelo `useAppFonts()` antes do app renderizar — se o componente estiver visível, as fontes já estão disponíveis.
 
 ---
 
 ## Espaçamento
 
 ```tsx
-import { Spacing } from '@/tokens';
+import { Spacing } from '@/tokens'
 ```
 
 | Token | Valor | Uso típico |
@@ -198,8 +190,9 @@ import { Spacing } from '@/tokens';
 | `Spacing.s5` | 20px | Margin entre seções pequenas |
 | `Spacing.s6` | 24px | Margin entre seções médias |
 | `Spacing.s8` | 32px | Margin entre blocos maiores |
+| `Spacing.s10` | 40px | Top padding de telas |
 | `Spacing.s12` | 48px | Espaço generoso entre seções |
-| `Spacing.s14` | 56px | Altura de bottom bar, espaço de respiro |
+| `Spacing.s16` | 64px | Separação grande |
 
 ```tsx
 <View style={{ padding: Spacing.s4, marginBottom: Spacing.s6 }} />
@@ -210,18 +203,15 @@ import { Spacing } from '@/tokens';
 ## Bordas arredondadas
 
 ```tsx
-import { Radius } from '@/tokens';
+import { Radius } from '@/tokens'
 ```
 
 | Token | Valor | Uso |
 |-------|-------|-----|
-| `Radius.xs` | 4 | Chips pequenos, badges |
-| `Radius.sm` | 8 | Inputs, botões secundários |
-| `Radius.md` | 12 | Bottom sheets, modais |
-| `Radius.btn` | 14 | Botões primários |
-| `Radius.lg` | 16 | Cards padrão |
-| `Radius.card` | 18 | Cards maiores |
-| `Radius.xl` | 24 | Elementos com destaque visual |
+| `Radius.sm` | 6 | Badges, tags |
+| `Radius.md` | 8 | Inputs, botões |
+| `Radius.lg` | 12 | Cards, modais |
+| `Radius.xl` | 16 | Containers grandes |
 | `Radius.full` | 9999 | Pills, avatares, botões redondos |
 
 ---
@@ -229,7 +219,7 @@ import { Radius } from '@/tokens';
 ## Sombras
 
 ```tsx
-import { Shadows } from '@/tokens';
+import { Shadows } from '@/tokens'
 
 <View style={[styles.card, Shadows.medium]} />
 ```
@@ -246,75 +236,49 @@ import { Shadows } from '@/tokens';
 
 ---
 
-## Fontes
-
-As fontes são carregadas pelo `useAppFonts()` antes do app renderizar. Você não precisa se preocupar com carregamento — se o componente estiver visível, as fontes já estão disponíveis.
-
-```tsx
-import { FontFamily, FontSize, FontWeight } from '@/tokens';
-
-// Uso direto (quando não quiser usar um preset de Typography)
-<Text style={{
-  fontFamily: FontFamily.displayBold,
-  fontSize: FontSize.h3,
-  fontWeight: FontWeight.bold,
-}} />
-```
-
-| Família | Pesos disponíveis | Uso |
-|---------|-------------------|-----|
-| Barlow Condensed | 700, 800, 900 | Headings, display, números grandes |
-| Barlow | 400, 500, 600 | Body, captions, labels de UI |
-
----
-
 ## Exemplo completo — card de academia
 
 ```tsx
-import { Radius, Shadows, Spacing, Typography } from '@/tokens';
-import { useTheme } from '@/contexts/ThemeContext';
-import type { OccupancyLevel } from '@/tokens';
+import { Radius, Shadows, Spacing, Typography } from '@/tokens'
+import { useTheme } from '@/contexts/ThemeContext'
+import type { OccupancyLevel } from '@/tokens'
 
 interface GymCardProps {
-  name: string;
-  address: string;
-  occupancy: OccupancyLevel;
+  name: string
+  address: string
+  occupancy: OccupancyLevel
 }
 
 export function GymCard({ name, address, occupancy }: GymCardProps) {
-  const { theme } = useTheme();
+  const { theme } = useTheme()
 
   return (
     <View
       style={{
-        backgroundColor: theme.surface.primary,
-        borderRadius: Radius.card,
+        backgroundColor: theme.card,
+        borderRadius: Radius.lg,
         padding: Spacing.s4,
         ...Shadows.medium,
       }}
     >
       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-        <Text style={[Typography.h3, { color: theme.text.primary }]}>
+        <Text style={[Typography.heading, { color: theme.foreground }]}>
           {name}
         </Text>
         <View
           style={{
-            backgroundColor: theme.occupancy[occupancy].bg,
+            backgroundColor: theme.status[occupancy],
             borderRadius: Radius.full,
             paddingHorizontal: Spacing.s3,
             paddingVertical: Spacing.s1,
           }}
-        >
-          <Text style={[Typography.caption, { color: theme.occupancy[occupancy].text }]}>
-            {occupancy}
-          </Text>
-        </View>
+        />
       </View>
-      <Text style={[Typography.body, { color: theme.text.secondary, marginTop: Spacing.s1 }]}>
+      <Text style={[Typography.body, { color: theme.mutedForeground, marginTop: Spacing.s1 }]}>
         {address}
       </Text>
     </View>
-  );
+  )
 }
 ```
 
@@ -322,9 +286,10 @@ export function GymCard({ name, address, occupancy }: GymCardProps) {
 
 ## Checklist de revisão
 
-- [ ] Nenhum valor de cor hardcoded (ex: `'#FF6B35'`, `'white'`) em componentes
+- [ ] Nenhum valor de cor hardcoded (ex: `'#FF6B00'`, `'white'`) em componentes
 - [ ] Nenhum `fontSize` hardcoded fora dos tokens
 - [ ] Nenhum `padding`/`margin` hardcoded — tudo via `Spacing.*`
 - [ ] Nenhum `borderRadius` hardcoded — tudo via `Radius.*`
 - [ ] Sombras via `Shadows.*`, não via propriedades manuais
 - [ ] Fontes via `Typography.*` ou `FontFamily.*`
+- [ ] Cores via `theme.*` de `useTheme()`, nunca `colors.*`

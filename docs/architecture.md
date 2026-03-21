@@ -38,6 +38,7 @@ src/
     types/            # Tipos TypeScript compartilhados
     utils/            # Funções puras
   store/              # Zustand stores (estado global)
+  theme/              # Motion system (animações, springs, durations)
   tokens/             # Design system (cores, tipografia, espaçamento, tema)
 ```
 
