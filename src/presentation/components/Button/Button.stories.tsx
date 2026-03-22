@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-native'
+import type { ComponentType } from 'react'
 import { View } from 'react-native'
 
 import { Button, ButtonVariant } from '@/presentation/components/Button/Button'
@@ -17,7 +18,7 @@ const meta = {
   title: 'Components/Button',
   component: Button,
   decorators: [
-    (Story) => (
+    (Story: ComponentType) => (
       <View style={{ padding: 24, width: '100%' }}>
         <Story />
       </View>

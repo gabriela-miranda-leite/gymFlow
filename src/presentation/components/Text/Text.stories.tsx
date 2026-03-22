@@ -1,13 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react-native'
+import type { ComponentType } from 'react'
 import { View } from 'react-native'
 
 import { Text } from '@/presentation/components/Text/Text'
+import type { AppTheme } from '@/tokens/theme'
 
 const meta = {
   title: 'Components/Text',
   component: Text,
   decorators: [
-    (Story) => (
+    (Story: ComponentType) => (
       <View style={{ padding: 24, gap: 12 }}>
         <Story />
       </View>
@@ -43,7 +45,7 @@ export const CustomColor: Story = {
   args: {
     variant: 'heading',
     children: 'Texto com cor primária',
-    color: (t) => t.brand.primary,
+    color: (t: AppTheme) => t.brand.primary,
   },
 }
 
@@ -51,6 +53,6 @@ export const Muted: Story = {
   args: {
     variant: 'body',
     children: 'Texto secundário',
-    color: (t) => t.mutedForeground,
+    color: (t: AppTheme) => t.mutedForeground,
   },
 }

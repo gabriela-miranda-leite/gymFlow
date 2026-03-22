@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-native'
+import type { ComponentProps } from 'react'
 import { Text } from 'react-native'
 
 import { ErrorFallbackView } from '@/presentation/components/ErrorBoundary/ErrorFallbackView'
@@ -17,7 +18,7 @@ export const Fallback: Story = {
 
 export const WithCustomFallback: Story = {
   args: { onRetry: () => {} },
-  render: (args) => (
+  render: (args: ComponentProps<typeof ErrorFallbackView>) => (
     <Text style={{ padding: 24, textAlign: 'center' }} {...args}>
       Fallback customizado
     </Text>

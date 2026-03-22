@@ -16,9 +16,7 @@
     "format": "prettier --write src/",
     "format:check": "prettier --check src/",
     "storybook": "EXPO_PUBLIC_STORYBOOK=true expo start",
-    "storybook:generate": "sb-rn-get-stories",
-    "storybook:web": "storybook dev -p 6006 --config-dir .storybook",
-    "storybook:web:build": "storybook build --config-dir .storybook --output-dir storybook-static"
+    "storybook:generate": "sb-rn-get-stories"
   },
   "dependencies": {
     "@expo-google-fonts/inter": "^0.4.2",
@@ -60,9 +58,8 @@
     "@commitlint/cli": "^20.4.4",
     "@commitlint/config-conventional": "^20.4.4",
     "@storybook/addon-ondevice-controls": "^10.2.3",
-    "@storybook/react": "^10.2.19",
     "@storybook/react-native": "^10.2.3",
-    "@storybook/react-webpack5": "^10.2.19",
+    "storybook": "^10.2.19",
     "@testing-library/jest-native": "^5.4.3",
     "@testing-library/react-native": "^13.3.3",
     "@types/jest": "^29.5.14",
@@ -70,7 +67,6 @@
     "@types/styled-components-react-native": "^5.2.5",
     "@typescript-eslint/eslint-plugin": "^8.57.0",
     "@typescript-eslint/parser": "^8.57.0",
-    "babel-loader": "^10.1.1",
     "babel-plugin-module-resolver": "^5.0.2",
     "babel-preset-expo": "^55.0.11",
     "eslint": "^8.57.1",
@@ -90,7 +86,6 @@
     "react-dom": "^19.2.0",
     "react-native-web": "^0.21.2",
     "react-test-renderer": "19.2.0",
-    "storybook": "^10.2.19",
     "typescript": "~5.9.2"
   },
   "private": true,
