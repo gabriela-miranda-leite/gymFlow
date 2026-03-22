@@ -28,6 +28,7 @@ jest.mock('@/data/repositories/AuthRepository', () => ({
 }))
 
 jest.mock('@/domain/useCases/LoginUseCase', () => ({
+  ...jest.requireActual('@/domain/useCases/LoginUseCase'),
   loginUseCase: jest.fn(),
 }))
 
@@ -72,7 +73,10 @@ describe('LoginScreen', () => {
     const { loginUseCase } = require('@/domain/useCases/LoginUseCase')
     loginUseCase.mockRejectedValueOnce(new Error('Invalid credentials'))
 
-    const { getByText, getAllByRole } = render(<LoginScreen />)
+    const { getByText, getAllByLabelText, getAllByRole } = render(<LoginScreen />)
+
+    fireEvent.changeText(getAllByLabelText('login.email')[0], 'test@email.com')
+    fireEvent.changeText(getAllByLabelText('login.password')[0], '123456')
 
     fireEvent.press(
       getAllByRole('button').find((el) => el.props.accessibilityLabel === 'login.loginButton')!,

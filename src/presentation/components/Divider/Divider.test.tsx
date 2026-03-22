@@ -22,7 +22,7 @@ describe('Divider', () => {
   it('renders label when provided', () => {
     const { getByText } = render(<Divider label="ou" />)
 
-    expect(getByText('ou')).toBeTruthy()
+    expect(getByText('ou', { includeHiddenElements: true })).toBeTruthy()
   })
 
   it('does not render label text when label is empty string', () => {

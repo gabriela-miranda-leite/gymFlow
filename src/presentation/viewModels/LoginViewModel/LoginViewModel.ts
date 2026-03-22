@@ -67,7 +67,11 @@ export const useLoginViewModel = (): LoginUiModel => {
     isPasswordVisible,
     onTogglePasswordVisibility,
     emailError: errors.email?.message ? t(tk.validation.emailInvalid) : null,
-    passwordError: errors.password?.message ?? null,
+    passwordError: errors.password
+      ? errors.password.type
+        ? t(tk.validation.passwordTooShort)
+        : (errors.password.message ?? null)
+      : null,
     onSubmit,
     onForgotPassword,
     onSignup,

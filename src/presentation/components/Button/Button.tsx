@@ -92,7 +92,7 @@ export function Button({
     >
       <Wrapper bgColor={bgColor} borderColor={borderColor} isDisabled={isDisabled}>
         {isLoading ? (
-          <ActivityIndicator color={resolvedTextColor} />
+          <ActivityIndicator color={resolvedTextColor} testID="activity-indicator" />
         ) : (
           <>
             {Icon && <Icon size={20} color={resolvedTextColor} />}
