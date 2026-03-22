@@ -5,6 +5,7 @@ import { Text } from 'react-native'
 import { ErrorBoundary } from '@/presentation/components/ErrorBoundary/ErrorBoundary'
 
 jest.mock('@/shared/i18n', () => ({
+  ...jest.requireActual('@/shared/i18n'),
   useTranslation: () => ({ t: (key: string) => key }),
 }))
 

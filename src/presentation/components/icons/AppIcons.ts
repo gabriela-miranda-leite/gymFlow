@@ -1,4 +1,5 @@
 import {
+  AppleLogoIcon,
   ArrowLeftIcon,
   BellIcon,
   CameraIcon,
@@ -10,6 +11,7 @@ import {
   EnvelopeIcon,
   EyeIcon,
   EyeSlashIcon,
+  GoogleLogoIcon,
   HeartIcon,
   LockIcon,
   MapPinIcon,
@@ -23,6 +25,8 @@ import {
   UserIcon,
   WarningCircleIcon,
 } from 'phosphor-react-native'
+
+import { ChartIcon } from '@/presentation/components/icons/ChartIcon'
 
 export type { IconProps } from 'phosphor-react-native'
 
@@ -47,6 +51,8 @@ export const AppIcons = {
   notifications: BellIcon,
   logout: SignOutIcon,
   editAvatar: CameraIcon,
+  'google-logo': GoogleLogoIcon,
+  'apple-logo': AppleLogoIcon,
 
   // Form fields
   validationError: WarningCircleIcon,
@@ -65,6 +71,7 @@ export const AppIcons = {
 
   // Reports
   reports: ChartBarIcon,
+  logo: ChartIcon,
 } as const
 
 export type AppIconName = keyof typeof AppIcons

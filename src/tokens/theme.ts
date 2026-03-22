@@ -44,7 +44,7 @@ export const lightTheme: AppTheme = {
   muted: colors.mutedLight,
   mutedForeground: colors.mutedForegroundLight,
   border: colors.mutedLight,
-  input: colors.mutedLight,
+  input: colors.cardLight,
 
   brand: {
     primary: colors.primary,

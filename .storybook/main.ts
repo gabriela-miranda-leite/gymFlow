@@ -55,6 +55,7 @@ const config: StorybookConfig = {
           __dirname,
           './mocks/async-storage.ts',
         ),
+        'react-native-reanimated': resolve(__dirname, './mocks/react-native-reanimated.ts'),
       },
       // Polyfill Node.js core modules used by dev deps (e.g. @testing-library)
       fallback: {
@@ -74,6 +75,12 @@ const config: StorybookConfig = {
         ...(webpackConfig.resolve?.extensions ?? []),
       ],
     };
+
+    // Handle font files
+    webpackConfig.module?.rules?.push({
+      test: /\.(ttf|otf|woff|woff2)$/,
+      type: 'asset/resource',
+    });
 
     return webpackConfig;
   },

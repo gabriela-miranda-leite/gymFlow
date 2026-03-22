@@ -1,47 +1,14 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import { useTheme } from '@/contexts/ThemeContext'
-import { HomeScreen } from '@/presentation/screens/HomeScreen'
 import { LoginScreen } from '@/presentation/screens/LoginScreen'
-import { ProfileScreen } from '@/presentation/screens/ProfileScreen'
-import { useTranslation } from '@/shared/i18n'
-import type { AppTabParamList, RootStackParamList } from '@/shared/navigation/types'
-import { useAuthStore } from '@/store/useAuthStore'
+import type { RootStackParamList } from '@/shared/navigation/types'
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
-const Tab = createBottomTabNavigator<AppTabParamList>()
-
-function AppTabs() {
-  const { theme } = useTheme()
-  const { t } = useTranslation()
-
-  return (
-    <Tab.Navigator
-      screenOptions={{
-        headerShown: false,
-        tabBarStyle: {
-          backgroundColor: theme.tabBar.bg,
-          borderTopColor: theme.tabBar.border,
-        },
-        tabBarActiveTintColor: theme.tabBar.active,
-        tabBarInactiveTintColor: theme.tabBar.inactive,
-      }}
-    >
-      <Tab.Screen name="Home" component={HomeScreen} options={{ title: t('common.tabs.home') }} />
-      <Tab.Screen
-        name="Profile"
-        component={ProfileScreen}
-        options={{ title: t('common.tabs.profile') }}
-      />
-    </Tab.Navigator>
-  )
-}
 
 export function RootNavigator() {
   const { theme } = useTheme()
-  const isAuthenticated = useAuthStore((s) => s.isAuthenticated)
 
   return (
     <NavigationContainer>
@@ -51,11 +18,8 @@ export function RootNavigator() {
           contentStyle: { backgroundColor: theme.background },
         }}
       >
-        {isAuthenticated ? (
-          <Stack.Screen name="App" component={AppTabs} />
-        ) : (
-          <Stack.Screen name="Login" component={LoginScreen} />
-        )}
+        {/* TODO: add Login and App screens */}
+        <Stack.Screen name="Login" component={LoginScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   )

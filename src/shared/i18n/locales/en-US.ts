@@ -2,26 +2,35 @@ const enUS = {
   common: {
     appName: 'GymFlow',
     retry: 'Try again',
+    loading: 'Please wait',
+    showPassword: 'Show password',
+    hidePassword: 'Hide password',
     tabs: {
       home: 'Gyms',
       profile: 'Profile',
     },
   },
-  home: {
-    title: 'Gyms',
-    emptyState: 'Your gyms will appear here',
-  },
   login: {
-    brand: 'GymFlow',
-    cta: 'Log in to continue',
-  },
-  profile: {
-    title: 'Profile',
-    emptyState: 'Your profile information will appear here',
+    title: 'Sign in',
+    subtitle: 'Welcome back to GymFlow',
+    googleLogin: 'Continue with Google',
+    appleLogin: 'Continue with Apple',
+    orLogin: 'Or',
+    email: 'Email',
+    placeholderEmail: 'your@email.com',
+    password: 'Password',
+    forgotPassword: 'Forgot your password?',
+    loginButton: 'Sign in',
+    signUpPrompt: "Don't have an account? ",
+    signUpLink: 'Create account',
   },
   errors: {
-    fetchGyms: 'Failed to fetch gyms',
     generic: 'Something went wrong. Please try again.',
+    loginFailed: 'Incorrect email or password.',
+  },
+  validation: {
+    emailInvalid: 'Please enter a valid email.',
+    passwordTooShort: 'Password must be at least 6 characters.',
   },
 } as const
 

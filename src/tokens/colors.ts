@@ -1,6 +1,6 @@
 export const colors = {
   // Primary
-  primary: '#FF6B00',
+  primary: '#FF6A00',
   primaryForeground: '#FFFFFF',
 
   // Light mode surfaces

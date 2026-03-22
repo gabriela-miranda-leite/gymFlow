@@ -3,6 +3,7 @@ module.exports = {
   testMatch: ['**/?(*.)+(spec|test).[tj]s?(x)'],
   setupFilesAfterEnv: ['<rootDir>/src/shared/tests/setupTests.ts'],
   moduleNameMapper: {
+    '^react-native-reanimated$': '<rootDir>/src/shared/tests/mocks/react-native-reanimated.ts',
     '^@/(.*)$': '<rootDir>/src/$1',
   },
   collectCoverageFrom: [
