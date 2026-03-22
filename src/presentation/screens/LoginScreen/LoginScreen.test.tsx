@@ -5,8 +5,8 @@ import { LoginScreen } from '@/presentation/screens/LoginScreen/LoginScreen'
 
 const mockNavigate = jest.fn()
 
-jest.mock('@react-navigation/native', () => ({
-  useNavigation: () => ({ navigate: mockNavigate }),
+jest.mock('@/shared/navigation/useAppNavigation', () => ({
+  useAppNavigation: () => ({ toSignUp: mockNavigate, toLogin: jest.fn(), goBack: jest.fn() }),
 }))
 
 jest.mock('@/contexts/ThemeContext', () => ({
@@ -84,7 +84,7 @@ describe('LoginScreen', () => {
 
     fireEvent.press(getByTestId('login-signup-link'))
 
-    expect(mockNavigate).toHaveBeenCalledWith('SignUp')
+    expect(mockNavigate).toHaveBeenCalled()
   })
 
   it('shows error message when login fails', async () => {

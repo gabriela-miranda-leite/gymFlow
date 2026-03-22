@@ -8,12 +8,6 @@ import { SignUpCredentials, signUpSchema, signUpUseCase } from '@/domain/useCase
 import type { SignUpUiModel } from '@/presentation/uiModels/SignUpUiModel'
 import { tk } from '@/shared/i18n'
 
-// TODO: implementar o ViewModel de cadastro
-// - Usar useForm + zodResolver(signUpSchema)
-// - Gerenciar isLoading e isPasswordVisible com useState
-// - onSubmit: chamar signUpUseCase, tratar erros com setError
-// - Mapear errors do Zod para mensagens traduzidas via t(tk...)
-// - Retornar SignUpUiModel
 export const useSignUpViewModel = (): SignUpUiModel => {
   const { t } = useTranslation()
 

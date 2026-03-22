@@ -1,5 +1,3 @@
-import { useNavigation } from '@react-navigation/native'
-
 import { Button, ButtonVariant } from '@/presentation/components/Button/Button'
 import { ButtonLink } from '@/presentation/components/ButtonLink/ButtonLink'
 import { Divider } from '@/presentation/components/Divider/Divider'
@@ -16,11 +14,12 @@ import {
 } from '@/presentation/screens/SignUpScreen/SignUpScreen.styles'
 import { useSignUpViewModel } from '@/presentation/viewModels/SignUpViewModel'
 import { tk, useTranslation } from '@/shared/i18n'
+import { useAppNavigation } from '@/shared/navigation/useAppNavigation'
 import { Spacing } from '@/tokens'
 
 export function SignUpScreen() {
   const { t } = useTranslation()
-  const navigation = useNavigation()
+  const { goBack } = useAppNavigation()
   const {
     name,
     onNameChange,
@@ -117,11 +116,7 @@ export function SignUpScreen() {
         <Text variant="caption" color={(theme) => theme.mutedForeground}>
           {t(tk.signUp.loginPrompt)}
         </Text>
-        <ButtonLink
-          label={t(tk.signUp.loginLink)}
-          onPress={() => navigation.goBack()}
-          testID="signUp-login-link"
-        />
+        <ButtonLink label={t(tk.signUp.loginLink)} onPress={goBack} testID="signUp-login-link" />
       </Footer>
     </ScreenContainer>
   )

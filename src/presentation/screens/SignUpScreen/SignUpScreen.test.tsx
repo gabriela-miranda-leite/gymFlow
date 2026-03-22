@@ -5,8 +5,8 @@ import { SignUpScreen } from '@/presentation/screens/SignUpScreen/SignUpScreen'
 
 const mockGoBack = jest.fn()
 
-jest.mock('@react-navigation/native', () => ({
-  useNavigation: () => ({ goBack: mockGoBack }),
+jest.mock('@/shared/navigation/useAppNavigation', () => ({
+  useAppNavigation: () => ({ toSignUp: jest.fn(), toLogin: jest.fn(), goBack: mockGoBack }),
 }))
 
 jest.mock('@/contexts/ThemeContext', () => ({

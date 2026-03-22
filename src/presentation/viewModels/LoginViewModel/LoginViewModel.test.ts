@@ -4,8 +4,8 @@ import { useLoginViewModel } from '@/presentation/viewModels/LoginViewModel'
 
 const mockNavigate = jest.fn()
 
-jest.mock('@react-navigation/native', () => ({
-  useNavigation: () => ({ navigate: mockNavigate }),
+jest.mock('@/shared/navigation/useAppNavigation', () => ({
+  useAppNavigation: () => ({ toSignUp: mockNavigate, toLogin: jest.fn(), goBack: jest.fn() }),
 }))
 
 jest.mock('@/data/repositories/AuthRepository', () => ({
@@ -85,7 +85,7 @@ describe('useLoginViewModel', () => {
         result.current.onSignup()
       })
 
-      expect(mockNavigate).toHaveBeenCalledWith('SignUp')
+      expect(mockNavigate).toHaveBeenCalled()
     })
   })
 
