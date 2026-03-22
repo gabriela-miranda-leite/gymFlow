@@ -3,10 +3,16 @@ import React from 'react'
 
 import { LoginScreen } from '@/presentation/screens/LoginScreen/LoginScreen'
 
-const mockNavigate = jest.fn()
+const mockToApp = jest.fn()
+const mockToSignUp = jest.fn()
 
 jest.mock('@/shared/navigation/useAppNavigation', () => ({
-  useAppNavigation: () => ({ toSignUp: mockNavigate, toLogin: jest.fn(), goBack: jest.fn() }),
+  useAppNavigation: () => ({
+    toSignUp: mockToSignUp,
+    toApp: mockToApp,
+    toLogin: jest.fn(),
+    goBack: jest.fn(),
+  }),
 }))
 
 jest.mock('@/contexts/ThemeContext', () => ({
@@ -27,15 +33,8 @@ jest.mock('react-native-safe-area-context', () => ({
   SafeAreaView: ({ children }: { children: React.ReactNode }) => <>{children}</>,
 }))
 
-jest.mock('@/data/repositories/AuthRepository', () => ({
-  authRepository: {
-    login: jest.fn(),
-  },
-}))
-
 jest.mock('@/domain/useCases/LoginUseCase', () => ({
   ...jest.requireActual('@/domain/useCases/LoginUseCase'),
-  loginUseCase: jest.fn(),
 }))
 
 describe('LoginScreen', () => {
@@ -84,24 +83,36 @@ describe('LoginScreen', () => {
 
     fireEvent.press(getByTestId('login-signup-link'))
 
-    expect(mockNavigate).toHaveBeenCalled()
+    expect(mockToSignUp).toHaveBeenCalled()
   })
 
-  it('shows error message when login fails', async () => {
-    const { loginUseCase } = require('@/domain/useCases/LoginUseCase')
-    loginUseCase.mockRejectedValueOnce(new Error('Invalid credentials'))
+  it('shows emailError when submitting with empty fields', async () => {
+    const { getByTestId, findByText } = render(<LoginScreen />)
 
-    const { getByText, getAllByLabelText, getAllByRole } = render(<LoginScreen />)
+    fireEvent.press(getByTestId('login-submit-button'))
+
+    expect(await findByText('validation.emailInvalid')).toBeTruthy()
+  })
+
+  it('shows passwordError when email is valid but password is too short', async () => {
+    const { getAllByLabelText, getByTestId, findByText } = render(<LoginScreen />)
+
+    fireEvent.changeText(getAllByLabelText('login.email')[0], 'test@email.com')
+    fireEvent.changeText(getAllByLabelText('login.password')[0], '123')
+    fireEvent.press(getByTestId('login-submit-button'))
+
+    expect(await findByText('validation.passwordTooShort')).toBeTruthy()
+  })
+
+  it('navigates to app with valid credentials', async () => {
+    const { getAllByLabelText, getByTestId } = render(<LoginScreen />)
 
     fireEvent.changeText(getAllByLabelText('login.email')[0], 'test@email.com')
     fireEvent.changeText(getAllByLabelText('login.password')[0], '123456')
-
-    fireEvent.press(
-      getAllByRole('button').find((el) => el.props.accessibilityLabel === 'login.loginButton')!,
-    )
+    fireEvent.press(getByTestId('login-submit-button'))
 
     await waitFor(() => {
-      expect(getByText('errors.loginFailed')).toBeTruthy()
+      expect(mockToApp).toHaveBeenCalled()
     })
   })
 })

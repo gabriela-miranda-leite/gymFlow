@@ -6,7 +6,8 @@ const enUS = {
     showPassword: 'Show password',
     hidePassword: 'Hide password',
     tabs: {
-      home: 'Gyms',
+      map: 'Map',
+      checkIn: 'Check-in',
       profile: 'Profile',
     },
   },
@@ -40,6 +41,15 @@ const enUS = {
     signUpButton: 'Create account',
     loginPrompt: 'Already have an account? ',
     loginLink: 'Sign in',
+  },
+  map: {
+    placeholder: 'Map Screen',
+  },
+  checkIn: {
+    placeholder: 'Check-in Screen',
+  },
+  profile: {
+    placeholder: 'Profile Screen',
   },
   errors: {
     generic: 'Something went wrong. Please try again.',

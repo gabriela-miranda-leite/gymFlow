@@ -2,16 +2,20 @@ import { act, renderHook } from '@testing-library/react-native'
 
 import { useSignUpViewModel } from '@/presentation/viewModels/SignUpViewModel'
 
-jest.mock('@/data/repositories/SignUpRepository', () => ({
-  signUpRepository: { signUp: jest.fn() },
+const mockToApp = jest.fn()
+
+jest.mock('@/shared/navigation/useAppNavigation', () => ({
+  useAppNavigation: () => ({
+    toApp: mockToApp,
+    toSignUp: jest.fn(),
+    toLogin: jest.fn(),
+    goBack: jest.fn(),
+  }),
 }))
 
 jest.mock('@/domain/useCases/SignUpUseCase', () => ({
   ...jest.requireActual('@/domain/useCases/SignUpUseCase'),
-  signUpUseCase: jest.fn(),
 }))
-
-const { signUpUseCase } = require('@/domain/useCases/SignUpUseCase')
 
 describe('useSignUpViewModel', () => {
   beforeEach(() => {
@@ -86,7 +90,7 @@ describe('useSignUpViewModel', () => {
   })
 
   describe('onSubmit — validação', () => {
-    it('com campos vazios seta nameError e não chama signUpUseCase', async () => {
+    it('com campos vazios seta nameError e não navega', async () => {
       const { result } = renderHook(() => useSignUpViewModel())
 
       await act(async () => {
@@ -94,10 +98,10 @@ describe('useSignUpViewModel', () => {
       })
 
       expect(result.current.nameError).not.toBeNull()
-      expect(signUpUseCase).not.toHaveBeenCalled()
+      expect(mockToApp).not.toHaveBeenCalled()
     })
 
-    it('com email inválido seta emailError e não chama signUpUseCase', async () => {
+    it('com email inválido seta emailError e não navega', async () => {
       const { result } = renderHook(() => useSignUpViewModel())
 
       act(() => {
@@ -111,10 +115,10 @@ describe('useSignUpViewModel', () => {
       })
 
       expect(result.current.emailError).not.toBeNull()
-      expect(signUpUseCase).not.toHaveBeenCalled()
+      expect(mockToApp).not.toHaveBeenCalled()
     })
 
-    it('com senha curta seta passwordError e não chama signUpUseCase', async () => {
+    it('com senha curta seta passwordError e não navega', async () => {
       const { result } = renderHook(() => useSignUpViewModel())
 
       act(() => {
@@ -130,17 +134,12 @@ describe('useSignUpViewModel', () => {
       expect(result.current.nameError).toBeNull()
       expect(result.current.emailError).toBeNull()
       expect(result.current.passwordError).not.toBeNull()
-      expect(signUpUseCase).not.toHaveBeenCalled()
+      expect(mockToApp).not.toHaveBeenCalled()
     })
   })
 
-  describe('onSubmit — chamada à API', () => {
-    it('com dados válidos chama signUpUseCase com os dados corretos', async () => {
-      signUpUseCase.mockResolvedValueOnce({
-        user: { id: '1', name: 'Gabriela', email: 'test@email.com' },
-        token: 'mock-token',
-      })
-
+  describe('onSubmit — navegação', () => {
+    it('com dados válidos navega para o app', async () => {
       const { result } = renderHook(() => useSignUpViewModel())
 
       act(() => {
@@ -153,54 +152,10 @@ describe('useSignUpViewModel', () => {
         await result.current.onSubmit()
       })
 
-      expect(signUpUseCase).toHaveBeenCalledWith(
-        { name: 'Gabriela', email: 'test@email.com', password: '123456' },
-        expect.anything(),
-      )
+      expect(mockToApp).toHaveBeenCalled()
       expect(result.current.nameError).toBeNull()
       expect(result.current.emailError).toBeNull()
       expect(result.current.passwordError).toBeNull()
-      expect(result.current.isLoading).toBe(false)
-    })
-
-    it('quando a API falha seta passwordError com mensagem adequada', async () => {
-      signUpUseCase.mockRejectedValueOnce(new Error('Sign up failed'))
-
-      const { result } = renderHook(() => useSignUpViewModel())
-
-      act(() => {
-        result.current.onNameChange('Gabriela')
-        result.current.onEmailChange('test@email.com')
-        result.current.onPasswordChange('123456')
-      })
-
-      await act(async () => {
-        await result.current.onSubmit()
-      })
-
-      expect(result.current.passwordError).not.toBeNull()
-      expect(result.current.isLoading).toBe(false)
-    })
-
-    it('isLoading é false após a chamada', async () => {
-      signUpUseCase.mockResolvedValueOnce({
-        user: { id: '1', name: 'Gabriela', email: 'test@email.com' },
-        token: 'mock-token',
-      })
-
-      const { result } = renderHook(() => useSignUpViewModel())
-
-      act(() => {
-        result.current.onNameChange('Gabriela')
-        result.current.onEmailChange('test@email.com')
-        result.current.onPasswordChange('123456')
-      })
-
-      await act(async () => {
-        await result.current.onSubmit()
-      })
-
-      expect(result.current.isLoading).toBe(false)
     })
   })
 })

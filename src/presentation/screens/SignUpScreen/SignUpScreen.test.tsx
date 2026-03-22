@@ -3,10 +3,16 @@ import React from 'react'
 
 import { SignUpScreen } from '@/presentation/screens/SignUpScreen/SignUpScreen'
 
+const mockToApp = jest.fn()
 const mockGoBack = jest.fn()
 
 jest.mock('@/shared/navigation/useAppNavigation', () => ({
-  useAppNavigation: () => ({ toSignUp: jest.fn(), toLogin: jest.fn(), goBack: mockGoBack }),
+  useAppNavigation: () => ({
+    toApp: mockToApp,
+    toSignUp: jest.fn(),
+    toLogin: jest.fn(),
+    goBack: mockGoBack,
+  }),
 }))
 
 jest.mock('@/contexts/ThemeContext', () => ({
@@ -27,16 +33,9 @@ jest.mock('react-native-safe-area-context', () => ({
   SafeAreaView: ({ children }: { children: React.ReactNode }) => <>{children}</>,
 }))
 
-jest.mock('@/data/repositories/AuthRepository', () => ({
-  authRepository: { signUp: jest.fn() },
-}))
-
 jest.mock('@/domain/useCases/SignUpUseCase', () => ({
   ...jest.requireActual('@/domain/useCases/SignUpUseCase'),
-  signUpUseCase: jest.fn(),
 }))
-
-const { signUpUseCase } = require('@/domain/useCases/SignUpUseCase')
 
 describe('SignUpScreen', () => {
   beforeEach(() => {
@@ -86,37 +85,15 @@ describe('SignUpScreen', () => {
     expect(await findByText('validation.passwordTooShort')).toBeTruthy()
   })
 
-  it('calls signUpUseCase with valid credentials', async () => {
-    signUpUseCase.mockResolvedValueOnce({ success: true })
+  it('navigates to app with valid credentials', async () => {
     const { getByTestId } = render(<SignUpScreen />)
     fireEvent.changeText(getByTestId('signUp-name-input'), 'Usuário')
     fireEvent.changeText(getByTestId('signUp-email-input'), 'user@email.com')
-    fireEvent.changeText(getByTestId('signUp-password-input'), '12345678')
+    fireEvent.changeText(getByTestId('signUp-password-input'), '123456')
     fireEvent.press(getByTestId('signUp-submit-btn'))
+
     await waitFor(() => {
-      expect(signUpUseCase).toHaveBeenCalledWith(
-        {
-          name: 'Usuário',
-          email: 'user@email.com',
-          password: '12345678',
-        },
-        expect.anything(),
-      )
+      expect(mockToApp).toHaveBeenCalled()
     })
   })
-
-  it('shows error message when sign up fails', async () => {
-    signUpUseCase.mockRejectedValueOnce(new Error('fail'))
-    const { getByTestId, findByText } = render(<SignUpScreen />)
-    fireEvent.changeText(getByTestId('signUp-name-input'), 'Usuário')
-    fireEvent.changeText(getByTestId('signUp-email-input'), 'user@email.com')
-    fireEvent.changeText(getByTestId('signUp-password-input'), '12345678')
-    fireEvent.press(getByTestId('signUp-submit-btn'))
-    expect(await findByText('errors.signFailed')).toBeTruthy()
-  })
 })
-
-void fireEvent
-void render
-void waitFor
-void signUpUseCase

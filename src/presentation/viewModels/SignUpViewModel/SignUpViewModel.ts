@@ -3,22 +3,21 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
-import { signUpRepository } from '@/data/repositories/SignUpRepository'
-import { SignUpCredentials, signUpSchema, signUpUseCase } from '@/domain/useCases/SignUpUseCase'
+import { SignUpCredentials, signUpSchema } from '@/domain/useCases/SignUpUseCase'
 import type { SignUpUiModel } from '@/presentation/uiModels/SignUpUiModel'
 import { tk } from '@/shared/i18n'
+import { useAppNavigation } from '@/shared/navigation/useAppNavigation'
 
 export const useSignUpViewModel = (): SignUpUiModel => {
   const { t } = useTranslation()
 
-  const [isLoading, setLoading] = useState<boolean>(false)
+  const [isLoading] = useState<boolean>(false)
   const [isPasswordVisible, setPasswordVisible] = useState<boolean>(false)
 
   const {
     watch,
     setValue,
     handleSubmit,
-    setError,
     formState: { errors },
   } = useForm<SignUpCredentials>({
     resolver: zodResolver(signUpSchema),
@@ -29,15 +28,10 @@ export const useSignUpViewModel = (): SignUpUiModel => {
   const email = watch('email')
   const password = watch('password')
 
-  const onSubmit = handleSubmit(async (data) => {
-    setLoading(true)
-    try {
-      await signUpUseCase(data, signUpRepository)
-    } catch {
-      setError('password', { message: t(tk.errors.signFailed) })
-    } finally {
-      setLoading(false)
-    }
+  const { toApp } = useAppNavigation()
+
+  const onSubmit = handleSubmit(async () => {
+    toApp()
   })
 
   const emailError = errors.email?.message ? t(tk.validation.emailInvalid) : null

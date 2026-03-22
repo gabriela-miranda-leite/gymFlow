@@ -3,8 +3,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
-import { authRepository } from '@/data/repositories/AuthRepository'
-import { loginSchema, loginUseCase } from '@/domain/useCases/LoginUseCase'
+import { loginSchema } from '@/domain/useCases/LoginUseCase'
 import type { LoginCredentials } from '@/domain/useCases/LoginUseCase'
 import type { LoginUiModel } from '@/presentation/uiModels/LoginUiModel'
 import { tk } from '@/shared/i18n'
@@ -13,14 +12,13 @@ import { useAppNavigation } from '@/shared/navigation/useAppNavigation'
 export const useLoginViewModel = (): LoginUiModel => {
   const { t } = useTranslation()
 
-  const [isLoading, setLoading] = useState<boolean>(false)
+  const [isLoading] = useState<boolean>(false)
   const [isPasswordVisible, setPasswordVisible] = useState<boolean>(false)
 
   const {
     watch,
     setValue,
     handleSubmit,
-    setError,
     formState: { errors },
   } = useForm<LoginCredentials>({
     resolver: zodResolver(loginSchema),
@@ -41,22 +39,15 @@ export const useLoginViewModel = (): LoginUiModel => {
   const email = watch('email')
   const password = watch('password')
 
-  const onSubmit = handleSubmit(async (data) => {
-    setLoading(true)
-    try {
-      await loginUseCase(data, authRepository)
-    } catch {
-      setError('password', { message: t(tk.errors.loginFailed) })
-    } finally {
-      setLoading(false)
-    }
+  const onSubmit = handleSubmit(async () => {
+    toApp()
   })
 
   const onForgotPassword = () => {
     //todo implementar função
   }
 
-  const { toSignUp } = useAppNavigation()
+  const { toSignUp, toApp } = useAppNavigation()
 
   const onSignup = () => {
     toSignUp()

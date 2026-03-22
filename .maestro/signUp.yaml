@@ -38,7 +38,7 @@ appId: com.gymflow.app
     id: "signUp-submit-btn"
 - assertVisible: "A senha deve ter pelo menos 6 caracteres"
 
-# 4. Credenciais válidas — submit com sucesso
+# 4. Credenciais válidas — entra no app autenticado (tab bar visível com Mapa)
 - tapOn:
     id: "signUp-password-input"
 - eraseText: 3
@@ -46,6 +46,8 @@ appId: com.gymflow.app
 - hideKeyboard
 - tapOn:
     id: "signUp-submit-btn"
+- assertVisible: "Mapa"
+- assertNotVisible: "signUp-submit-btn"
 
 # 5. Volta para o Login pelo link "Entrar"
 - launchApp
