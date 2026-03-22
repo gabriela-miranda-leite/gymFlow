@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import { useTheme } from '@/contexts/ThemeContext'
 import { LoginScreen } from '@/presentation/screens/LoginScreen'
+import { SignUpScreen } from '@/presentation/screens/SignUpScreen'
 import type { RootStackParamList } from '@/shared/navigation/types'
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
@@ -18,8 +19,9 @@ export function RootNavigator() {
           contentStyle: { backgroundColor: theme.background },
         }}
       >
-        {/* TODO: add Login and App screens */}
         <Stack.Screen name="Login" component={LoginScreen} />
+        {/* TODO: GYM-11 — registrar SignUpScreen */}
+        <Stack.Screen name="SignUp" component={SignUpScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   )
