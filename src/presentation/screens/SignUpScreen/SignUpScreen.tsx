@@ -1,3 +1,5 @@
+import { MotiView } from 'moti'
+
 import { Button, ButtonVariant } from '@/presentation/components/Button/Button'
 import { ButtonLink } from '@/presentation/components/ButtonLink/ButtonLink'
 import { Divider } from '@/presentation/components/Divider/Divider'
@@ -16,6 +18,13 @@ import { useSignUpViewModel } from '@/presentation/viewModels/SignUpViewModel'
 import { tk, useTranslation } from '@/shared/i18n'
 import { useAppNavigation } from '@/shared/navigation/useAppNavigation'
 import { Spacing } from '@/tokens'
+
+const fadeUp = (delay: number) =>
+  ({
+    from: { opacity: 0, translateY: 16 },
+    animate: { opacity: 1, translateY: 0 },
+    transition: { type: 'timing', duration: 350, delay },
+  }) as const
 
 export function SignUpScreen() {
   const { t } = useTranslation()
@@ -40,84 +49,96 @@ export function SignUpScreen() {
 
   return (
     <ScreenContainer>
-      <Header>
+      <MotiView {...fadeUp(0)}>
+        <Header>
+          <Stack paddingVertical={Spacing.s4}>
+            <Logo variant={LogoVariant.Flat} size={LogoSize.Lg} />
+          </Stack>
+
+          <Text variant="heading">{t(tk.signUp.title)}</Text>
+          <Text variant="body" color={(theme) => theme.mutedForeground}>
+            {t(tk.signUp.subtitle)}
+          </Text>
+        </Header>
+      </MotiView>
+
+      <MotiView {...fadeUp(100)}>
+        <SocialButtons>
+          <Button
+            label={t(tk.signUp.googleLogin)}
+            onPress={onGoogleSignUp}
+            variant={ButtonVariant.Outlined}
+            leftIcon="google-logo"
+            testID="signUp-google-btn"
+          />
+          <Button
+            label={t(tk.signUp.appleLogin)}
+            onPress={onAppleSignUp}
+            variant={ButtonVariant.Outlined}
+            leftIcon="apple-logo"
+            testID="signUp-apple-btn"
+          />
+        </SocialButtons>
+      </MotiView>
+
+      <MotiView {...fadeUp(200)}>
         <Stack paddingVertical={Spacing.s4}>
-          <Logo variant={LogoVariant.Flat} size={LogoSize.Lg} />
+          <Divider label={t(tk.signUp.orSignUp)} />
         </Stack>
+      </MotiView>
 
-        <Text variant="heading">{t(tk.signUp.title)}</Text>
-        <Text variant="body" color={(theme) => theme.mutedForeground}>
-          {t(tk.signUp.subtitle)}
-        </Text>
-      </Header>
+      <MotiView {...fadeUp(300)}>
+        <FormFields>
+          <TextInput
+            label={t(tk.signUp.name)}
+            value={name}
+            onChangeText={onNameChange}
+            placeholder={t(tk.signUp.placeholderName)}
+            autoCapitalize="words"
+            errorMessage={nameError ?? undefined}
+            testID="signUp-name-input"
+          />
+          <TextInput
+            label={t(tk.signUp.email)}
+            value={email}
+            onChangeText={onEmailChange}
+            placeholder={t(tk.signUp.placeholderEmail)}
+            keyboardType="email-address"
+            autoCapitalize="none"
+            errorMessage={emailError ?? undefined}
+            testID="signUp-email-input"
+          />
+          <TextInput
+            label={t(tk.signUp.password)}
+            value={password}
+            onChangeText={onPasswordChange}
+            placeholder={t(tk.signUp.placeholderPassword)}
+            secureTextEntry={!isPasswordVisible}
+            rightIcon={isPasswordVisible ? 'hidePassword' : 'showPassword'}
+            onPressRightIcon={onTogglePasswordVisibility}
+            errorMessage={passwordError ?? undefined}
+            testID="signUp-password-input"
+          />
+        </FormFields>
+      </MotiView>
 
-      <SocialButtons>
+      <MotiView {...fadeUp(400)}>
         <Button
-          label={t(tk.signUp.googleLogin)}
-          onPress={onGoogleSignUp}
-          variant={ButtonVariant.Outlined}
-          leftIcon="google-logo"
-          testID="signUp-google-btn"
+          label={t(tk.signUp.signUpButton)}
+          onPress={onSubmit}
+          isLoading={isLoading}
+          testID="signUp-submit-btn"
         />
-        <Button
-          label={t(tk.signUp.appleLogin)}
-          onPress={onAppleSignUp}
-          variant={ButtonVariant.Outlined}
-          leftIcon="apple-logo"
-          testID="signUp-apple-btn"
-        />
-      </SocialButtons>
+      </MotiView>
 
-      <Stack paddingVertical={Spacing.s4}>
-        <Divider label={t(tk.signUp.orSignUp)} />
-      </Stack>
-
-      <FormFields>
-        <TextInput
-          label={t(tk.signUp.name)}
-          value={name}
-          onChangeText={onNameChange}
-          placeholder={t(tk.signUp.placeholderName)}
-          autoCapitalize="words"
-          errorMessage={nameError ?? undefined}
-          testID="signUp-name-input"
-        />
-        <TextInput
-          label={t(tk.signUp.email)}
-          value={email}
-          onChangeText={onEmailChange}
-          placeholder={t(tk.signUp.placeholderEmail)}
-          keyboardType="email-address"
-          autoCapitalize="none"
-          errorMessage={emailError ?? undefined}
-          testID="signUp-email-input"
-        />
-        <TextInput
-          label={t(tk.signUp.password)}
-          value={password}
-          onChangeText={onPasswordChange}
-          placeholder={t(tk.signUp.placeholderPassword)}
-          secureTextEntry={!isPasswordVisible}
-          rightIcon={isPasswordVisible ? 'hidePassword' : 'showPassword'}
-          onPressRightIcon={onTogglePasswordVisibility}
-          errorMessage={passwordError ?? undefined}
-          testID="signUp-password-input"
-        />
-      </FormFields>
-
-      <Button
-        label={t(tk.signUp.signUpButton)}
-        onPress={onSubmit}
-        isLoading={isLoading}
-        testID="signUp-submit-btn"
-      />
-
-      <Footer>
-        <Text variant="caption" color={(theme) => theme.mutedForeground}>
-          {t(tk.signUp.loginPrompt)}
-        </Text>
-        <ButtonLink label={t(tk.signUp.loginLink)} onPress={goBack} testID="signUp-login-link" />
-      </Footer>
+      <MotiView {...fadeUp(500)}>
+        <Footer>
+          <Text variant="caption" color={(theme) => theme.mutedForeground}>
+            {t(tk.signUp.loginPrompt)}
+          </Text>
+          <ButtonLink label={t(tk.signUp.loginLink)} onPress={goBack} testID="signUp-login-link" />
+        </Footer>
+      </MotiView>
     </ScreenContainer>
   )
 }
