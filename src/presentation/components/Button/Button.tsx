@@ -19,6 +19,7 @@ type ButtonProps = {
   disabled?: boolean
   textColor?: (theme: AppTheme) => string
   leftIcon?: AppIconName
+  testID?: string
 }
 
 function resolveVariantColors(variant: ButtonVariant, theme: AppTheme) {
@@ -48,6 +49,7 @@ export function Button({
   disabled = false,
   textColor,
   leftIcon,
+  testID,
 }: ButtonProps) {
   const { theme } = useTheme()
   const { t } = useTranslation()
@@ -86,6 +88,7 @@ export function Button({
       accessibilityLabel={label}
       accessibilityState={{ disabled: isDisabled, busy: isLoading }}
       accessibilityHint={isLoading ? t(tk.common.loading) : undefined}
+      testID={testID}
     >
       <Wrapper bgColor={bgColor} borderColor={borderColor} isDisabled={isDisabled}>
         {isLoading ? (

@@ -1,0 +1,48 @@
+appId: com.gymflow.app
+---
+- launchApp
+
+# Tenta submeter com campos vazios — espera erro de email
+- tapOn:
+    id: "login-submit-button"
+- assertVisible: "Insira um email válido."
+
+# Preenche email inválido — espera erro de email
+- tapOn:
+    id: "login-email-input"
+- inputText: "email-invalido"
+- hideKeyboard
+- tapOn:
+    id: "login-submit-button"
+- assertVisible: "Insira um email válido."
+
+# Corrige email mas deixa senha vazia — espera erro de senha
+- tapOn:
+    id: "login-email-input"
+- eraseText: 14
+- inputText: "qa@gymflow.app"
+- hideKeyboard
+- tapOn:
+    id: "login-submit-button"
+- assertVisible: "Digite sua senha."
+
+# Preenche senha curta — espera erro de senha
+- tapOn:
+    id: "login-password-input"
+- inputText: "123"
+- hideKeyboard
+- tapOn:
+    id: "login-submit-button"
+- assertVisible: "A senha deve ter pelo menos 6 caracteres."
+
+# Preenche senha válida e loga
+- tapOn:
+    id: "login-password-input"
+- eraseText: 3
+- inputText: "123456"
+- hideKeyboard
+- tapOn:
+    id: "login-submit-button"
+
+# Verifica que saiu da tela de login
+- assertNotVisible: "login-submit-button"

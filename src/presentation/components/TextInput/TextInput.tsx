@@ -25,6 +25,7 @@ type TextInputProps = {
   onPressRightIcon?: () => void
   autoCapitalize?: RNTextInputProps['autoCapitalize']
   keyboardType?: RNTextInputProps['keyboardType']
+  testID?: string
 }
 
 export function TextInput({
@@ -39,6 +40,7 @@ export function TextInput({
   onPressRightIcon,
   autoCapitalize = 'none',
   keyboardType = 'default',
+  testID,
 }: TextInputProps) {
   const { theme } = useTheme()
   const { t } = useTranslation()
@@ -74,6 +76,7 @@ export function TextInput({
           accessibilityLabel={label}
           accessibilityHint={placeholder}
           accessibilityState={{ disabled }}
+          testID={testID}
         />
         {Icon && (
           <TouchableOpacity

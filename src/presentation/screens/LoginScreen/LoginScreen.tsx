@@ -39,7 +39,7 @@ export function LoginScreen() {
   return (
     <ScreenContainer>
       <Header>
-        <Stack paddingVertical={Spacing.s6}>
+        <Stack paddingVertical={Spacing.s4}>
           <Logo variant={LogoVariant.Flat} size={LogoSize.Lg} />
         </Stack>
 
@@ -55,12 +55,14 @@ export function LoginScreen() {
           onPress={onGoogleLogin}
           variant={ButtonVariant.Outlined}
           leftIcon="google-logo"
+          testID="login-google-button"
         />
         <Button
           label={t(tk.login.appleLogin)}
           onPress={onAppleLogin}
           variant={ButtonVariant.Outlined}
           leftIcon="apple-logo"
+          testID="login-apple-button"
         />
       </SocialButtons>
 
@@ -77,6 +79,7 @@ export function LoginScreen() {
           keyboardType="email-address"
           autoCapitalize="none"
           errorMessage={emailError ?? undefined}
+          testID="login-email-input"
         />
         <TextInput
           label={t(tk.login.password)}
@@ -86,13 +89,19 @@ export function LoginScreen() {
           rightIcon={isPasswordVisible ? 'hidePassword' : 'showPassword'}
           onPressRightIcon={onTogglePasswordVisibility}
           errorMessage={passwordError ?? undefined}
+          testID="login-password-input"
         />
         <ForgotPasswordRow>
           <ButtonLink label={t(tk.login.forgotPassword)} onPress={onForgotPassword} />
         </ForgotPasswordRow>
       </FormFields>
 
-      <Button label={t(tk.login.loginButton)} onPress={onSubmit} isLoading={isLoading} />
+      <Button
+        label={t(tk.login.loginButton)}
+        onPress={onSubmit}
+        isLoading={isLoading}
+        testID="login-submit-button"
+      />
 
       <Footer>
         <Text variant="caption" color={(theme) => theme.mutedForeground}>
