@@ -2,7 +2,7 @@ import { render } from '@testing-library/react-native'
 import React from 'react'
 import { Text } from 'react-native'
 
-import { Stack } from '@/presentation/components/Stack/Stack'
+import { Stack, StackDirection } from '@/presentation/components/Stack/Stack'
 
 describe('Stack', () => {
   it('renders children', () => {
@@ -31,7 +31,7 @@ describe('Stack', () => {
 
   it('renders horizontal when direction is horizontal', () => {
     const { getByTestId } = render(
-      <Stack direction="horizontal" testID="stack">
+      <Stack direction={StackDirection.Horizontal} testID="stack">
         <Text>Item</Text>
       </Stack>,
     )

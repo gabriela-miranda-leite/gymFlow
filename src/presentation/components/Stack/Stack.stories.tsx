@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-native'
 import { View } from 'react-native'
 
-import { Stack } from '@/presentation/components/Stack/Stack'
+import { Stack, StackDirection } from '@/presentation/components/Stack/Stack'
 import { Text } from '@/presentation/components/Text/Text'
 import { Spacing } from '@/tokens'
 
@@ -46,8 +46,9 @@ const Box = ({ label }: { label: string }) => (
 
 export const Vertical: Story = {
   args: {
-    direction: 'vertical',
+    direction: StackDirection.Vertical,
     spacing: Spacing.s3,
+    children: null,
   },
   render: (args) => (
     <Stack {...args}>
@@ -60,9 +61,10 @@ export const Vertical: Story = {
 
 export const Horizontal: Story = {
   args: {
-    direction: 'horizontal',
+    direction: StackDirection.Horizontal,
     spacing: Spacing.s3,
     align: 'center',
+    children: null,
   },
   render: (args) => (
     <Stack {...args}>
@@ -75,10 +77,11 @@ export const Horizontal: Story = {
 
 export const SpaceBetween: Story = {
   args: {
-    direction: 'horizontal',
+    direction: StackDirection.Horizontal,
     spacing: 0,
     justify: 'space-between',
     align: 'center',
+    children: null,
   },
   render: (args) => (
     <Stack {...args}>

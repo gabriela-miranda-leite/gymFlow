@@ -25,6 +25,7 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const AllVariants: Story = {
+  args: { children: '' },
   render: () => (
     <>
       <Text variant="display">Display — 24px Bold</Text>

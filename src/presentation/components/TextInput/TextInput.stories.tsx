@@ -48,6 +48,7 @@ export const Default: Story = {
     label: 'Email',
     value: '',
     placeholder: 'seu@email.com',
+    onChangeText: () => {},
   },
 }
 
@@ -57,6 +58,7 @@ export const WithError: Story = {
     value: 'aaa',
     placeholder: 'seu@email.com',
     errorMessage: 'Email inválido',
+    onChangeText: () => {},
   },
 }
 
@@ -67,6 +69,7 @@ export const Password: Story = {
     placeholder: '••••••••',
     secureTextEntry: true,
     rightIcon: 'showPassword',
+    onChangeText: () => {},
   },
 }
 
@@ -76,5 +79,6 @@ export const PasswordVisible: Story = {
     value: 'minhasenha',
     secureTextEntry: false,
     rightIcon: 'hidePassword',
+    onChangeText: () => {},
   },
 }

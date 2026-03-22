@@ -63,6 +63,7 @@ export const Contained: Story = {
   args: {
     label: 'Entrar',
     variant: ButtonVariant.Contained,
+    onPress: () => {},
   },
 }
 
@@ -70,6 +71,7 @@ export const Outlined: Story = {
   args: {
     label: 'Continuar com Google',
     variant: ButtonVariant.Outlined,
+    onPress: () => {},
   },
 }
 
@@ -78,6 +80,7 @@ export const OutlinedWithIcon: Story = {
     label: 'Continuar com Google',
     variant: ButtonVariant.Outlined,
     leftIcon: 'emailField',
+    onPress: () => {},
   },
 }
 
@@ -85,6 +88,7 @@ export const Loading: Story = {
   args: {
     label: 'Entrar',
     isLoading: true,
+    onPress: () => {},
   },
 }
 
@@ -92,5 +96,6 @@ export const Disabled: Story = {
   args: {
     label: 'Entrar',
     disabled: true,
+    onPress: () => {},
   },
 }
