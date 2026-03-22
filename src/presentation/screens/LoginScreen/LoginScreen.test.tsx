@@ -3,6 +3,12 @@ import React from 'react'
 
 import { LoginScreen } from '@/presentation/screens/LoginScreen/LoginScreen'
 
+const mockNavigate = jest.fn()
+
+jest.mock('@react-navigation/native', () => ({
+  useNavigation: () => ({ navigate: mockNavigate }),
+}))
+
 jest.mock('@/contexts/ThemeContext', () => ({
   useTheme: () => ({
     theme: {
@@ -33,6 +39,10 @@ jest.mock('@/domain/useCases/LoginUseCase', () => ({
 }))
 
 describe('LoginScreen', () => {
+  beforeEach(() => {
+    jest.clearAllMocks()
+  })
+
   it('renders email and password fields', () => {
     const { getByText } = render(<LoginScreen />)
 
@@ -67,6 +77,14 @@ describe('LoginScreen', () => {
     fireEvent.changeText(emailInput, 'test@email.com')
 
     expect(getByDisplayValue('test@email.com')).toBeTruthy()
+  })
+
+  it('navigates to SignUp when "Criar conta" is pressed', () => {
+    const { getByTestId } = render(<LoginScreen />)
+
+    fireEvent.press(getByTestId('login-signup-link'))
+
+    expect(mockNavigate).toHaveBeenCalledWith('SignUp')
   })
 
   it('shows error message when login fails', async () => {

@@ -2,6 +2,12 @@ import { act, renderHook } from '@testing-library/react-native'
 
 import { useLoginViewModel } from '@/presentation/viewModels/LoginViewModel'
 
+const mockNavigate = jest.fn()
+
+jest.mock('@react-navigation/native', () => ({
+  useNavigation: () => ({ navigate: mockNavigate }),
+}))
+
 jest.mock('@/data/repositories/AuthRepository', () => ({
   authRepository: { login: jest.fn() },
 }))
@@ -68,6 +74,18 @@ describe('useLoginViewModel', () => {
         result.current.onTogglePasswordVisibility()
       })
       expect(result.current.isPasswordVisible).toBe(false)
+    })
+  })
+
+  describe('onSignup', () => {
+    it('navega para a tela de SignUp', () => {
+      const { result } = renderHook(() => useLoginViewModel())
+
+      act(() => {
+        result.current.onSignup()
+      })
+
+      expect(mockNavigate).toHaveBeenCalledWith('SignUp')
     })
   })
 

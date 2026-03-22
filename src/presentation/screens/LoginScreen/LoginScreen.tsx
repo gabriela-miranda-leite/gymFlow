@@ -107,7 +107,7 @@ export function LoginScreen() {
         <Text variant="caption" color={(theme) => theme.mutedForeground}>
           {t(tk.login.signUpPrompt)}
         </Text>
-        <ButtonLink label={t(tk.login.signUpLink)} onPress={onSignup} />
+        <ButtonLink label={t(tk.login.signUpLink)} onPress={onSignup} testID="login-signup-link" />
       </Footer>
     </ScreenContainer>
   )

@@ -1,4 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useNavigation } from '@react-navigation/native'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
@@ -8,6 +9,7 @@ import { loginSchema, loginUseCase } from '@/domain/useCases/LoginUseCase'
 import type { LoginCredentials } from '@/domain/useCases/LoginUseCase'
 import type { LoginUiModel } from '@/presentation/uiModels/LoginUiModel'
 import { tk } from '@/shared/i18n'
+import type { RootStackScreenProps } from '@/shared/navigation/types'
 
 export const useLoginViewModel = (): LoginUiModel => {
   const { t } = useTranslation()
@@ -55,8 +57,10 @@ export const useLoginViewModel = (): LoginUiModel => {
     //todo implementar função
   }
 
+  const navigation = useNavigation<RootStackScreenProps<'Login'>['navigation']>()
+
   const onSignup = () => {
-    //todo implementar função
+    navigation.navigate('SignUp')
   }
 
   const onGoogleLogin = () => {
