@@ -43,9 +43,12 @@ const enUS = {
   errors: {
     generic: 'Something went wrong. Please try again.',
     loginFailed: 'Incorrect email or password.',
+    signFailed: 'Name, email or password is incorrect.',
   },
   validation: {
+    nameInvalid: 'Please enter your name.',
     emailInvalid: 'Please enter a valid email.',
+    passwordRequired: 'Please enter your password.',
     passwordTooShort: 'Password must be at least 6 characters.',
   },
 } as const

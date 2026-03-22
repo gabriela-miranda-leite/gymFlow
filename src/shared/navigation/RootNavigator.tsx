@@ -20,7 +20,6 @@ export function RootNavigator() {
         }}
       >
         <Stack.Screen name="Login" component={LoginScreen} />
-        {/* TODO: GYM-11 — registrar SignUpScreen */}
         <Stack.Screen name="SignUp" component={SignUpScreen} />
       </Stack.Navigator>
     </NavigationContainer>

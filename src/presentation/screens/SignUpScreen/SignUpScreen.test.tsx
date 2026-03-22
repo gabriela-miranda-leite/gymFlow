@@ -1,7 +1,25 @@
 import { fireEvent, render, waitFor } from '@testing-library/react-native'
+import React from 'react'
 
-// TODO: descomentar quando a SignUpScreen estiver implementada
-// import { SignUpScreen } from '@/presentation/screens/SignUpScreen'
+import { SignUpScreen } from '@/presentation/screens/SignUpScreen/SignUpScreen'
+
+jest.mock('@/contexts/ThemeContext', () => ({
+  useTheme: () => ({
+    theme: {
+      background: '#FFFFFF',
+      foreground: '#18181B',
+      mutedForeground: '#71717A',
+      border: '#E4E4E7',
+      input: '#F4F4F5',
+      destructive: '#EF4444',
+      brand: { primary: '#FF6A00', primaryForeground: '#FFFFFF' },
+    },
+  }),
+}))
+
+jest.mock('react-native-safe-area-context', () => ({
+  SafeAreaView: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+}))
 
 jest.mock('@/data/repositories/AuthRepository', () => ({
   authRepository: { signUp: jest.fn() },
@@ -20,27 +38,67 @@ describe('SignUpScreen', () => {
   })
 
   it('renders all fields and the submit button', () => {
-    // TODO: implementar
+    const { getByTestId } = render(<SignUpScreen />)
+    expect(getByTestId('signUp-name-input')).toBeTruthy()
+    expect(getByTestId('signUp-email-input')).toBeTruthy()
+    expect(getByTestId('signUp-password-input')).toBeTruthy()
+    expect(getByTestId('signUp-submit-btn')).toBeTruthy()
+    expect(getByTestId('signUp-google-btn')).toBeTruthy()
+    expect(getByTestId('signUp-apple-btn')).toBeTruthy()
+    expect(getByTestId('signUp-login-link')).toBeTruthy()
   })
 
   it('shows nameError when name is empty on submit', async () => {
-    // TODO: implementar
+    const { getByTestId, findByText } = render(<SignUpScreen />)
+    fireEvent.press(getByTestId('signUp-submit-btn'))
+    expect(await findByText('validation.nameInvalid')).toBeTruthy()
   })
 
   it('shows emailError when email is invalid on submit', async () => {
-    // TODO: implementar
+    const { getByTestId, findByText } = render(<SignUpScreen />)
+    fireEvent.changeText(getByTestId('signUp-name-input'), 'Usuário')
+    fireEvent.changeText(getByTestId('signUp-email-input'), 'email-invalido')
+    fireEvent.changeText(getByTestId('signUp-password-input'), '12345678')
+    fireEvent.press(getByTestId('signUp-submit-btn'))
+    expect(await findByText('validation.emailInvalid')).toBeTruthy()
   })
 
   it('shows passwordError when password is too short', async () => {
-    // TODO: implementar
+    const { getByTestId, findByText } = render(<SignUpScreen />)
+    fireEvent.changeText(getByTestId('signUp-name-input'), 'Usuário')
+    fireEvent.changeText(getByTestId('signUp-email-input'), 'user@email.com')
+    fireEvent.changeText(getByTestId('signUp-password-input'), '123')
+    fireEvent.press(getByTestId('signUp-submit-btn'))
+    expect(await findByText('validation.passwordTooShort')).toBeTruthy()
   })
 
   it('calls signUpUseCase with valid credentials', async () => {
-    // TODO: implementar
+    signUpUseCase.mockResolvedValueOnce({ success: true })
+    const { getByTestId } = render(<SignUpScreen />)
+    fireEvent.changeText(getByTestId('signUp-name-input'), 'Usuário')
+    fireEvent.changeText(getByTestId('signUp-email-input'), 'user@email.com')
+    fireEvent.changeText(getByTestId('signUp-password-input'), '12345678')
+    fireEvent.press(getByTestId('signUp-submit-btn'))
+    await waitFor(() => {
+      expect(signUpUseCase).toHaveBeenCalledWith(
+        {
+          name: 'Usuário',
+          email: 'user@email.com',
+          password: '12345678',
+        },
+        expect.anything(),
+      )
+    })
   })
 
   it('shows error message when sign up fails', async () => {
-    // TODO: implementar
+    signUpUseCase.mockRejectedValueOnce(new Error('fail'))
+    const { getByTestId, findByText } = render(<SignUpScreen />)
+    fireEvent.changeText(getByTestId('signUp-name-input'), 'Usuário')
+    fireEvent.changeText(getByTestId('signUp-email-input'), 'user@email.com')
+    fireEvent.changeText(getByTestId('signUp-password-input'), '12345678')
+    fireEvent.press(getByTestId('signUp-submit-btn'))
+    expect(await findByText('errors.signFailed')).toBeTruthy()
   })
 })
 

@@ -1,19 +1,26 @@
 import { z } from 'zod'
 
-// TODO: definir o schema de validação do cadastro (name, email, password)
-export const signUpSchema = z.object({})
+import { UserModel } from '@/domain/models/UserModel'
+
+export const signUpSchema = z.object({
+  name: z.string().min(1),
+  email: z.email(),
+  password: z.string().min(6),
+})
 
 export type SignUpCredentials = z.infer<typeof signUpSchema>
+export interface SignUpResult {
+  user: UserModel
+  token: string
+}
+export interface ISignUpRepository {
+  signUp(credentials: SignUpCredentials): Promise<SignUpResult>
+}
 
-// TODO: definir o resultado do cadastro (user + token)
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-export interface SignUpResult {}
-
-// TODO: definir a interface do repositório para sign up
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-export interface ISignUpRepository {}
-
-// TODO: implementar o use case de cadastro
-export const signUpUseCase = async (): Promise<SignUpResult> => {
-  throw new Error('Not implemented')
+export const signUpUseCase = async (
+  credentials: SignUpCredentials,
+  authRepository: ISignUpRepository,
+): Promise<SignUpResult> => {
+  signUpSchema.parse(credentials)
+  return authRepository.signUp(credentials)
 }

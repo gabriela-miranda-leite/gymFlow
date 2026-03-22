@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-import type { UserModel } from '@/domain/models/UserModel'
+import { UserModel } from '@/domain/models/UserModel'
 
 export const loginSchema = z.object({
   email: z.email(),

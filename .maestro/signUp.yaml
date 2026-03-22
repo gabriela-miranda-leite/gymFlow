@@ -1,0 +1,45 @@
+appId: com.gymflow.app
+---
+# Navega para a tela de Sign Up (via botão na tela de Login)
+- tapOn:
+    id: "login-signup-link"
+
+# 1. Submit vazio — deve mostrar erro de nome
+- hideKeyboard
+- tapOn:
+    id: "signUp-submit-btn"
+- assertVisible: "Insira um nome"
+
+# 2. Nome válido, email inválido — deve mostrar erro de email
+- tapOn:
+    id: "signUp-name-input"
+- inputText: "Usuário Teste"
+- tapOn:
+    id: "signUp-email-input"
+- inputText: "email-invalido"
+- hideKeyboard
+- tapOn:
+    id: "signUp-submit-btn"
+- assertVisible: "Insira um email válido"
+
+# 3. Email válido, senha curta — deve mostrar erro de senha
+- tapOn:
+    id: "signUp-email-input"
+- eraseText: 14
+- inputText: "user@email.com"
+- tapOn:
+    id: "signUp-password-input"
+- inputText: "123"
+- hideKeyboard
+- tapOn:
+    id: "signUp-submit-btn"
+- assertVisible: "A senha deve ter pelo menos 6 caracteres"
+
+# 4. Credenciais válidas — submit com sucesso
+- tapOn:
+    id: "signUp-password-input"
+- eraseText: 3
+- inputText: "123456"
+- hideKeyboard
+- tapOn:
+    id: "signUp-submit-btn"

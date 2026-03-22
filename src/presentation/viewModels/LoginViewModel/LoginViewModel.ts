@@ -26,6 +26,17 @@ export const useLoginViewModel = (): LoginUiModel => {
     defaultValues: { email: '', password: '' },
   })
 
+  const emailError = errors.email?.message ? t(tk.validation.emailInvalid) : null
+
+  let passwordError: string | null = null
+  if (errors.password) {
+    if (errors.password.type === 'too_small') {
+      passwordError = t(tk.validation.passwordTooShort)
+    } else if (errors.password.message) {
+      passwordError = errors.password.message
+    }
+  }
+
   const email = watch('email')
   const password = watch('password')
 
@@ -58,20 +69,23 @@ export const useLoginViewModel = (): LoginUiModel => {
 
   const onTogglePasswordVisibility = () => setPasswordVisible((prev) => !prev)
 
+  const onEmailChange = (value: string) => {
+    setValue('email', value, { shouldValidate: Boolean(errors.email) })
+  }
+
+  const onPasswordChange = (value: string) =>
+    setValue('password', value, { shouldValidate: Boolean(errors.password) })
+
   return {
     email,
-    onEmailChange: (value) => setValue('email', value, { shouldValidate: !!errors.email }),
+    onEmailChange,
     password,
-    onPasswordChange: (value) => setValue('password', value, { shouldValidate: !!errors.password }),
+    onPasswordChange,
     isLoading,
     isPasswordVisible,
     onTogglePasswordVisibility,
-    emailError: errors.email?.message ? t(tk.validation.emailInvalid) : null,
-    passwordError: errors.password
-      ? errors.password.type
-        ? t(tk.validation.passwordTooShort)
-        : (errors.password.message ?? null)
-      : null,
+    emailError,
+    passwordError,
     onSubmit,
     onForgotPassword,
     onSignup,

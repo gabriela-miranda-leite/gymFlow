@@ -14,6 +14,7 @@ type ButtonLinkProps = {
   iconPosition?: IconPosition
   disabled?: boolean
   color?: (theme: AppTheme) => string
+  testID?: string
 }
 
 export function ButtonLink({
@@ -23,6 +24,7 @@ export function ButtonLink({
   iconPosition = 'start',
   disabled = false,
   color,
+  testID,
 }: ButtonLinkProps) {
   const { theme } = useTheme()
 
@@ -37,6 +39,7 @@ export function ButtonLink({
       accessibilityRole="button"
       accessibilityLabel={label}
       accessibilityState={{ disabled }}
+      testID={testID}
     >
       {Icon && iconPosition === 'start' && <Icon size={16} color={resolvedColor} />}
       <Text variant="caption" color={() => resolvedColor}>

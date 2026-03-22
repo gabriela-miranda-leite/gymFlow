@@ -43,8 +43,10 @@ const ptBR = {
   errors: {
     generic: 'Algo deu errado. Tente novamente.',
     loginFailed: 'Email ou senha incorretos.',
+    signFailed: 'Erro ao criar conta. Tente novamente.',
   },
   validation: {
+    nameInvalid: 'Insira um nome',
     emailInvalid: 'Insira um email válido.',
     passwordRequired: 'Digite sua senha.',
     passwordTooShort: 'A senha deve ter pelo menos 6 caracteres.',
