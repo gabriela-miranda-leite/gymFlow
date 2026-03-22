@@ -44,6 +44,12 @@ const enUS = {
   },
   map: {
     placeholder: 'Map Screen',
+    open: 'Open',
+    closed: 'Closed',
+    checkIn: 'Check in',
+    km: 'km',
+    locationError: 'Could not get your location.',
+    locationPermissionDenied: 'Location permission denied. Please enable it in settings.',
   },
   checkIn: {
     placeholder: 'Check-in Screen',

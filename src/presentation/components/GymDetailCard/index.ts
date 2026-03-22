@@ -1,0 +1,1 @@
+export { GymDetailCard } from './GymDetailCard'

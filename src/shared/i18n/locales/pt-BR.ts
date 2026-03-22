@@ -44,6 +44,12 @@ const ptBR = {
   },
   map: {
     placeholder: 'Tela de Mapa',
+    open: 'Aberta',
+    closed: 'Fechada',
+    checkIn: 'Fazer check-in',
+    km: 'km',
+    locationError: 'Não foi possível obter sua localização.',
+    locationPermissionDenied: 'Permissão de localização negada. Habilite nas configurações.',
   },
   checkIn: {
     placeholder: 'Tela de Check-in',

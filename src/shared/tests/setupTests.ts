@@ -1,5 +1,51 @@
 import '@testing-library/jest-native/extend-expect'
 
+jest.mock('react-native-gesture-handler', () => {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const { View } = require('react-native')
+  return {
+    GestureHandlerRootView: View,
+    Swipeable: View,
+    DrawerLayout: View,
+    State: {},
+    ScrollView: View,
+    Slider: View,
+    Switch: View,
+    TextInput: View,
+    ToolbarAndroid: View,
+    ViewPagerAndroid: View,
+    DrawerLayoutAndroid: View,
+    WebView: View,
+    NativeViewGestureHandler: View,
+    TapGestureHandler: View,
+    FlingGestureHandler: View,
+    ForceTouchGestureHandler: View,
+    LongPressGestureHandler: View,
+    PanGestureHandler: View,
+    PinchGestureHandler: View,
+    RotationGestureHandler: View,
+    RawButton: View,
+    BaseButton: View,
+    RectButton: View,
+    BorderlessButton: View,
+    TouchableOpacity: View,
+    TouchableHighlight: View,
+    TouchableNativeFeedback: View,
+    TouchableWithoutFeedback: View,
+    gestureHandlerRootHOC: (c: unknown) => c,
+    Directions: {},
+  }
+})
+
+jest.mock('expo-location', () => ({
+  requestForegroundPermissionsAsync: jest.fn().mockResolvedValue({ status: 'granted' }),
+  getCurrentPositionAsync: jest.fn().mockResolvedValue({
+    coords: { latitude: -23.565, longitude: -46.6525 },
+  }),
+  PermissionStatus: { GRANTED: 'granted', DENIED: 'denied' },
+  Accuracy: { Balanced: 3 },
+}))
+
 jest.mock('react-i18next', () => ({
   initReactI18next: { type: '3rdParty', init: () => {} },
   useTranslation: () => ({ t: (key: string) => key }),
