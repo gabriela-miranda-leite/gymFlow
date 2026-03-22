@@ -3,6 +3,12 @@ import React from 'react'
 
 import { SignUpScreen } from '@/presentation/screens/SignUpScreen/SignUpScreen'
 
+const mockGoBack = jest.fn()
+
+jest.mock('@react-navigation/native', () => ({
+  useNavigation: () => ({ goBack: mockGoBack }),
+}))
+
 jest.mock('@/contexts/ThemeContext', () => ({
   useTheme: () => ({
     theme: {
@@ -46,6 +52,14 @@ describe('SignUpScreen', () => {
     expect(getByTestId('signUp-google-btn')).toBeTruthy()
     expect(getByTestId('signUp-apple-btn')).toBeTruthy()
     expect(getByTestId('signUp-login-link')).toBeTruthy()
+  })
+
+  it('navigates back when "Entrar" is pressed', () => {
+    const { getByTestId } = render(<SignUpScreen />)
+
+    fireEvent.press(getByTestId('signUp-login-link'))
+
+    expect(mockGoBack).toHaveBeenCalled()
   })
 
   it('shows nameError when name is empty on submit', async () => {
