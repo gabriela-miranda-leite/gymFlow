@@ -2,6 +2,7 @@ import {
   AppleLogoIcon,
   ArrowLeftIcon,
   BellIcon,
+  BroadcastIcon,
   CameraIcon,
   CaretDownIcon,
   CaretRightIcon,
@@ -17,7 +18,6 @@ import {
   MapPinIcon,
   MapTrifoldIcon,
   MoonIcon,
-  RadioIcon,
   SignOutIcon,
   SpinnerIcon,
   SunIcon,
@@ -38,7 +38,7 @@ export const AppIcons = {
 
   // Tabs
   tabMap: MapTrifoldIcon,
-  tabCheckIn: RadioIcon,
+  tabCheckIn: BroadcastIcon,
   tabProfile: UserIcon,
 
   // Location & time

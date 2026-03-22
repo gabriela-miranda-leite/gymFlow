@@ -44,7 +44,8 @@ appId: com.gymflow.app
 - tapOn:
     id: "login-submit-button"
 
-# Verifica que saiu da tela de login
+# Verifica que entrou no app autenticado (tab bar visível com Mapa)
+- assertVisible: "Mapa"
 - assertNotVisible: "login-submit-button"
 
 # Navega para a tela de Sign Up

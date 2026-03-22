@@ -9,7 +9,8 @@ export type RootStackParamList = {
 }
 
 export type AppTabParamList = {
-  Home: undefined
+  Map: undefined
+  CheckIn: undefined
   Profile: undefined
 }
 

@@ -6,7 +6,8 @@ const ptBR = {
     showPassword: 'Mostrar senha',
     hidePassword: 'Ocultar senha',
     tabs: {
-      home: 'Academias',
+      map: 'Mapa',
+      checkIn: 'Check-in',
       profile: 'Perfil',
     },
   },
@@ -40,6 +41,15 @@ const ptBR = {
     signUpButton: 'Criar conta',
     loginPrompt: 'Já tem conta? ',
     loginLink: 'Entrar',
+  },
+  map: {
+    placeholder: 'Tela de Mapa',
+  },
+  checkIn: {
+    placeholder: 'Tela de Check-in',
+  },
+  profile: {
+    placeholder: 'Tela de Perfil',
   },
   errors: {
     generic: 'Algo deu errado. Tente novamente.',
