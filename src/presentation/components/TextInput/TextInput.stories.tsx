@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-native'
+import type { ComponentType } from 'react'
 import { View } from 'react-native'
 
 import { TextInput } from '@/presentation/components/TextInput/TextInput'
@@ -7,7 +8,7 @@ const meta = {
   title: 'Components/TextInput',
   component: TextInput,
   decorators: [
-    (Story) => (
+    (Story: ComponentType) => (
       <View style={{ padding: 24, width: '100%' }}>
         <Story />
       </View>

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-native'
+import type { ComponentType } from 'react'
 import { View } from 'react-native'
 
 import { Divider } from '@/presentation/components/Divider/Divider'
@@ -7,7 +8,7 @@ const meta = {
   title: 'Components/Divider',
   component: Divider,
   decorators: [
-    (Story) => (
+    (Story: ComponentType) => (
       <View style={{ padding: 24, width: '100%' }}>
         <Story />
       </View>

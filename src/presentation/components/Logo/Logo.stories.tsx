@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-native'
+import type { ComponentType } from 'react'
 import { View } from 'react-native'
 
 import { Logo, LogoSize, LogoVariant } from '@/presentation/components/Logo/Logo'
@@ -7,7 +8,7 @@ const meta = {
   title: 'Components/Logo',
   component: Logo,
   decorators: [
-    (Story) => (
+    (Story: ComponentType) => (
       <View style={{ alignItems: 'flex-start', padding: 24 }}>
         <Story />
       </View>

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-native'
+import type { ComponentProps, ComponentType } from 'react'
 import { View } from 'react-native'
 
 import { Stack, StackDirection } from '@/presentation/components/Stack/Stack'
@@ -9,7 +10,7 @@ const meta = {
   title: 'Components/Stack',
   component: Stack,
   decorators: [
-    (Story) => (
+    (Story: ComponentType) => (
       <View style={{ padding: 24, width: '100%' }}>
         <Story />
       </View>
@@ -50,7 +51,7 @@ export const Vertical: Story = {
     spacing: Spacing.s3,
     children: null,
   },
-  render: (args) => (
+  render: (args: ComponentProps<typeof Stack>) => (
     <Stack {...args}>
       <Box label="Item 1" />
       <Box label="Item 2" />
@@ -66,7 +67,7 @@ export const Horizontal: Story = {
     align: 'center',
     children: null,
   },
-  render: (args) => (
+  render: (args: ComponentProps<typeof Stack>) => (
     <Stack {...args}>
       <Box label="A" />
       <Box label="B" />
@@ -83,7 +84,7 @@ export const SpaceBetween: Story = {
     align: 'center',
     children: null,
   },
-  render: (args) => (
+  render: (args: ComponentProps<typeof Stack>) => (
     <Stack {...args}>
       <Box label="Esquerda" />
       <Box label="Direita" />
