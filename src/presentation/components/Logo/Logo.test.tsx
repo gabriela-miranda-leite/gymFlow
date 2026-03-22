@@ -25,6 +25,13 @@ describe('Logo', () => {
     expect(queryByText('common.appName')).toBeNull()
   })
 
+  it('renders app name without icon container when variant is Flat', () => {
+    const { getByText, queryByRole } = render(<Logo variant={LogoVariant.Flat} />)
+
+    expect(getByText('common.appName')).toBeTruthy()
+    expect(queryByRole('image')).toBeNull()
+  })
+
   it('renders with default props', () => {
     const { getByText } = render(<Logo />)
 
