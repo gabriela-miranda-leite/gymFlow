@@ -1,10 +1,9 @@
 import { act, renderHook } from '@testing-library/react-native'
 
-// TODO: descomentar quando o ViewModel estiver implementado
-// import { useSignUpViewModel } from '@/presentation/viewModels/SignUpViewModel'
+import { useSignUpViewModel } from '@/presentation/viewModels/SignUpViewModel'
 
-jest.mock('@/data/repositories/AuthRepository', () => ({
-  authRepository: { signUp: jest.fn() },
+jest.mock('@/data/repositories/SignUpRepository', () => ({
+  signUpRepository: { signUp: jest.fn() },
 }))
 
 jest.mock('@/domain/useCases/SignUpUseCase', () => ({
@@ -21,63 +20,187 @@ describe('useSignUpViewModel', () => {
 
   describe('initial state', () => {
     it('starts with empty fields and no errors', () => {
-      // TODO: implementar
+      const { result } = renderHook(() => useSignUpViewModel())
+
+      expect(result.current.name).toBe('')
+      expect(result.current.email).toBe('')
+      expect(result.current.password).toBe('')
+      expect(result.current.nameError).toBeNull()
+      expect(result.current.emailError).toBeNull()
+      expect(result.current.passwordError).toBeNull()
+      expect(result.current.isLoading).toBe(false)
+      expect(result.current.isPasswordVisible).toBe(false)
     })
   })
 
   describe('onNameChange', () => {
     it('updates name value', () => {
-      // TODO: implementar
+      const { result } = renderHook(() => useSignUpViewModel())
+
+      act(() => {
+        result.current.onNameChange('Gabriela')
+      })
+
+      expect(result.current.name).toBe('Gabriela')
     })
   })
 
   describe('onEmailChange', () => {
     it('updates email value', () => {
-      // TODO: implementar
+      const { result } = renderHook(() => useSignUpViewModel())
+
+      act(() => {
+        result.current.onEmailChange('test@email.com')
+      })
+
+      expect(result.current.email).toBe('test@email.com')
     })
   })
 
   describe('onPasswordChange', () => {
     it('updates password value', () => {
-      // TODO: implementar
+      const { result } = renderHook(() => useSignUpViewModel())
+
+      act(() => {
+        result.current.onPasswordChange('123456')
+      })
+
+      expect(result.current.password).toBe('123456')
     })
   })
 
   describe('onTogglePasswordVisibility', () => {
     it('toggles isPasswordVisible', () => {
-      // TODO: implementar
+      const { result } = renderHook(() => useSignUpViewModel())
+
+      act(() => {
+        result.current.onTogglePasswordVisibility()
+      })
+      expect(result.current.isPasswordVisible).toBe(true)
+
+      act(() => {
+        result.current.onTogglePasswordVisibility()
+      })
+      expect(result.current.isPasswordVisible).toBe(false)
     })
   })
 
   describe('onSubmit — validação', () => {
-    it('com campos vazios seta erros e não chama signUpUseCase', async () => {
-      // TODO: implementar
+    it('com campos vazios seta nameError e não chama signUpUseCase', async () => {
+      const { result } = renderHook(() => useSignUpViewModel())
+
+      await act(async () => {
+        await result.current.onSubmit()
+      })
+
+      expect(result.current.nameError).not.toBeNull()
+      expect(signUpUseCase).not.toHaveBeenCalled()
     })
 
-    it('com email inválido seta emailError', async () => {
-      // TODO: implementar
+    it('com email inválido seta emailError e não chama signUpUseCase', async () => {
+      const { result } = renderHook(() => useSignUpViewModel())
+
+      act(() => {
+        result.current.onNameChange('Gabriela')
+        result.current.onEmailChange('email-invalido')
+        result.current.onPasswordChange('123456')
+      })
+
+      await act(async () => {
+        await result.current.onSubmit()
+      })
+
+      expect(result.current.emailError).not.toBeNull()
+      expect(signUpUseCase).not.toHaveBeenCalled()
     })
 
-    it('com senha curta seta passwordError', async () => {
-      // TODO: implementar
+    it('com senha curta seta passwordError e não chama signUpUseCase', async () => {
+      const { result } = renderHook(() => useSignUpViewModel())
+
+      act(() => {
+        result.current.onNameChange('Gabriela')
+        result.current.onEmailChange('test@email.com')
+        result.current.onPasswordChange('123')
+      })
+
+      await act(async () => {
+        await result.current.onSubmit()
+      })
+
+      expect(result.current.nameError).toBeNull()
+      expect(result.current.emailError).toBeNull()
+      expect(result.current.passwordError).not.toBeNull()
+      expect(signUpUseCase).not.toHaveBeenCalled()
     })
   })
 
   describe('onSubmit — chamada à API', () => {
     it('com dados válidos chama signUpUseCase com os dados corretos', async () => {
-      // TODO: implementar
+      signUpUseCase.mockResolvedValueOnce({
+        user: { id: '1', name: 'Gabriela', email: 'test@email.com' },
+        token: 'mock-token',
+      })
+
+      const { result } = renderHook(() => useSignUpViewModel())
+
+      act(() => {
+        result.current.onNameChange('Gabriela')
+        result.current.onEmailChange('test@email.com')
+        result.current.onPasswordChange('123456')
+      })
+
+      await act(async () => {
+        await result.current.onSubmit()
+      })
+
+      expect(signUpUseCase).toHaveBeenCalledWith(
+        { name: 'Gabriela', email: 'test@email.com', password: '123456' },
+        expect.anything(),
+      )
+      expect(result.current.nameError).toBeNull()
+      expect(result.current.emailError).toBeNull()
+      expect(result.current.passwordError).toBeNull()
+      expect(result.current.isLoading).toBe(false)
     })
 
-    it('quando a API falha seta erro com mensagem adequada', async () => {
-      // TODO: implementar
+    it('quando a API falha seta passwordError com mensagem adequada', async () => {
+      signUpUseCase.mockRejectedValueOnce(new Error('Sign up failed'))
+
+      const { result } = renderHook(() => useSignUpViewModel())
+
+      act(() => {
+        result.current.onNameChange('Gabriela')
+        result.current.onEmailChange('test@email.com')
+        result.current.onPasswordChange('123456')
+      })
+
+      await act(async () => {
+        await result.current.onSubmit()
+      })
+
+      expect(result.current.passwordError).not.toBeNull()
+      expect(result.current.isLoading).toBe(false)
     })
 
     it('isLoading é false após a chamada', async () => {
-      // TODO: implementar
+      signUpUseCase.mockResolvedValueOnce({
+        user: { id: '1', name: 'Gabriela', email: 'test@email.com' },
+        token: 'mock-token',
+      })
+
+      const { result } = renderHook(() => useSignUpViewModel())
+
+      act(() => {
+        result.current.onNameChange('Gabriela')
+        result.current.onEmailChange('test@email.com')
+        result.current.onPasswordChange('123456')
+      })
+
+      await act(async () => {
+        await result.current.onSubmit()
+      })
+
+      expect(result.current.isLoading).toBe(false)
     })
   })
 })
-
-void act
-void renderHook
-void signUpUseCase

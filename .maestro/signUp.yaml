@@ -1,8 +1,11 @@
 appId: com.gymflow.app
 ---
-# Navega para a tela de Sign Up (via botão na tela de Login)
+- launchApp
+
+# Navega para a tela de Sign Up via link na tela de Login
 - tapOn:
     id: "login-signup-link"
+- assertVisible: "signUp-submit-btn"
 
 # 1. Submit vazio — deve mostrar erro de nome
 - hideKeyboard
@@ -43,3 +46,11 @@ appId: com.gymflow.app
 - hideKeyboard
 - tapOn:
     id: "signUp-submit-btn"
+
+# 5. Volta para o Login pelo link "Entrar"
+- launchApp
+- tapOn:
+    id: "login-signup-link"
+- tapOn:
+    id: "signUp-login-link"
+- assertVisible: "login-submit-button"
