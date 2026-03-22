@@ -85,6 +85,7 @@ export function LoginScreen() {
           label={t(tk.login.password)}
           value={password}
           onChangeText={onPasswordChange}
+          placeholder={t(tk.login.placeholderPassword)}
           secureTextEntry={!isPasswordVisible}
           rightIcon={isPasswordVisible ? 'hidePassword' : 'showPassword'}
           onPressRightIcon={onTogglePasswordVisibility}

@@ -19,6 +19,7 @@ const enUS = {
     email: 'Email',
     placeholderEmail: 'your@email.com',
     password: 'Password',
+    placeholderPassword: 'At least 6 characters',
     forgotPassword: 'Forgot your password?',
     loginButton: 'Sign in',
     signUpPrompt: "Don't have an account? ",

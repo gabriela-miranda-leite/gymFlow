@@ -19,6 +19,7 @@ const ptBR = {
     email: 'Email',
     placeholderEmail: 'seu@email.com',
     password: 'Senha',
+    placeholderPassword: 'Mínimo 6 caracteres',
     forgotPassword: 'Esqueceu a senha?',
     loginButton: 'Entrar',
     signUpPrompt: 'Não tem uma conta? ',
