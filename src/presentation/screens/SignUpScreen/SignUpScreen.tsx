@@ -1,6 +1,4 @@
-import { useFocusEffect } from '@react-navigation/native'
 import { MotiView } from 'moti'
-import { useCallback, useState } from 'react'
 
 import { Button, ButtonVariant } from '@/presentation/components/Button/Button'
 import { ButtonLink } from '@/presentation/components/ButtonLink/ButtonLink'
@@ -12,13 +10,13 @@ import { Text } from '@/presentation/components/Text/Text'
 import { TextInput } from '@/presentation/components/TextInput/TextInput'
 import {
   Footer,
-  ForgotPasswordRow,
   FormFields,
   Header,
   SocialButtons,
-} from '@/presentation/screens/LoginScreen/LoginScreen.styles'
-import { useLoginViewModel } from '@/presentation/viewModels/LoginViewModel'
+} from '@/presentation/screens/SignUpScreen/SignUpScreen.styles'
+import { useSignUpViewModel } from '@/presentation/viewModels/SignUpViewModel'
 import { tk, useTranslation } from '@/shared/i18n'
+import { useAppNavigation } from '@/shared/navigation/useAppNavigation'
 import { Spacing } from '@/tokens'
 
 const fadeUp = (delay: number) =>
@@ -28,17 +26,12 @@ const fadeUp = (delay: number) =>
     transition: { type: 'timing', duration: 350, delay },
   }) as const
 
-export function LoginScreen() {
+export function SignUpScreen() {
   const { t } = useTranslation()
-  const [animKey, setAnimKey] = useState(0)
-
-  useFocusEffect(
-    useCallback(() => {
-      setAnimKey((k) => k + 1)
-    }, []),
-  )
-
+  const { goBack } = useAppNavigation()
   const {
+    name,
+    onNameChange,
     email,
     onEmailChange,
     password,
@@ -46,103 +39,104 @@ export function LoginScreen() {
     isPasswordVisible,
     onTogglePasswordVisibility,
     isLoading,
+    nameError,
     emailError,
     passwordError,
     onSubmit,
-    onForgotPassword,
-    onSignup,
-    onGoogleLogin,
-    onAppleLogin,
-  } = useLoginViewModel()
+    onGoogleSignUp,
+    onAppleSignUp,
+  } = useSignUpViewModel()
 
   return (
     <ScreenContainer>
-      <MotiView key={`header-${animKey}`} {...fadeUp(0)}>
+      <MotiView {...fadeUp(0)}>
         <Header>
           <Stack paddingVertical={Spacing.s4}>
             <Logo variant={LogoVariant.Flat} size={LogoSize.Lg} />
           </Stack>
 
-          <Text variant="heading">{t(tk.login.title)}</Text>
+          <Text variant="heading">{t(tk.signUp.title)}</Text>
           <Text variant="body" color={(theme) => theme.mutedForeground}>
-            {t(tk.login.subtitle)}
+            {t(tk.signUp.subtitle)}
           </Text>
         </Header>
       </MotiView>
 
-      <MotiView key={`social-${animKey}`} {...fadeUp(100)}>
+      <MotiView {...fadeUp(100)}>
         <SocialButtons>
           <Button
-            label={t(tk.login.googleLogin)}
-            onPress={onGoogleLogin}
+            label={t(tk.signUp.googleLogin)}
+            onPress={onGoogleSignUp}
             variant={ButtonVariant.Outlined}
             leftIcon="google-logo"
-            testID="login-google-button"
+            testID="signUp-google-btn"
           />
           <Button
-            label={t(tk.login.appleLogin)}
-            onPress={onAppleLogin}
+            label={t(tk.signUp.appleLogin)}
+            onPress={onAppleSignUp}
             variant={ButtonVariant.Outlined}
             leftIcon="apple-logo"
-            testID="login-apple-button"
+            testID="signUp-apple-btn"
           />
         </SocialButtons>
       </MotiView>
 
-      <MotiView key={`divider-${animKey}`} {...fadeUp(200)}>
+      <MotiView {...fadeUp(200)}>
         <Stack paddingVertical={Spacing.s4}>
-          <Divider label={t(tk.login.orLogin)} />
+          <Divider label={t(tk.signUp.orSignUp)} />
         </Stack>
       </MotiView>
 
-      <MotiView key={`fields-${animKey}`} {...fadeUp(300)}>
+      <MotiView {...fadeUp(300)}>
         <FormFields>
           <TextInput
-            label={t(tk.login.email)}
+            label={t(tk.signUp.name)}
+            value={name}
+            onChangeText={onNameChange}
+            placeholder={t(tk.signUp.placeholderName)}
+            autoCapitalize="words"
+            errorMessage={nameError ?? undefined}
+            testID="signUp-name-input"
+          />
+          <TextInput
+            label={t(tk.signUp.email)}
             value={email}
             onChangeText={onEmailChange}
-            placeholder={t(tk.login.placeholderEmail)}
+            placeholder={t(tk.signUp.placeholderEmail)}
             keyboardType="email-address"
             autoCapitalize="none"
             errorMessage={emailError ?? undefined}
-            testID="login-email-input"
+            testID="signUp-email-input"
           />
           <TextInput
-            label={t(tk.login.password)}
+            label={t(tk.signUp.password)}
             value={password}
             onChangeText={onPasswordChange}
-            placeholder={t(tk.login.placeholderPassword)}
+            placeholder={t(tk.signUp.placeholderPassword)}
             secureTextEntry={!isPasswordVisible}
             rightIcon={isPasswordVisible ? 'hidePassword' : 'showPassword'}
             onPressRightIcon={onTogglePasswordVisibility}
             errorMessage={passwordError ?? undefined}
-            testID="login-password-input"
+            testID="signUp-password-input"
           />
-          <ForgotPasswordRow>
-            <ButtonLink label={t(tk.login.forgotPassword)} onPress={onForgotPassword} />
-          </ForgotPasswordRow>
         </FormFields>
       </MotiView>
 
-      <MotiView key={`submit-${animKey}`} {...fadeUp(400)}>
+      <MotiView {...fadeUp(400)}>
         <Button
-          label={t(tk.login.loginButton)}
+          label={t(tk.signUp.signUpButton)}
           onPress={onSubmit}
           isLoading={isLoading}
-          testID="login-submit-button"
+          testID="signUp-submit-btn"
         />
       </MotiView>
 
-      <MotiView key={`footer-${animKey}`} {...fadeUp(500)}>
+      <MotiView {...fadeUp(500)}>
         <Footer>
           <Text variant="caption" color={(theme) => theme.mutedForeground}>
-            {t(tk.login.signUpPrompt)}
+            {t(tk.signUp.loginPrompt)}
           </Text>
-          <ButtonLink
-            label={t(tk.login.signUpLink)}
-            onPress={onSignup}
-            testID="login-signup-link"
-          />
+          <ButtonLink label={t(tk.signUp.loginLink)} onPress={goBack} testID="signUp-login-link" />
         </Footer>
       </MotiView>
     </ScreenContainer>

@@ -1,35 +1,31 @@
 import { act, renderHook } from '@testing-library/react-native'
 
-import { useLoginViewModel } from '@/presentation/viewModels/LoginViewModel'
+import { useSignUpViewModel } from '@/presentation/viewModels/SignUpViewModel'
 
-const mockNavigate = jest.fn()
-
-jest.mock('@/shared/navigation/useAppNavigation', () => ({
-  useAppNavigation: () => ({ toSignUp: mockNavigate, toLogin: jest.fn(), goBack: jest.fn() }),
+jest.mock('@/data/repositories/SignUpRepository', () => ({
+  signUpRepository: { signUp: jest.fn() },
 }))
 
-jest.mock('@/data/repositories/AuthRepository', () => ({
-  authRepository: { login: jest.fn() },
+jest.mock('@/domain/useCases/SignUpUseCase', () => ({
+  ...jest.requireActual('@/domain/useCases/SignUpUseCase'),
+  signUpUseCase: jest.fn(),
 }))
 
-jest.mock('@/domain/useCases/LoginUseCase', () => ({
-  ...jest.requireActual('@/domain/useCases/LoginUseCase'),
-  loginUseCase: jest.fn(),
-}))
+const { signUpUseCase } = require('@/domain/useCases/SignUpUseCase')
 
-const { loginUseCase } = require('@/domain/useCases/LoginUseCase')
-
-describe('useLoginViewModel', () => {
+describe('useSignUpViewModel', () => {
   beforeEach(() => {
     jest.clearAllMocks()
   })
 
   describe('initial state', () => {
     it('starts with empty fields and no errors', () => {
-      const { result } = renderHook(() => useLoginViewModel())
+      const { result } = renderHook(() => useSignUpViewModel())
 
+      expect(result.current.name).toBe('')
       expect(result.current.email).toBe('')
       expect(result.current.password).toBe('')
+      expect(result.current.nameError).toBeNull()
       expect(result.current.emailError).toBeNull()
       expect(result.current.passwordError).toBeNull()
       expect(result.current.isLoading).toBe(false)
@@ -37,9 +33,21 @@ describe('useLoginViewModel', () => {
     })
   })
 
+  describe('onNameChange', () => {
+    it('updates name value', () => {
+      const { result } = renderHook(() => useSignUpViewModel())
+
+      act(() => {
+        result.current.onNameChange('Gabriela')
+      })
+
+      expect(result.current.name).toBe('Gabriela')
+    })
+  })
+
   describe('onEmailChange', () => {
     it('updates email value', () => {
-      const { result } = renderHook(() => useLoginViewModel())
+      const { result } = renderHook(() => useSignUpViewModel())
 
       act(() => {
         result.current.onEmailChange('test@email.com')
@@ -51,7 +59,7 @@ describe('useLoginViewModel', () => {
 
   describe('onPasswordChange', () => {
     it('updates password value', () => {
-      const { result } = renderHook(() => useLoginViewModel())
+      const { result } = renderHook(() => useSignUpViewModel())
 
       act(() => {
         result.current.onPasswordChange('123456')
@@ -63,7 +71,7 @@ describe('useLoginViewModel', () => {
 
   describe('onTogglePasswordVisibility', () => {
     it('toggles isPasswordVisible', () => {
-      const { result } = renderHook(() => useLoginViewModel())
+      const { result } = renderHook(() => useSignUpViewModel())
 
       act(() => {
         result.current.onTogglePasswordVisibility()
@@ -77,35 +85,25 @@ describe('useLoginViewModel', () => {
     })
   })
 
-  describe('onSignup', () => {
-    it('navega para a tela de SignUp', () => {
-      const { result } = renderHook(() => useLoginViewModel())
-
-      act(() => {
-        result.current.onSignup()
-      })
-
-      expect(mockNavigate).toHaveBeenCalled()
-    })
-  })
-
   describe('onSubmit — validação', () => {
-    it('com campos vazios seta emailError e não chama loginUseCase', async () => {
-      const { result } = renderHook(() => useLoginViewModel())
+    it('com campos vazios seta nameError e não chama signUpUseCase', async () => {
+      const { result } = renderHook(() => useSignUpViewModel())
 
       await act(async () => {
         await result.current.onSubmit()
       })
 
-      expect(result.current.emailError).not.toBeNull()
-      expect(loginUseCase).not.toHaveBeenCalled()
+      expect(result.current.nameError).not.toBeNull()
+      expect(signUpUseCase).not.toHaveBeenCalled()
     })
 
-    it('com email inválido seta emailError e não chama loginUseCase', async () => {
-      const { result } = renderHook(() => useLoginViewModel())
+    it('com email inválido seta emailError e não chama signUpUseCase', async () => {
+      const { result } = renderHook(() => useSignUpViewModel())
 
       act(() => {
+        result.current.onNameChange('Gabriela')
         result.current.onEmailChange('email-invalido')
+        result.current.onPasswordChange('123456')
       })
 
       await act(async () => {
@@ -113,13 +111,14 @@ describe('useLoginViewModel', () => {
       })
 
       expect(result.current.emailError).not.toBeNull()
-      expect(loginUseCase).not.toHaveBeenCalled()
+      expect(signUpUseCase).not.toHaveBeenCalled()
     })
 
-    it('com email válido e senha curta seta passwordError e não chama loginUseCase', async () => {
-      const { result } = renderHook(() => useLoginViewModel())
+    it('com senha curta seta passwordError e não chama signUpUseCase', async () => {
+      const { result } = renderHook(() => useSignUpViewModel())
 
       act(() => {
+        result.current.onNameChange('Gabriela')
         result.current.onEmailChange('test@email.com')
         result.current.onPasswordChange('123')
       })
@@ -128,22 +127,24 @@ describe('useLoginViewModel', () => {
         await result.current.onSubmit()
       })
 
+      expect(result.current.nameError).toBeNull()
       expect(result.current.emailError).toBeNull()
       expect(result.current.passwordError).not.toBeNull()
-      expect(loginUseCase).not.toHaveBeenCalled()
+      expect(signUpUseCase).not.toHaveBeenCalled()
     })
   })
 
   describe('onSubmit — chamada à API', () => {
-    it('com credenciais válidas chama loginUseCase com os dados corretos', async () => {
-      loginUseCase.mockResolvedValueOnce({
-        user: { id: '1', name: 'Test', email: 'test@email.com' },
+    it('com dados válidos chama signUpUseCase com os dados corretos', async () => {
+      signUpUseCase.mockResolvedValueOnce({
+        user: { id: '1', name: 'Gabriela', email: 'test@email.com' },
         token: 'mock-token',
       })
 
-      const { result } = renderHook(() => useLoginViewModel())
+      const { result } = renderHook(() => useSignUpViewModel())
 
       act(() => {
+        result.current.onNameChange('Gabriela')
         result.current.onEmailChange('test@email.com')
         result.current.onPasswordChange('123456')
       })
@@ -152,21 +153,23 @@ describe('useLoginViewModel', () => {
         await result.current.onSubmit()
       })
 
-      expect(loginUseCase).toHaveBeenCalledWith(
-        { email: 'test@email.com', password: '123456' },
+      expect(signUpUseCase).toHaveBeenCalledWith(
+        { name: 'Gabriela', email: 'test@email.com', password: '123456' },
         expect.anything(),
       )
+      expect(result.current.nameError).toBeNull()
       expect(result.current.emailError).toBeNull()
       expect(result.current.passwordError).toBeNull()
       expect(result.current.isLoading).toBe(false)
     })
 
-    it('quando a API falha seta passwordError com mensagem de login inválido', async () => {
-      loginUseCase.mockRejectedValueOnce(new Error('Invalid credentials'))
+    it('quando a API falha seta passwordError com mensagem adequada', async () => {
+      signUpUseCase.mockRejectedValueOnce(new Error('Sign up failed'))
 
-      const { result } = renderHook(() => useLoginViewModel())
+      const { result } = renderHook(() => useSignUpViewModel())
 
       act(() => {
+        result.current.onNameChange('Gabriela')
         result.current.onEmailChange('test@email.com')
         result.current.onPasswordChange('123456')
       })
@@ -179,15 +182,16 @@ describe('useLoginViewModel', () => {
       expect(result.current.isLoading).toBe(false)
     })
 
-    it('isLoading é false após a chamada bem-sucedida', async () => {
-      loginUseCase.mockResolvedValueOnce({
-        user: { id: '1', name: 'Test', email: 'test@email.com' },
+    it('isLoading é false após a chamada', async () => {
+      signUpUseCase.mockResolvedValueOnce({
+        user: { id: '1', name: 'Gabriela', email: 'test@email.com' },
         token: 'mock-token',
       })
 
-      const { result } = renderHook(() => useLoginViewModel())
+      const { result } = renderHook(() => useSignUpViewModel())
 
       act(() => {
+        result.current.onNameChange('Gabriela')
         result.current.onEmailChange('test@email.com')
         result.current.onPasswordChange('123456')
       })

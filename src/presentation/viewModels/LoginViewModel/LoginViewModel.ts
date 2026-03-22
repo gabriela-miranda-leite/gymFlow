@@ -8,6 +8,7 @@ import { loginSchema, loginUseCase } from '@/domain/useCases/LoginUseCase'
 import type { LoginCredentials } from '@/domain/useCases/LoginUseCase'
 import type { LoginUiModel } from '@/presentation/uiModels/LoginUiModel'
 import { tk } from '@/shared/i18n'
+import { useAppNavigation } from '@/shared/navigation/useAppNavigation'
 
 export const useLoginViewModel = (): LoginUiModel => {
   const { t } = useTranslation()
@@ -25,6 +26,17 @@ export const useLoginViewModel = (): LoginUiModel => {
     resolver: zodResolver(loginSchema),
     defaultValues: { email: '', password: '' },
   })
+
+  const emailError = errors.email?.message ? t(tk.validation.emailInvalid) : null
+
+  let passwordError: string | null = null
+  if (errors.password) {
+    if (errors.password.type === 'too_small') {
+      passwordError = t(tk.validation.passwordTooShort)
+    } else if (errors.password.message) {
+      passwordError = errors.password.message
+    }
+  }
 
   const email = watch('email')
   const password = watch('password')
@@ -44,8 +56,10 @@ export const useLoginViewModel = (): LoginUiModel => {
     //todo implementar função
   }
 
+  const { toSignUp } = useAppNavigation()
+
   const onSignup = () => {
-    //todo implementar função
+    toSignUp()
   }
 
   const onGoogleLogin = () => {
@@ -58,20 +72,23 @@ export const useLoginViewModel = (): LoginUiModel => {
 
   const onTogglePasswordVisibility = () => setPasswordVisible((prev) => !prev)
 
+  const onEmailChange = (value: string) => {
+    setValue('email', value, { shouldValidate: Boolean(errors.email) })
+  }
+
+  const onPasswordChange = (value: string) =>
+    setValue('password', value, { shouldValidate: Boolean(errors.password) })
+
   return {
     email,
-    onEmailChange: (value) => setValue('email', value, { shouldValidate: !!errors.email }),
+    onEmailChange,
     password,
-    onPasswordChange: (value) => setValue('password', value, { shouldValidate: !!errors.password }),
+    onPasswordChange,
     isLoading,
     isPasswordVisible,
     onTogglePasswordVisibility,
-    emailError: errors.email?.message ? t(tk.validation.emailInvalid) : null,
-    passwordError: errors.password
-      ? errors.password.type
-        ? t(tk.validation.passwordTooShort)
-        : (errors.password.message ?? null)
-      : null,
+    emailError,
+    passwordError,
     onSubmit,
     onForgotPassword,
     onSignup,

@@ -46,3 +46,9 @@ appId: com.gymflow.app
 
 # Verifica que saiu da tela de login
 - assertNotVisible: "login-submit-button"
+
+# Navega para a tela de Sign Up
+- launchApp
+- tapOn:
+    id: "login-signup-link"
+- assertVisible: "signUp-submit-btn"
