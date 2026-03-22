@@ -1,3 +1,4 @@
+import type { BottomTabBarProps } from '@react-navigation/bottom-tabs'
 import { fireEvent, render } from '@testing-library/react-native'
 import React from 'react'
 
@@ -50,7 +51,7 @@ function makeProps(activeIndex = 0) {
 describe('TabBar', () => {
   it('renders one tab item per route', () => {
     const props = makeProps()
-    const { getByTestId } = render(<TabBar {...(props as never)} />)
+    const { getByTestId } = render(<TabBar {...(props as unknown as BottomTabBarProps)} />)
 
     expect(getByTestId('tab-Map')).toBeTruthy()
     expect(getByTestId('tab-CheckIn')).toBeTruthy()
@@ -59,7 +60,9 @@ describe('TabBar', () => {
 
   it('renders the active indicator only for the focused tab', () => {
     const props = makeProps(0)
-    const { getByTestId, queryByTestId } = render(<TabBar {...(props as never)} />)
+    const { getByTestId, queryByTestId } = render(
+      <TabBar {...(props as unknown as BottomTabBarProps)} />,
+    )
 
     expect(getByTestId('tab-indicator-Map')).toBeTruthy()
     expect(queryByTestId('tab-indicator-CheckIn')).toBeNull()
@@ -68,7 +71,9 @@ describe('TabBar', () => {
 
   it('moves indicator when a different tab is active', () => {
     const props = makeProps(2)
-    const { getByTestId, queryByTestId } = render(<TabBar {...(props as never)} />)
+    const { getByTestId, queryByTestId } = render(
+      <TabBar {...(props as unknown as BottomTabBarProps)} />,
+    )
 
     expect(queryByTestId('tab-indicator-Map')).toBeNull()
     expect(getByTestId('tab-indicator-Profile')).toBeTruthy()
@@ -76,7 +81,7 @@ describe('TabBar', () => {
 
   it('pressing an inactive tab emits tabPress and navigates', () => {
     const props = makeProps(0)
-    const { getByTestId } = render(<TabBar {...(props as never)} />)
+    const { getByTestId } = render(<TabBar {...(props as unknown as BottomTabBarProps)} />)
 
     fireEvent.press(getByTestId('tab-CheckIn'))
 
@@ -88,7 +93,7 @@ describe('TabBar', () => {
 
   it('pressing the already focused tab does not call navigate', () => {
     const props = makeProps(0)
-    const { getByTestId } = render(<TabBar {...(props as never)} />)
+    const { getByTestId } = render(<TabBar {...(props as unknown as BottomTabBarProps)} />)
 
     fireEvent.press(getByTestId('tab-Map'))
 
@@ -97,7 +102,7 @@ describe('TabBar', () => {
 
   it('renders each tab label', () => {
     const props = makeProps()
-    const { getByText } = render(<TabBar {...(props as never)} />)
+    const { getByText } = render(<TabBar {...(props as unknown as BottomTabBarProps)} />)
 
     expect(getByText('Map')).toBeTruthy()
     expect(getByText('CheckIn')).toBeTruthy()
