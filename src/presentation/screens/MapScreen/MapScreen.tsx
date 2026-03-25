@@ -1,6 +1,6 @@
 import BottomSheet from '@gorhom/bottom-sheet'
 import MapLibreGL from '@maplibre/maplibre-react-native'
-import { useEffect, useRef } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 import { ActivityIndicator } from 'react-native'
 
 import { useTheme } from '@/contexts/ThemeContext'
@@ -14,12 +14,13 @@ import {
 } from '@/presentation/screens/MapScreen/MapScreen.styles'
 import { useMapViewModel } from '@/presentation/viewModels/MapViewModel'
 
-MapLibreGL.setAccessToken(null)
+MapLibreGL.setAccessToken('')
+MapLibreGL.setConnected(true)
 
 const LIGHT_STYLE = 'https://tiles.openfreemap.org/styles/liberty'
-const DARK_STYLE = 'https://tiles.openfreemap.org/styles/positron'
+const DARK_STYLE = 'https://tiles.openfreemap.org/styles/liberty'
 
-const DEFAULT_CENTER: [number, number] = [-46.6525, -23.565] // São Paulo
+const DEFAULT_CENTER: [number, number] = [-48.2772, -18.9186] // Uberlândia
 
 export function MapScreen() {
   const { theme, isDark } = useTheme()
@@ -35,6 +36,12 @@ export function MapScreen() {
   } = useMapViewModel()
 
   const bottomSheetRef = useRef<BottomSheet>(null)
+
+  const center = useMemo<[number, number]>(
+    () =>
+      userCoordinates ? [userCoordinates.longitude, userCoordinates.latitude] : DEFAULT_CENTER,
+    [userCoordinates],
+  )
 
   useEffect(() => {
     if (selectedGym) {
@@ -52,28 +59,21 @@ export function MapScreen() {
     )
   }
 
-  const center: [number, number] = userCoordinates
-    ? [userCoordinates.longitude, userCoordinates.latitude]
-    : DEFAULT_CENTER
-
   return (
     <Container>
       <MapWrapper>
         <MapLibreGL.MapView
           style={{ flex: 1 }}
-          styleURL={isDark ? DARK_STYLE : LIGHT_STYLE}
+          mapStyle={isDark ? DARK_STYLE : LIGHT_STYLE}
           logoEnabled={false}
           attributionEnabled={false}
         >
           <MapLibreGL.Camera
-            defaultSettings={{ centerCoordinate: center, zoomLevel: 14 }}
             centerCoordinate={center}
-            zoomLevel={14}
+            zoomLevel={13}
             animationMode="flyTo"
             animationDuration={800}
           />
-
-          <MapLibreGL.UserLocation visible androidRenderMode="normal" />
 
           {gyms.map((gym) => (
             <MapLibreGL.MarkerView
