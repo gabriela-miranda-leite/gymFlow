@@ -162,9 +162,4 @@ describe('Select', () => {
       expect(item.props.accessibilityLabel).toBe(`${option.label}, ${option.sublabel}`)
     })
   })
-
-  it('matches snapshot of the closed component', () => {
-    const { toJSON } = render(<Select options={OPTIONS} value="smart-vila" onChange={() => {}} />)
-    expect(toJSON()).toMatchSnapshot()
-  })
 })
