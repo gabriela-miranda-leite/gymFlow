@@ -5,6 +5,7 @@ module.exports = {
   moduleNameMapper: {
     '^react-native-reanimated$': '<rootDir>/src/shared/tests/mocks/react-native-reanimated.ts',
     '^moti(.*)$': '<rootDir>/src/shared/tests/mocks/moti.ts',
+    '^@maplibre/maplibre-react-native$': '<rootDir>/src/shared/tests/mocks/maplibre.ts',
     '^@/(.*)$': '<rootDir>/src/$1',
   },
   transformIgnorePatterns: [

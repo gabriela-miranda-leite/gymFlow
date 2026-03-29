@@ -16,6 +16,11 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   ios: {
     supportsTablet: true,
     bundleIdentifier: 'com.gymflow.app',
+    infoPlist: {
+      NSAppTransportSecurity: {
+        NSAllowsArbitraryLoads: true,
+      },
+    },
   },
   android: {
     package: 'com.gymflow.app',
@@ -30,7 +35,18 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   web: {
     favicon: './assets/favicon.png',
   },
-  plugins: ['expo-font', 'expo-asset', 'expo-localization', '@react-native-community/datetimepicker'],
+  plugins: [
+    'expo-font',
+    'expo-asset',
+    'expo-localization',
+    '@react-native-community/datetimepicker',
+    [
+      'expo-location',
+      {
+        locationWhenInUsePermission: 'Permitir que o GymFlow acesse sua localização para exibir academias próximas.',
+      },
+    ],
+  ],
   extra: {
     apiUrl: process.env.API_URL ?? '',
     googleMapsKey: process.env.GOOGLE_MAPS_KEY ?? '',
