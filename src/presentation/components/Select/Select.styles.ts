@@ -38,8 +38,6 @@ export const ListContainer = styled.View<{ bg: string }>`
   border-radius: ${Radius.lg}px;
   padding-top: ${Spacing.s2}px;
   padding-bottom: ${Spacing.s2}px;
-  overflow: hidden;
-  max-height: 280px;
   ${Shadows.md}
 `
 

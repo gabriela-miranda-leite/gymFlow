@@ -70,6 +70,18 @@ exports[`Select matches snapshot of the closed component 1`] = `
     >
       SmartFit Vila Mariana
     </Text>
+    <View
+      collapsable={false}
+      style={
+        {
+          "transform": [
+            {
+              "rotate": "0deg",
+            },
+          ],
+        }
+      }
+    />
   </View>
 </View>
 `;
