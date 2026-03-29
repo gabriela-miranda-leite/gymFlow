@@ -33,7 +33,7 @@ export const ListContainer = styled.View<{ bg: string }>`
   border-radius: ${Radius.lg}px;
   padding-top: ${Spacing.s2}px;
   padding-bottom: ${Spacing.s2}px;
-  ${Shadows.md}
+  ${Shadows.medium}
 `
 
 export const OptionItem = styled.TouchableOpacity<{
