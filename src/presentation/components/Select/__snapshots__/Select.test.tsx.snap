@@ -35,10 +35,9 @@ exports[`Select matches snapshot of the closed component 1`] = `
     style={
       {
         "alignItems": "center",
-        "backgroundColor": "#2A2A2E",
         "borderBottomLeftRadius": 8,
         "borderBottomRightRadius": 8,
-        "borderColor": "#8A8A8E",
+        "borderColor": "transparent",
         "borderTopLeftRadius": 8,
         "borderTopRightRadius": 8,
         "borderWidth": 1,

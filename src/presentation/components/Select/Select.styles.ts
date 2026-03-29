@@ -3,20 +3,16 @@ import styled from 'styled-components/native'
 import { FontFamily, FontSize, Radius, Shadows, Spacing } from '@/tokens'
 
 export const TriggerWrapper = styled.TouchableOpacity<{
-  bg: string
   borderColor: string
-  defaultBorderColor: string
   isOpen: boolean
   disabled?: boolean
 }>`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  background-color: ${({ bg }) => bg};
   border-radius: ${Radius.md}px;
   border-width: 1px;
-  border-color: ${({ isOpen, borderColor, defaultBorderColor }) =>
-    isOpen ? borderColor : defaultBorderColor};
+  border-color: ${({ isOpen, borderColor }) => (isOpen ? borderColor : 'transparent')};
   padding-top: ${Spacing.s3}px;
   padding-bottom: ${Spacing.s3}px;
   padding-left: ${Spacing.s4}px;
