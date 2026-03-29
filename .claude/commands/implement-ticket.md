@@ -91,3 +91,4 @@ Apresente ao usuário:
 - Arquivos criados e modificados (código, testes unitários, E2E)
 - Páginas do Confluence criadas/atualizadas com links diretos
 - Próximos passos: `npm test`, `npm run e2e:test`, `git add`, `git commit`, abrir PR
+  - O PR deve incluir no campo **Jira** o link: `https://gabrielamiranda1110.atlassian.net/browse/GYM-<número>`

@@ -1,3 +1,8 @@
+## Jira
+
+<!-- Link da task relacionada -->
+[GYM-](https://gabrielamiranda1110.atlassian.net/browse/GYM-)
+
 ## Como
 
 <!-- Descreva o que foi feito tecnicamente -->
