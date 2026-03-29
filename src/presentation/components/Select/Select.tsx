@@ -96,9 +96,9 @@ export function Select({
   return (
     <View>
       <TriggerWrapper
-        bg={theme.secondary}
+        bg={theme.card}
         borderColor={theme.brand.primary}
-        defaultBorderColor={theme.muted}
+        defaultBorderColor={theme.mutedForeground}
         isOpen={isOpen}
         disabled={disabled}
         onPress={handleTriggerPress}

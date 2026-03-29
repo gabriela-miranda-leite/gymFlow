@@ -35,14 +35,15 @@ exports[`Select matches snapshot of the closed component 1`] = `
     style={
       {
         "alignItems": "center",
-        "backgroundColor": "",
+        "backgroundColor": "#2A2A2E",
         "borderBottomLeftRadius": 8,
         "borderBottomRightRadius": 8,
-        "borderColor": "",
+        "borderColor": "#8A8A8E",
         "borderTopLeftRadius": 8,
         "borderTopRightRadius": 8,
         "borderWidth": 1.5,
         "flexDirection": "row",
+        "justifyContent": "center",
         "opacity": 1,
         "paddingBottom": 12,
         "paddingLeft": 16,
@@ -57,14 +58,11 @@ exports[`Select matches snapshot of the closed component 1`] = `
       style={
         {
           "color": "#FFFFFF",
-          "flexBasis": 0,
-          "flexGrow": 1,
-          "flexShrink": 1,
           "fontFamily": "Inter_400Regular",
           "fontSize": 14,
           "fontWeight": "400",
           "marginLeft": 8,
-          "marginRight": 8,
+          "marginRight": 4,
         }
       }
     >

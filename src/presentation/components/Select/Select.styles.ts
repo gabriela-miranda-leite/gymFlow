@@ -11,6 +11,7 @@ export const TriggerWrapper = styled.TouchableOpacity<{
 }>`
   flex-direction: row;
   align-items: center;
+  justify-content: center;
   background-color: ${({ bg }) => bg};
   border-radius: ${Radius.md}px;
   border-width: 1.5px;
@@ -24,13 +25,12 @@ export const TriggerWrapper = styled.TouchableOpacity<{
 `
 
 export const TriggerLabel = styled.Text<{ color: string }>`
-  flex: 1;
   font-size: ${FontSize.body}px;
   font-family: ${FontFamily.regular};
   font-weight: ${FontWeight.regular};
   color: ${({ color }) => color};
   margin-left: ${Spacing.s2}px;
-  margin-right: ${Spacing.s2}px;
+  margin-right: ${Spacing.s1}px;
 `
 
 export const ListContainer = styled.View<{ bg: string }>`
