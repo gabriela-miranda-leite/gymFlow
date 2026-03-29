@@ -1,8 +1,15 @@
 import { fireEvent, render } from '@testing-library/react-native'
 import React from 'react'
+import { View } from 'react-native'
 
 import { Select } from '@/presentation/components/Select/Select'
 import type { SelectOption } from '@/presentation/components/Select/Select'
+
+beforeEach(() => {
+  jest.spyOn(View.prototype, 'measure').mockImplementation((callback) => {
+    callback(0, 0, 300, 50, 0, 100)
+  })
+})
 
 jest.mock('@/contexts/ThemeContext', () => ({
   useTheme: () => ({
