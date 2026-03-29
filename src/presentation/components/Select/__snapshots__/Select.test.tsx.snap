@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Select matches snapshot of the closed component 1`] = `
+<View
+  accessibilityLabel="Selecionar academia"
+  accessibilityRole="combobox"
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": false,
+      "expanded": false,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    {
+      "alignItems": "center",
+      "backgroundColor": "#2A2A2E",
+      "borderBottomLeftRadius": 8,
+      "borderBottomRightRadius": 8,
+      "borderColor": "#2A2A2E",
+      "borderTopLeftRadius": 8,
+      "borderTopRightRadius": 8,
+      "borderWidth": 1.5,
+      "flexDirection": "row",
+      "opacity": 1,
+      "paddingBottom": 12,
+      "paddingLeft": 16,
+      "paddingRight": 16,
+      "paddingTop": 12,
+    }
+  }
+>
+  <Text
+    color="#FFFFFF"
+    isPlaceholder={false}
+    numberOfLines={1}
+    style={
+      {
+        "color": "#FFFFFF",
+        "flexBasis": 0,
+        "flexGrow": 1,
+        "flexShrink": 1,
+        "fontFamily": "Inter_700Bold",
+        "fontSize": 14,
+        "fontWeight": "700",
+        "marginLeft": 8,
+        "marginRight": 8,
+      }
+    }
+  >
+    SmartFit Vila Mariana
+  </Text>
+</View>
+`;
