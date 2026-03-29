@@ -15,7 +15,6 @@ import {
 import { useMapViewModel } from '@/presentation/viewModels/MapViewModel'
 
 MapLibreGL.setAccessToken('')
-MapLibreGL.setConnected(true)
 
 const LIGHT_STYLE = 'https://tiles.openfreemap.org/styles/liberty'
 const DARK_STYLE = 'https://tiles.openfreemap.org/styles/liberty'
