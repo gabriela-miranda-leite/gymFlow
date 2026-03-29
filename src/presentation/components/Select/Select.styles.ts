@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 
-import { FontFamily, FontSize, FontWeight, Radius, Shadows, Spacing } from '@/tokens'
+import { FontFamily, FontSize, Radius, Shadows, Spacing } from '@/tokens'
 
 export const TriggerWrapper = styled.TouchableOpacity<{
   bg: string
@@ -14,7 +14,7 @@ export const TriggerWrapper = styled.TouchableOpacity<{
   justify-content: center;
   background-color: ${({ bg }) => bg};
   border-radius: ${Radius.md}px;
-  border-width: 1.5px;
+  border-width: 1px;
   border-color: ${({ isOpen, borderColor, defaultBorderColor }) =>
     isOpen ? borderColor : defaultBorderColor};
   padding-top: ${Spacing.s3}px;
@@ -27,7 +27,6 @@ export const TriggerWrapper = styled.TouchableOpacity<{
 export const TriggerLabel = styled.Text<{ color: string }>`
   font-size: ${FontSize.body}px;
   font-family: ${FontFamily.regular};
-  font-weight: ${FontWeight.regular};
   color: ${({ color }) => color};
   margin-left: ${Spacing.s2}px;
   margin-right: ${Spacing.s1}px;
@@ -64,15 +63,13 @@ export const OptionTextContainer = styled.View`
 
 export const OptionLabel = styled.Text<{ color: string }>`
   font-size: ${FontSize.body}px;
-  font-family: ${FontFamily.bold};
-  font-weight: ${FontWeight.bold};
+  font-family: ${FontFamily.semiBold};
   color: ${({ color }) => color};
 `
 
 export const OptionSublabel = styled.Text<{ color: string }>`
   font-size: ${FontSize.caption}px;
   font-family: ${FontFamily.regular};
-  font-weight: ${FontWeight.regular};
   color: ${({ color }) => color};
   margin-top: ${Spacing.s1}px;
 `

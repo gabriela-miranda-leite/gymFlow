@@ -41,7 +41,7 @@ exports[`Select matches snapshot of the closed component 1`] = `
         "borderColor": "#8A8A8E",
         "borderTopLeftRadius": 8,
         "borderTopRightRadius": 8,
-        "borderWidth": 1.5,
+        "borderWidth": 1,
         "flexDirection": "row",
         "justifyContent": "center",
         "opacity": 1,
@@ -60,7 +60,6 @@ exports[`Select matches snapshot of the closed component 1`] = `
           "color": "#FFFFFF",
           "fontFamily": "Inter_400Regular",
           "fontSize": 14,
-          "fontWeight": "400",
           "marginLeft": 8,
           "marginRight": 4,
         }
