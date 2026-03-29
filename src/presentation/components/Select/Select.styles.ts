@@ -5,6 +5,7 @@ import { FontFamily, FontSize, FontWeight, Radius, Shadows, Spacing } from '@/to
 export const TriggerWrapper = styled.TouchableOpacity<{
   bg: string
   borderColor: string
+  defaultBorderColor: string
   isOpen: boolean
   disabled?: boolean
 }>`
@@ -13,7 +14,8 @@ export const TriggerWrapper = styled.TouchableOpacity<{
   background-color: ${({ bg }) => bg};
   border-radius: ${Radius.md}px;
   border-width: 1.5px;
-  border-color: ${({ isOpen, borderColor, bg }) => (isOpen ? borderColor : bg)};
+  border-color: ${({ isOpen, borderColor, defaultBorderColor }) =>
+    isOpen ? borderColor : defaultBorderColor};
   padding-top: ${Spacing.s3}px;
   padding-bottom: ${Spacing.s3}px;
   padding-left: ${Spacing.s4}px;
@@ -37,6 +39,7 @@ export const ListContainer = styled.View<{ bg: string }>`
   padding-top: ${Spacing.s2}px;
   padding-bottom: ${Spacing.s2}px;
   overflow: hidden;
+  max-height: 280px;
   ${Shadows.md}
 `
 

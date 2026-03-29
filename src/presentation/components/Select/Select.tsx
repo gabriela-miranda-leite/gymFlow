@@ -71,6 +71,7 @@ export function Select({
         <TriggerWrapper
           bg={theme.card}
           borderColor={theme.brand.primary}
+          defaultBorderColor={theme.border}
           isOpen={isOpen}
           disabled={disabled}
           onPress={handleTriggerPress}
@@ -90,7 +91,7 @@ export function Select({
         </TriggerWrapper>
       </View>
 
-      <Modal visible={isOpen} transparent animationType="fade" onRequestClose={handleOverlayPress}>
+      <Modal visible={isOpen} transparent animationType="none" onRequestClose={handleOverlayPress}>
         <TouchableOpacity style={{ flex: 1 }} onPress={handleOverlayPress} activeOpacity={1}>
           <View
             style={{
