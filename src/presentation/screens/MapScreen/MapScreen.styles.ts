@@ -28,6 +28,15 @@ export const ErrorText = styled.Text<{ color: string }>`
   text-align: center;
 `
 
+export const UserLocationDot = styled.View<{ color: string; borderColor: string }>`
+  width: 20px;
+  height: 20px;
+  border-radius: ${Radius.full}px;
+  background-color: ${({ color }) => color};
+  border-width: 3px;
+  border-color: ${({ borderColor }) => borderColor};
+`
+
 export const LoadingOverlay = styled.View<{ bg: string }>`
   position: absolute;
   top: 0;

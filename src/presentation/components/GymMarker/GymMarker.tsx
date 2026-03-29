@@ -12,11 +12,17 @@ interface Props {
 export function GymMarker({ gym, isActive, onPress }: Props) {
   const { theme } = useTheme()
 
-  const bg = isActive ? theme.brand.primary : theme.card
-  const iconColor = isActive ? theme.brand.primaryForeground : theme.mutedForeground
+  const bg = isActive ? theme.card : theme.brand.primary
+  const iconColor = isActive ? theme.brand.primary : theme.brand.primaryForeground
+  const borderColor = theme.brand.primary
 
   return (
-    <MarkerContainer testID="gym-marker" bg={bg} isActive={isActive} onPress={() => onPress(gym)}>
+    <MarkerContainer
+      testID="gym-marker"
+      bg={bg}
+      borderColor={borderColor}
+      onPress={() => onPress(gym)}
+    >
       <AppIcons.location color={iconColor} size={18} weight="fill" />
     </MarkerContainer>
   )

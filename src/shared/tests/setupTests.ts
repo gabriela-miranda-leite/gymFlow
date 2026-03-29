@@ -39,9 +39,12 @@ jest.mock('react-native-gesture-handler', () => {
 
 jest.mock('expo-location', () => ({
   requestForegroundPermissionsAsync: jest.fn().mockResolvedValue({ status: 'granted' }),
-  getCurrentPositionAsync: jest.fn().mockResolvedValue({
-    coords: { latitude: -23.565, longitude: -46.6525 },
-  }),
+  watchPositionAsync: jest
+    .fn()
+    .mockImplementation(async (_options: unknown, callback: (loc: unknown) => void) => {
+      callback({ coords: { latitude: -23.565, longitude: -46.6525 } })
+      return { remove: jest.fn() }
+    }),
   PermissionStatus: { GRANTED: 'granted', DENIED: 'denied' },
   Accuracy: { Balanced: 3 },
 }))

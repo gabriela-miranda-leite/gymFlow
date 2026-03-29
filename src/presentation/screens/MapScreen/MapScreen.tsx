@@ -1,5 +1,5 @@
 import BottomSheet from '@gorhom/bottom-sheet'
-import MapLibreGL from '@maplibre/maplibre-react-native'
+import { Camera, MapView, MarkerView, setAccessToken } from '@maplibre/maplibre-react-native'
 import { useEffect, useMemo, useRef } from 'react'
 import { ActivityIndicator } from 'react-native'
 
@@ -11,13 +11,12 @@ import {
   ErrorContainer,
   ErrorText,
   MapWrapper,
+  UserLocationDot,
 } from '@/presentation/screens/MapScreen/MapScreen.styles'
+import { darkMapStyle, lightMapStyle } from '@/presentation/screens/MapScreen/mapStyles'
 import { useMapViewModel } from '@/presentation/viewModels/MapViewModel'
 
-MapLibreGL.setAccessToken('')
-
-const LIGHT_STYLE = 'https://tiles.openfreemap.org/styles/liberty'
-const DARK_STYLE = 'https://tiles.openfreemap.org/styles/liberty'
+setAccessToken('')
 
 const DEFAULT_CENTER: [number, number] = [-48.2772, -18.9186] // Uberlândia
 
@@ -61,28 +60,37 @@ export function MapScreen() {
   return (
     <Container>
       <MapWrapper>
-        <MapLibreGL.MapView
+        <MapView
           style={{ flex: 1 }}
-          mapStyle={isDark ? DARK_STYLE : LIGHT_STYLE}
+          mapStyle={isDark ? darkMapStyle : lightMapStyle}
           logoEnabled={false}
           attributionEnabled={false}
         >
-          <MapLibreGL.Camera
+          <Camera
             centerCoordinate={center}
             zoomLevel={13}
             animationMode="flyTo"
             animationDuration={800}
           />
 
+          {userCoordinates && (
+            <MarkerView coordinate={[userCoordinates.longitude, userCoordinates.latitude]}>
+              <UserLocationDot
+                color={theme.brand.primary}
+                borderColor={theme.brand.primaryForeground}
+              />
+            </MarkerView>
+          )}
+
           {gyms.map((gym) => (
-            <MapLibreGL.MarkerView
+            <MarkerView
               key={gym.id}
               coordinate={[gym.coordinates.longitude, gym.coordinates.latitude]}
             >
               <GymMarker gym={gym} isActive={selectedGym?.id === gym.id} onPress={onSelectGym} />
-            </MapLibreGL.MarkerView>
+            </MarkerView>
           ))}
-        </MapLibreGL.MapView>
+        </MapView>
 
         {isLoading && (
           <ActivityIndicator

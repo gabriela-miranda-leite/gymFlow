@@ -95,9 +95,7 @@ describe('useMapViewModel', () => {
     })
 
     it('sets locationError when location fetch throws', async () => {
-      jest
-        .spyOn(Location, 'getCurrentPositionAsync')
-        .mockRejectedValueOnce(new Error('GPS failure'))
+      jest.spyOn(Location, 'watchPositionAsync').mockRejectedValueOnce(new Error('GPS failure'))
 
       const { result } = renderHook(() => useMapViewModel())
 

@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native'
 import type { NavigationProp } from '@react-navigation/native'
 import * as Location from 'expo-location'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { gymRepository } from '@/data/repositories/GymRepository'
@@ -45,8 +45,11 @@ export const useMapViewModel = (): MapUiModel => {
   const [selectedGym, setSelectedGym] = useState<GymModel | null>(null)
   const [isLoading, setLoading] = useState(true)
   const [locationError, setLocationError] = useState<string | null>(null)
+  const gymsLoaded = useRef(false)
 
   useEffect(() => {
+    let subscription: Location.LocationSubscription | null = null
+
     async function init() {
       try {
         const { status } = await Location.requestForegroundPermissionsAsync()
@@ -57,27 +60,35 @@ export const useMapViewModel = (): MapUiModel => {
           return
         }
 
-        const location = await Location.getCurrentPositionAsync({
-          accuracy: Location.Accuracy.Balanced,
-        })
+        subscription = await Location.watchPositionAsync(
+          { accuracy: Location.Accuracy.Balanced, distanceInterval: 10 },
+          async (location) => {
+            const coords = {
+              latitude: location.coords.latitude,
+              longitude: location.coords.longitude,
+            }
 
-        const coords = {
-          latitude: location.coords.latitude,
-          longitude: location.coords.longitude,
-        }
+            setUserCoordinates(coords)
 
-        setUserCoordinates(coords)
-
-        const nearbyGyms = await getNearbyGymsUseCase(coords, gymRepository)
-        setGyms(nearbyGyms)
+            if (!gymsLoaded.current) {
+              gymsLoaded.current = true
+              const nearbyGyms = await getNearbyGymsUseCase(coords, gymRepository)
+              setGyms(nearbyGyms)
+              setLoading(false)
+            }
+          },
+        )
       } catch {
         setLocationError(t(tk.map.locationError))
-      } finally {
         setLoading(false)
       }
     }
 
     init()
+
+    return () => {
+      subscription?.remove()
+    }
   }, [t])
 
   return {
