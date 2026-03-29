@@ -1,8 +1,17 @@
 import { useState } from 'react'
-import { Animated, ScrollView, View } from 'react-native'
+import { ScrollView, View } from 'react-native'
+import Animated, {
+  Easing,
+  interpolate,
+  runOnJS,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated'
 
 import { useTheme } from '@/contexts/ThemeContext'
 import { AppIcons } from '@/presentation/components/icons/AppIcons'
+import { Duration } from '@/theme/motion'
 
 import {
   ListContainer,
@@ -31,7 +40,7 @@ export interface SelectProps {
 }
 
 const LIST_MAX_HEIGHT = 280
-const ANIMATION_DURATION = 220
+const EASING = Easing.bezier(0.25, 0.1, 0.25, 1)
 
 export function Select({
   options,
@@ -43,33 +52,34 @@ export function Select({
 }: SelectProps) {
   const { theme } = useTheme()
   const [isOpen, setIsOpen] = useState(false)
-  const [animatedHeight] = useState(() => new Animated.Value(0))
+  const progress = useSharedValue(0)
 
   const selectedOption = options.find((opt) => opt.value === value)
 
   const PinIcon = AppIcons.location
   const ChevronIcon = AppIcons.navChevronDown
 
-  const chevronRotation = animatedHeight.interpolate({
-    inputRange: [0, LIST_MAX_HEIGHT],
-    outputRange: ['0deg', '180deg'],
-  })
+  const animatedListStyle = useAnimatedStyle(() => ({
+    height: interpolate(progress.value, [0, 1], [0, LIST_MAX_HEIGHT]),
+    overflow: 'hidden',
+    marginTop: 4,
+  }))
+
+  const animatedChevronStyle = useAnimatedStyle(() => ({
+    transform: [{ rotate: `${interpolate(progress.value, [0, 1], [0, 180])}deg` }],
+  }))
 
   function openList() {
     setIsOpen(true)
-    Animated.timing(animatedHeight, {
-      toValue: LIST_MAX_HEIGHT,
-      duration: ANIMATION_DURATION,
-      useNativeDriver: false,
-    }).start()
+    // eslint-disable-next-line react-hooks/immutability
+    progress.value = withTiming(1, { duration: Duration.normal, easing: EASING })
   }
 
   function closeList() {
-    Animated.timing(animatedHeight, {
-      toValue: 0,
-      duration: ANIMATION_DURATION,
-      useNativeDriver: false,
-    }).start(() => setIsOpen(false))
+    // eslint-disable-next-line react-hooks/immutability
+    progress.value = withTiming(0, { duration: Duration.normal, easing: EASING }, (finished) => {
+      if (finished) runOnJS(setIsOpen)(false)
+    })
   }
 
   function handleTriggerPress() {
@@ -86,9 +96,9 @@ export function Select({
   return (
     <View>
       <TriggerWrapper
-        bg={theme.card}
+        bg={theme.secondary}
         borderColor={theme.brand.primary}
-        defaultBorderColor={theme.border}
+        defaultBorderColor={theme.muted}
         isOpen={isOpen}
         disabled={disabled}
         onPress={handleTriggerPress}
@@ -104,13 +114,13 @@ export function Select({
         >
           {selectedOption ? selectedOption.label : placeholder}
         </TriggerLabel>
-        <Animated.View style={{ transform: [{ rotate: chevronRotation }] }}>
+        <Animated.View style={animatedChevronStyle}>
           <ChevronIcon size={18} color={theme.mutedForeground} />
         </Animated.View>
       </TriggerWrapper>
 
       {isOpen && (
-        <Animated.View style={{ height: animatedHeight, overflow: 'hidden', marginTop: 4 }}>
+        <Animated.View style={animatedListStyle}>
           <ListContainer bg={theme.card} accessibilityRole="radiogroup">
             <ScrollView bounces={false} keyboardShouldPersistTaps="handled">
               {options.map((option) => {
