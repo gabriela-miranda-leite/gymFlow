@@ -52,7 +52,6 @@ exports[`Select matches snapshot of the closed component 1`] = `
     }
   >
     <Text
-      color="#FFFFFF"
       numberOfLines={1}
       style={
         {
@@ -63,6 +62,7 @@ exports[`Select matches snapshot of the closed component 1`] = `
           "marginRight": 4,
         }
       }
+      textColor="#FFFFFF"
     >
       SmartFit Vila Mariana
     </Text>

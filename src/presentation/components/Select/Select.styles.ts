@@ -20,10 +20,10 @@ export const TriggerWrapper = styled.TouchableOpacity<{
   opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
 `
 
-export const TriggerLabel = styled.Text<{ color: string }>`
+export const TriggerLabel = styled.Text<{ textColor: string }>`
   font-size: ${FontSize.body}px;
   font-family: ${FontFamily.regular};
-  color: ${({ color }) => color};
+  color: ${({ textColor }) => textColor};
   margin-left: ${Spacing.s2}px;
   margin-right: ${Spacing.s1}px;
 `

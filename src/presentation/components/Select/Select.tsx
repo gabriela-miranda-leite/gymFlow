@@ -107,7 +107,7 @@ export function Select({
       >
         <PinIcon size={18} color={theme.mutedForeground} />
         <TriggerLabel
-          color={selectedOption ? theme.foreground : theme.mutedForeground}
+          textColor={selectedOption ? theme.foreground : theme.mutedForeground}
           numberOfLines={1}
         >
           {selectedOption ? selectedOption.label : placeholder}
