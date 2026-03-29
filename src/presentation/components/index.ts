@@ -3,5 +3,8 @@ export { ButtonLink } from '@/presentation/components/ButtonLink'
 export { ButtonGroup } from '@/presentation/components/ButtonGroup'
 export type { ButtonGroupOption, ButtonGroupProps } from '@/presentation/components/ButtonGroup'
 
+export { Select } from '@/presentation/components/Select'
+export type { SelectOption, SelectProps } from '@/presentation/components/Select'
+
 export { AppIcons } from '@/presentation/components/icons'
 export type { AppIconName, IconProps } from '@/presentation/components/icons'
