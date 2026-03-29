@@ -53,6 +53,26 @@ const enUS = {
   },
   checkIn: {
     placeholder: 'Check-in Screen',
+    buttonGroup: {
+      options: {
+        empty: {
+          label: 'Empty',
+          sublabel: 'Equipment available',
+        },
+        normal: {
+          label: 'Normal',
+          sublabel: 'Smooth flow',
+        },
+        full: {
+          label: 'Busy',
+          sublabel: 'Wait for some',
+        },
+        packed: {
+          label: 'Packed',
+          sublabel: 'Long wait',
+        },
+      },
+    },
   },
   profile: {
     placeholder: 'Profile Screen',

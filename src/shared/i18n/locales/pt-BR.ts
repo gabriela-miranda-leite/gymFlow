@@ -53,6 +53,26 @@ const ptBR = {
   },
   checkIn: {
     placeholder: 'Tela de Check-in',
+    buttonGroup: {
+      options: {
+        empty: {
+          label: 'Vazio',
+          sublabel: 'Equipamentos livres',
+        },
+        normal: {
+          label: 'Normal',
+          sublabel: 'Fluxo tranquilo',
+        },
+        full: {
+          label: 'Cheio',
+          sublabel: 'Espera em alguns',
+        },
+        packed: {
+          label: 'Lotado',
+          sublabel: 'Longa espera',
+        },
+      },
+    },
   },
   profile: {
     placeholder: 'Tela de Perfil',
