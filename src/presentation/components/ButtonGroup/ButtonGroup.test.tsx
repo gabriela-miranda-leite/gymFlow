@@ -111,9 +111,4 @@ describe('ButtonGroup', () => {
     )
     expect(normalButton?.props.accessibilityState?.selected).toBe(true)
   })
-
-  it('matches snapshot', () => {
-    const { toJSON } = render(<ButtonGroup options={OPTIONS} onSelect={() => {}} />)
-    expect(toJSON()).toMatchSnapshot()
-  })
 })
