@@ -4,6 +4,10 @@ import React from 'react'
 import { CheckInScreen } from '@/presentation/screens/CheckInScreen/CheckInScreen'
 import { colors } from '@/tokens'
 
+jest.mock('react-native-safe-area-context', () => ({
+  SafeAreaView: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+}))
+
 const mockOnSelectOccupancy = jest.fn()
 const mockOnSelectGym = jest.fn()
 

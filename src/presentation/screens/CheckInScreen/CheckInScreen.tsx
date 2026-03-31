@@ -1,3 +1,5 @@
+import { SafeAreaView } from 'react-native-safe-area-context'
+
 import { useTheme } from '@/contexts/ThemeContext'
 import { ButtonGroup } from '@/presentation/components/ButtonGroup/ButtonGroup'
 import { Select } from '@/presentation/components/Select/Select'
@@ -25,26 +27,28 @@ export function CheckInScreen() {
   const isDisabled = isLoading || !selectedGymId
 
   return (
-    <Container bg={theme.background}>
-      <Title color={theme.foreground} accessibilityRole="header" testID="checkin-title">
-        {title}
-      </Title>
+    <SafeAreaView style={{ flex: 1, backgroundColor: theme.background }}>
+      <Container bg={theme.background}>
+        <Title color={theme.foreground} accessibilityRole="header" testID="checkin-title">
+          {title}
+        </Title>
 
-      <SelectWrapper>
-        <Select
-          options={gymOptions}
-          value={selectedGymId}
-          onChange={onSelectGym}
-          placeholder={selectPlaceholder}
-          accessibilityLabel={selectPlaceholder}
+        <SelectWrapper>
+          <Select
+            options={gymOptions}
+            value={selectedGymId}
+            onChange={onSelectGym}
+            placeholder={selectPlaceholder}
+            accessibilityLabel={selectPlaceholder}
+          />
+        </SelectWrapper>
+
+        <ButtonGroup
+          options={occupancyOptions}
+          onSelect={(value) => onSelectOccupancy(value as OccupancyLevel)}
+          disabled={isDisabled}
         />
-      </SelectWrapper>
-
-      <ButtonGroup
-        options={occupancyOptions}
-        onSelect={(value) => onSelectOccupancy(value as OccupancyLevel)}
-        disabled={isDisabled}
-      />
-    </Container>
+      </Container>
+    </SafeAreaView>
   )
 }
