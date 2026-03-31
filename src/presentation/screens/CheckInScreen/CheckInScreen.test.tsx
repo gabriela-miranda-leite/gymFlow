@@ -71,7 +71,11 @@ jest.mock('@/contexts/ThemeContext', () => ({
       secondary: '#F0F0F2',
       secondaryForeground: '#52525B',
       border: '#E4E4E7',
-      brand: { primary: '#FF6A00', primaryForeground: '#FFFFFF' },
+      brand: {
+        primary: '#FF6A00',
+        primaryForeground: '#FFFFFF',
+        subtle: 'rgba(255, 106, 0, 0.10)',
+      },
     },
   }),
 }))

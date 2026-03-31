@@ -48,12 +48,12 @@ export function CheckInScreen() {
 
         {isCoolingDown && cooldownMessage && (
           <CooldownBanner
-            bg={theme.secondary}
+            bg={theme.brand.subtle}
             testID="checkin-cooldown-banner"
             accessibilityRole="alert"
             accessibilityLabel={cooldownMessage ?? undefined}
           >
-            <CooldownText color={theme.secondaryForeground}>{cooldownMessage}</CooldownText>
+            <CooldownText color={theme.brand.primary}>{cooldownMessage}</CooldownText>
           </CooldownBanner>
         )}
 

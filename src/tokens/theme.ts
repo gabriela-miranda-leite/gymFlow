@@ -18,6 +18,7 @@ export interface AppTheme {
   brand: {
     primary: string
     primaryForeground: string
+    subtle: string
   }
 
   status: Record<OccupancyLevel, string>
@@ -49,6 +50,7 @@ export const lightTheme: AppTheme = {
   brand: {
     primary: colors.primary,
     primaryForeground: colors.primaryForeground,
+    subtle: 'rgba(255, 106, 0, 0.10)',
   },
 
   status: {
@@ -85,6 +87,7 @@ export const darkTheme: AppTheme = {
   brand: {
     primary: colors.primary,
     primaryForeground: colors.primaryForeground,
+    subtle: 'rgba(255, 106, 0, 0.15)',
   },
 
   status: {
