@@ -53,6 +53,8 @@ const enUS = {
   },
   checkIn: {
     placeholder: 'Check-in Screen',
+    title: "How's the gym?",
+    selectPlaceholder: 'Select gym',
     buttonGroup: {
       options: {
         empty: {

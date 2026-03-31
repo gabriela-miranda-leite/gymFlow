@@ -53,6 +53,8 @@ const ptBR = {
   },
   checkIn: {
     placeholder: 'Tela de Check-in',
+    title: 'Como está a academia?',
+    selectPlaceholder: 'Selecionar academia',
     buttonGroup: {
       options: {
         empty: {
