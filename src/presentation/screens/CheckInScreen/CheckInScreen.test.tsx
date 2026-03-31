@@ -50,6 +50,7 @@ const defaultViewModel = {
   ],
   isLoading: false,
   isCoolingDown: false,
+  isButtonGroupDisabled: false,
   cooldownMessage: null,
   error: null,
   onSelectOccupancy: mockOnSelectOccupancy,
@@ -138,6 +139,7 @@ describe('CheckInScreen', () => {
     mockUseCheckInViewModel.mockReturnValueOnce({
       ...defaultViewModel,
       isLoading: true,
+      isButtonGroupDisabled: true,
     })
 
     const { getAllByRole } = render(<CheckInScreen />)
@@ -151,6 +153,7 @@ describe('CheckInScreen', () => {
     mockUseCheckInViewModel.mockReturnValueOnce({
       ...defaultViewModel,
       selectedGymId: undefined,
+      isButtonGroupDisabled: true,
     })
 
     const { getAllByRole } = render(<CheckInScreen />)
@@ -183,6 +186,7 @@ describe('CheckInScreen', () => {
     mockUseCheckInViewModel.mockReturnValueOnce({
       ...defaultViewModel,
       isCoolingDown: true,
+      isButtonGroupDisabled: true,
       cooldownMessage: COOLDOWN_MESSAGE,
     })
 

@@ -21,13 +21,11 @@ export function CheckInScreen() {
     selectedGymId,
     onSelectGym,
     occupancyOptions,
-    isLoading,
     isCoolingDown,
+    isButtonGroupDisabled,
     cooldownMessage,
     onSelectOccupancy,
   } = useCheckInViewModel()
-
-  const isDisabled = isLoading || !selectedGymId || isCoolingDown
 
   return (
     <SafeAreaWrapper bg={theme.background}>
@@ -60,7 +58,7 @@ export function CheckInScreen() {
         <ButtonGroup
           options={occupancyOptions}
           onSelect={(value) => onSelectOccupancy(value as OccupancyLevel)}
-          disabled={isDisabled}
+          disabled={isButtonGroupDisabled}
         />
       </Container>
     </SafeAreaWrapper>

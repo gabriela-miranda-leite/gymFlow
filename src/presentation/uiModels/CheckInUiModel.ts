@@ -22,6 +22,7 @@ export interface CheckInUiModel {
   occupancyOptions: OccupancyOption[]
   isLoading: boolean
   isCoolingDown: boolean
+  isButtonGroupDisabled: boolean
   cooldownMessage: string | null
   error: string | null
   onSelectOccupancy: (value: OccupancyLevel) => void

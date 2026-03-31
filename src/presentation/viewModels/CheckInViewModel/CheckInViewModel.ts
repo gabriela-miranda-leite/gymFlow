@@ -137,6 +137,7 @@ export const useCheckInViewModel = (): CheckInUiModel => {
     occupancyOptions,
     isLoading,
     isCoolingDown,
+    isButtonGroupDisabled: isLoading || !selectedGymId || isCoolingDown,
     cooldownMessage: isCoolingDown
       ? t(tk.checkIn.cooldownBanner, { minutes: remainingMinutes })
       : null,
