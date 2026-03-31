@@ -21,6 +21,9 @@ export interface CheckInUiModel {
   onSelectGym: (gymId: string) => void
   occupancyOptions: OccupancyOption[]
   isLoading: boolean
+  isCoolingDown: boolean
+  isButtonGroupDisabled: boolean
+  cooldownMessage: string | null
   error: string | null
   onSelectOccupancy: (value: OccupancyLevel) => void
 }

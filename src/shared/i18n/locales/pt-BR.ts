@@ -55,6 +55,7 @@ const ptBR = {
     placeholder: 'Tela de Check-in',
     title: 'Como está a academia?',
     selectPlaceholder: 'Selecionar academia',
+    cooldownBanner: 'Aguarde {{minutes}} min para reportar novamente',
     buttonGroup: {
       options: {
         empty: {
