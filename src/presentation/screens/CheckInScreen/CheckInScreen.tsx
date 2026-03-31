@@ -1,10 +1,11 @@
-import { SafeAreaView } from 'react-native-safe-area-context'
-
 import { useTheme } from '@/contexts/ThemeContext'
 import { ButtonGroup } from '@/presentation/components/ButtonGroup/ButtonGroup'
 import { Select } from '@/presentation/components/Select/Select'
 import {
   Container,
+  CooldownBanner,
+  CooldownText,
+  SafeAreaWrapper,
   SelectWrapper,
   Title,
 } from '@/presentation/screens/CheckInScreen/CheckInScreen.styles'
@@ -21,13 +22,15 @@ export function CheckInScreen() {
     onSelectGym,
     occupancyOptions,
     isLoading,
+    isCoolingDown,
+    cooldownMessage,
     onSelectOccupancy,
   } = useCheckInViewModel()
 
-  const isDisabled = isLoading || !selectedGymId
+  const isDisabled = isLoading || !selectedGymId || isCoolingDown
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: theme.background }}>
+    <SafeAreaWrapper bg={theme.background}>
       <Container bg={theme.background}>
         <Title color={theme.foreground} accessibilityRole="header" testID="checkin-title">
           {title}
@@ -43,12 +46,23 @@ export function CheckInScreen() {
           />
         </SelectWrapper>
 
+        {isCoolingDown && cooldownMessage && (
+          <CooldownBanner
+            bg={theme.secondary}
+            testID="checkin-cooldown-banner"
+            accessibilityRole="alert"
+            accessibilityLabel={cooldownMessage ?? undefined}
+          >
+            <CooldownText color={theme.secondaryForeground}>{cooldownMessage}</CooldownText>
+          </CooldownBanner>
+        )}
+
         <ButtonGroup
           options={occupancyOptions}
           onSelect={(value) => onSelectOccupancy(value as OccupancyLevel)}
           disabled={isDisabled}
         />
       </Container>
-    </SafeAreaView>
+    </SafeAreaWrapper>
   )
 }

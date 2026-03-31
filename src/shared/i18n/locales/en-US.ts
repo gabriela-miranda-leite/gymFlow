@@ -55,6 +55,7 @@ const enUS = {
     placeholder: 'Check-in Screen',
     title: "How's the gym?",
     selectPlaceholder: 'Select gym',
+    cooldownBanner: 'Wait {{minutes}} min to report again',
     buttonGroup: {
       options: {
         empty: {

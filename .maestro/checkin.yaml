@@ -15,3 +15,5 @@ appId: com.gymflow.app
     text: "Selecionar academia"
 - tapOn:
     text: "Vazio"
+- assertVisible:
+    id: "checkin-cooldown-banner"

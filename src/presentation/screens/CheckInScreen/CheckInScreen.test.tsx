@@ -4,6 +4,8 @@ import React from 'react'
 import { CheckInScreen } from '@/presentation/screens/CheckInScreen/CheckInScreen'
 import { colors } from '@/tokens'
 
+const COOLDOWN_MESSAGE = 'Aguarde 30 min para reportar novamente'
+
 jest.mock('react-native-safe-area-context', () => ({
   SafeAreaView: ({ children }: { children: React.ReactNode }) => <>{children}</>,
 }))
@@ -47,6 +49,8 @@ const defaultViewModel = {
     },
   ],
   isLoading: false,
+  isCoolingDown: false,
+  cooldownMessage: null,
   error: null,
   onSelectOccupancy: mockOnSelectOccupancy,
 }
@@ -64,6 +68,8 @@ jest.mock('@/contexts/ThemeContext', () => ({
       foreground: '#18181B',
       mutedForeground: '#A1A1AA',
       card: '#F7F7F8',
+      secondary: '#F0F0F2',
+      secondaryForeground: '#52525B',
       border: '#E4E4E7',
       brand: { primary: '#FF6A00', primaryForeground: '#FFFFFF' },
     },
@@ -132,8 +138,7 @@ describe('CheckInScreen', () => {
 
     const { getAllByRole } = render(<CheckInScreen />)
 
-    const buttons = getAllByRole('button')
-    buttons.forEach((btn) => {
+    getAllByRole('button').forEach((btn) => {
       expect(btn.props.accessibilityState?.disabled).toBe(true)
     })
   })
@@ -146,8 +151,40 @@ describe('CheckInScreen', () => {
 
     const { getAllByRole } = render(<CheckInScreen />)
 
-    const buttons = getAllByRole('button')
-    buttons.forEach((btn) => {
+    getAllByRole('button').forEach((btn) => {
+      expect(btn.props.accessibilityState?.disabled).toBe(true)
+    })
+  })
+
+  it('shows cooldown banner when isCoolingDown is true', () => {
+    mockUseCheckInViewModel.mockReturnValueOnce({
+      ...defaultViewModel,
+      isCoolingDown: true,
+      cooldownMessage: COOLDOWN_MESSAGE,
+    })
+
+    const { getByTestId, getByText } = render(<CheckInScreen />)
+
+    expect(getByTestId('checkin-cooldown-banner')).toBeTruthy()
+    expect(getByText(COOLDOWN_MESSAGE)).toBeTruthy()
+  })
+
+  it('does not show cooldown banner when isCoolingDown is false', () => {
+    const { queryByTestId } = render(<CheckInScreen />)
+
+    expect(queryByTestId('checkin-cooldown-banner')).toBeNull()
+  })
+
+  it('disables ButtonGroup items when cooling down', () => {
+    mockUseCheckInViewModel.mockReturnValueOnce({
+      ...defaultViewModel,
+      isCoolingDown: true,
+      cooldownMessage: COOLDOWN_MESSAGE,
+    })
+
+    const { getAllByRole } = render(<CheckInScreen />)
+
+    getAllByRole('button').forEach((btn) => {
       expect(btn.props.accessibilityState?.disabled).toBe(true)
     })
   })
