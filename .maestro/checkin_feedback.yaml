@@ -1,0 +1,29 @@
+appId: com.gymflow.app
+---
+- launchApp
+- tapOn:
+    id: "tab-checkin"
+- assertVisible:
+    id: "checkin-title"
+- tapOn:
+    text: "Selecionar academia"
+- assertVisible:
+    text: "Smart Fit – Uberlândia Shopping"
+- tapOn:
+    text: "Smart Fit – Uberlândia Shopping"
+- tapOn:
+    text: "Vazio"
+- assertVisible:
+    id: "feedback-success-icon"
+- assertVisible:
+    id: "feedback-title"
+- assertVisible:
+    id: "feedback-gym-name"
+- assertVisible:
+    id: "feedback-occupancy"
+- assertVisible:
+    id: "feedback-back-button"
+- tapOn:
+    id: "feedback-back-button"
+- assertVisible:
+    id: "checkin-title"

@@ -2,6 +2,7 @@ export const RootRoutes = {
   Login: 'Login',
   SignUp: 'SignUp',
   App: 'App',
+  CheckInFeedback: 'CheckInFeedback',
 } as const
 
 export const TabRoutes = {

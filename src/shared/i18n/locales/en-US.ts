@@ -77,6 +77,12 @@ const enUS = {
       },
     },
   },
+  checkInFeedback: {
+    title: 'Check-in submitted!',
+    subtitle: 'Thanks for reporting. Your report helps other users plan their workout.',
+    button: 'Back to home',
+    successIconLabel: 'Check-in successfully submitted',
+  },
   profile: {
     placeholder: 'Profile Screen',
   },

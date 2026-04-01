@@ -1,3 +1,5 @@
+import { useNavigation } from '@react-navigation/native'
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -13,6 +15,8 @@ import type {
   OccupancyOption,
 } from '@/presentation/uiModels/CheckInUiModel'
 import { tk } from '@/shared/i18n'
+import { RootRoutes } from '@/shared/navigation/routes'
+import type { RootStackParamList } from '@/shared/navigation/types'
 import { colors } from '@/tokens'
 import type { OccupancyLevel } from '@/tokens'
 
@@ -28,6 +32,7 @@ function toGymOption(gym: GymModel): CheckInGymOption {
 
 export const useCheckInViewModel = (): CheckInUiModel => {
   const { t } = useTranslation()
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
 
   const [gyms, setGyms] = useState<GymModel[]>([])
   const [selectedGymId, setSelectedGymId] = useState<string | undefined>(undefined)
@@ -121,6 +126,15 @@ export const useCheckInViewModel = (): CheckInUiModel => {
       await checkInCooldownRepository.saveLastCheckInTimestamp(now)
       updateCooldownState(now)
       startCooldownInterval(now)
+
+      const selectedGym = gyms.find((g) => g.id === selectedGymId)
+      const selectedOption = occupancyOptions.find((o) => o.value === value)
+      navigation.navigate(RootRoutes.CheckInFeedback, {
+        gymName: selectedGym?.name ?? '',
+        occupancy: value,
+        occupancyLabel: selectedOption?.label ?? '',
+        occupancyColor: selectedOption?.color ?? '',
+      })
     } catch {
       setError(t(tk.errors.generic))
     } finally {
