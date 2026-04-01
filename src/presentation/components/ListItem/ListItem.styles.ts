@@ -49,6 +49,12 @@ export const Sublabel = styled.Text<{ color: string }>`
   margin-top: ${Spacing.s1}px;
 `
 
+export const AvatarSlot = styled.View`
+  align-items: center;
+  justify-content: center;
+  margin-right: ${Spacing.s3}px;
+`
+
 export const TrailingSlot = styled.View`
   flex-direction: row;
   align-items: center;
