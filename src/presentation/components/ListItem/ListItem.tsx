@@ -1,6 +1,5 @@
-import type { ReactNode } from 'react'
-
 import { useTheme } from '@/contexts/ThemeContext'
+import { Avatar } from '@/presentation/components/Avatar'
 import {
   ContentArea,
   Indicator,
@@ -20,7 +19,13 @@ import type { AppIconName } from '@/presentation/components/icons/AppIcons'
 export type ListItemLeading =
   | { type: 'icon'; icon: AppIconName }
   | { type: 'indicator'; color: string }
-  | { type: 'avatar'; node: ReactNode }
+  | {
+      type: 'avatar'
+      name: string
+      imageUri?: string
+      showCameraBadge?: boolean
+      onCameraPress?: () => void
+    }
   | { type: 'none' }
 
 export type ListItemTrailing =
@@ -70,7 +75,17 @@ function Leading({ leading, iconColor }: { leading: ListItemLeading; iconColor: 
     )
   }
 
-  return <LeadingSlot>{leading.node}</LeadingSlot>
+  return (
+    <LeadingSlot>
+      <Avatar
+        name={leading.name}
+        imageUri={leading.imageUri}
+        showCameraBadge={leading.showCameraBadge}
+        onCameraPress={leading.onCameraPress}
+        size="md"
+      />
+    </LeadingSlot>
+  )
 }
 
 function Trailing({

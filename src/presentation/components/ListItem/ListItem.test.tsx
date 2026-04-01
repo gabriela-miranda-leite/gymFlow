@@ -3,13 +3,25 @@ import React from 'react'
 
 import { ListItem } from '@/presentation/components/ListItem'
 
+jest.mock('@/presentation/components/Avatar', () => ({
+  Avatar: ({ name, testID }: { name: string; testID?: string }) => {
+    const { View, Text } = require('react-native')
+    return (
+      <View testID={testID}>
+        <Text>{name.trim().charAt(0).toUpperCase()}</Text>
+      </View>
+    )
+  },
+}))
+
 jest.mock('@/contexts/ThemeContext', () => ({
   useTheme: () => ({
     theme: {
       foreground: '#18181B',
       mutedForeground: '#A1A1AA',
       secondary: '#F0F0F2',
-      brand: { primary: '#FF6A00' },
+      card: '#FFFFFF',
+      brand: { primary: '#FF6A00', primaryForeground: '#FFFFFF' },
       destructive: '#EF4444',
     },
   }),
@@ -184,13 +196,23 @@ describe('ListItem', () => {
   })
 
   describe('leading: avatar', () => {
-    it('renders avatar node', () => {
-      const AvatarNode = <React.Fragment />
+    it('renders the avatar initial', () => {
+      const { getByText } = render(
+        <ListItem
+          label="Rafael Souza"
+          leading={{ type: 'avatar', name: 'Rafael Souza' }}
+          trailing={{ type: 'chevron' }}
+        />,
+      )
+
+      expect(getByText('R')).toBeTruthy()
+    })
+
+    it('renders with camera badge when showCameraBadge is true', () => {
       const { getByTestId } = render(
         <ListItem
           label="Rafael Souza"
-          leading={{ type: 'avatar', node: AvatarNode }}
-          trailing={{ type: 'chevron' }}
+          leading={{ type: 'avatar', name: 'Rafael Souza', showCameraBadge: true }}
           testID="profile-item"
         />,
       )

@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
-import { View } from 'react-native'
 
 import { ListItem } from './ListItem'
 
@@ -86,7 +85,7 @@ export const WithAvatarLeading: Story = {
   args: {
     label: 'Rafael Souza',
     sublabel: '12 check-ins este mês',
-    leading: { type: 'avatar', node: <View style={{ width: 40, height: 40 }} /> },
+    leading: { type: 'avatar', name: 'Rafael Souza', showCameraBadge: true },
     trailing: { type: 'chevron' },
     onPress: () => {},
   },
