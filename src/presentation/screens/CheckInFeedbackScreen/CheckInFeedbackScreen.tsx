@@ -31,13 +31,8 @@ export function CheckInFeedbackScreen() {
   return (
     <SafeAreaWrapper bg={theme.background}>
       <Container bg={theme.background}>
-        <IconWrapper>
-          <AppIcons.success
-            size={64}
-            color={theme.brand.primary}
-            accessibilityLabel={successIconLabel}
-            testID="feedback-success-icon"
-          />
+        <IconWrapper testID="feedback-success-icon" accessibilityLabel={successIconLabel}>
+          <AppIcons.success size={64} color={theme.brand.primary} />
         </IconWrapper>
 
         <Title color={theme.foreground} accessibilityRole="header" testID="feedback-title">
