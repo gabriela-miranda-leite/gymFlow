@@ -1,5 +1,5 @@
 import BottomSheet from '@gorhom/bottom-sheet'
-import { Camera, MapView, MarkerView, setAccessToken } from '@maplibre/maplibre-react-native'
+import { Camera, MapView, MarkerView } from '@maplibre/maplibre-react-native'
 import { useEffect, useMemo, useRef } from 'react'
 import { ActivityIndicator } from 'react-native'
 
@@ -15,8 +15,6 @@ import {
 } from '@/presentation/screens/MapScreen/MapScreen.styles'
 import { darkMapStyle, lightMapStyle } from '@/presentation/screens/MapScreen/mapStyles'
 import { useMapViewModel } from '@/presentation/viewModels/MapViewModel'
-
-setAccessToken('')
 
 const DEFAULT_CENTER: [number, number] = [-48.2772, -18.9186] // Uberlândia
 
