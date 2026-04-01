@@ -77,6 +77,12 @@ const ptBR = {
       },
     },
   },
+  checkInFeedback: {
+    title: 'Check-in enviado!',
+    subtitle: 'Obrigado por reportar. Seu reporte ajuda outros usuários a planejar o treino.',
+    button: 'Voltar ao início',
+    successIconLabel: 'Check-in realizado com sucesso',
+  },
   profile: {
     placeholder: 'Tela de Perfil',
   },

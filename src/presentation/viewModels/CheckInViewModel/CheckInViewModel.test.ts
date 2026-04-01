@@ -5,7 +5,15 @@ import { checkInRepository } from '@/data/repositories/CheckInRepository'
 import { gymRepository } from '@/data/repositories/GymRepository'
 import { CHECKIN_COOLDOWN_MINUTES } from '@/domain/useCases/CheckCheckInCooldownUseCase'
 import { useCheckInViewModel } from '@/presentation/viewModels/CheckInViewModel'
+import { RootRoutes } from '@/shared/navigation/routes'
 import type { OccupancyLevel } from '@/tokens'
+
+const mockNavigate = jest.fn()
+const mockGoBack = jest.fn()
+
+jest.mock('@react-navigation/native', () => ({
+  useNavigation: () => ({ navigate: mockNavigate, goBack: mockGoBack }),
+}))
 
 const mockGymModels = [
   {
@@ -192,6 +200,38 @@ describe('useCheckInViewModel', () => {
 
       expect(result.current.isCoolingDown).toBe(true)
       expect(result.current.cooldownMessage).not.toBeNull()
+    })
+
+    it('navigates to CheckInFeedback after successful check-in', async () => {
+      const { result } = renderHook(() => useCheckInViewModel())
+      await waitFor(() => expect(result.current.gymOptions).toHaveLength(1))
+
+      act(() => {
+        result.current.onSelectGym('1')
+      })
+      await act(async () => {
+        await result.current.onSelectOccupancy('empty')
+      })
+
+      expect(mockNavigate).toHaveBeenCalledWith(
+        RootRoutes.CheckInFeedback,
+        expect.objectContaining({ gymName: 'Smart Fit', occupancy: 'empty' }),
+      )
+    })
+
+    it('does not navigate when submission fails', async () => {
+      mockSubmit.mockRejectedValueOnce(new Error('network error'))
+      const { result } = renderHook(() => useCheckInViewModel())
+      await waitFor(() => expect(result.current.gymOptions).toHaveLength(1))
+
+      act(() => {
+        result.current.onSelectGym('1')
+      })
+      await act(async () => {
+        await result.current.onSelectOccupancy('busy')
+      })
+
+      expect(mockNavigate).not.toHaveBeenCalled()
     })
 
     it('sets error when submission fails', async () => {
