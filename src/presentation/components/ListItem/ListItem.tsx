@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 
 import { useTheme } from '@/contexts/ThemeContext'
 import {
+  AvatarSlot,
   ContentArea,
   Indicator,
   Label,
@@ -70,7 +71,7 @@ function Leading({ leading, iconColor }: { leading: ListItemLeading; iconColor: 
     )
   }
 
-  return <LeadingSlot>{leading.node}</LeadingSlot>
+  return <AvatarSlot>{leading.node}</AvatarSlot>
 }
 
 function Trailing({
