@@ -1,0 +1,68 @@
+appId: com.gymflow.app
+---
+- launchApp
+
+# Navega para a aba de Perfil
+- tapOn:
+    id: "tab-profile"
+
+# Verifica que a tela de perfil carregou com o nome do usuário
+- assertVisible: "Rafael Souza"
+
+# Verifica que o card do usuário está visível
+- assertVisible:
+    id: "profile-header-card"
+
+# Happy path — testa a seção de Conta
+- tapOn:
+    id: "profile-email-row"
+
+# Volta para a tela de perfil (sem navegação real no mock)
+- tapOn:
+    id: "tab-profile"
+
+# Testa a seção de Conta — linha de senha
+- tapOn:
+    id: "profile-password-row"
+
+# Volta para a tela de perfil
+- tapOn:
+    id: "tab-profile"
+
+# Happy path — testa academia favorita
+- assertVisible: "SmartFit Paulista"
+- assertVisible: "BodyTech Jardins"
+- assertVisible: "22%"
+
+# Testa pressionar uma academia favorita
+- tapOn:
+    id: "profile-favorite-gym-1"
+
+# Volta para a tela de perfil
+- tapOn:
+    id: "tab-profile"
+
+# Verifica seção de alertas — toggle de horário ideal
+- assertVisible:
+    id: "profile-ideal-time-toggle"
+
+# Verifica slider de limite de lotação
+- assertVisible:
+    id: "profile-occupancy-slider"
+
+# Testa alternância de tema — label deve mostrar "Modo escuro" no tema claro
+- assertVisible: "Modo escuro"
+- tapOn:
+    id: "profile-theme-button"
+
+# Após alternar para dark mode, label deve mostrar "Modo claro"
+- assertVisible: "Modo claro"
+
+# Restaura tema original
+- tapOn:
+    id: "profile-theme-button"
+
+# Fluxo de erro/borda — testa botão de logout (tela de confirmação ou ação)
+- assertVisible: "Sair"
+- tapOn:
+    id: "profile-logout-button"
