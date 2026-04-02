@@ -17,7 +17,6 @@ import {
 } from '@/presentation/screens/MapScreen/MapScreen.styles'
 import { darkMapStyle, lightMapStyle } from '@/presentation/screens/MapScreen/mapStyles'
 import { useMapViewModel } from '@/presentation/viewModels/MapViewModel'
-import { Transition } from '@/theme/motion'
 
 const DEFAULT_CENTER: [number, number] = [-48.2772, -18.9186] // Uberlândia
 
@@ -69,9 +68,9 @@ export function MapScreen() {
   return (
     <MotiView
       key={animKey}
-      from={{ opacity: 0, translateY: 24 }}
-      animate={{ opacity: 1, translateY: 0 }}
-      transition={Transition.screenEnter}
+      from={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ type: 'timing', duration: 350 }}
       style={{ flex: 1 }}
     >
       <Container>

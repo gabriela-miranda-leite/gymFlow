@@ -14,8 +14,14 @@ import {
   Title,
 } from '@/presentation/screens/CheckInScreen/CheckInScreen.styles'
 import { useCheckInViewModel } from '@/presentation/viewModels/CheckInViewModel'
-import { Transition } from '@/theme/motion'
 import type { OccupancyLevel } from '@/tokens'
+
+const slideUp = (delay: number) =>
+  ({
+    from: { opacity: 0, translateY: 16 },
+    animate: { opacity: 1, translateY: 0 },
+    transition: { type: 'timing', duration: 350, delay },
+  }) as const
 
 export function CheckInScreen() {
   const { theme } = useTheme()
@@ -41,19 +47,15 @@ export function CheckInScreen() {
   } = useCheckInViewModel()
 
   return (
-    <MotiView
-      key={animKey}
-      from={{ opacity: 0, translateY: 24 }}
-      animate={{ opacity: 1, translateY: 0 }}
-      transition={Transition.screenEnter}
-      style={{ flex: 1 }}
-    >
-      <SafeAreaWrapper bg={theme.background}>
-        <Container bg={theme.background}>
+    <SafeAreaWrapper bg={theme.background}>
+      <Container bg={theme.background}>
+        <MotiView key={animKey} {...slideUp(0)}>
           <Title color={theme.foreground} accessibilityRole="header" testID="checkin-title">
             {title}
           </Title>
+        </MotiView>
 
+        <MotiView key={`${animKey}-select`} {...slideUp(80)}>
           <SelectWrapper>
             <Select
               options={gymOptions}
@@ -74,14 +76,16 @@ export function CheckInScreen() {
               <CooldownText color={theme.brand.primary}>{cooldownMessage}</CooldownText>
             </CooldownBanner>
           )}
+        </MotiView>
 
+        <MotiView key={`${animKey}-buttons`} {...slideUp(160)}>
           <ButtonGroup
             options={occupancyOptions}
             onSelect={(value) => onSelectOccupancy(value as OccupancyLevel)}
             disabled={isButtonGroupDisabled}
           />
-        </Container>
-      </SafeAreaWrapper>
-    </MotiView>
+        </MotiView>
+      </Container>
+    </SafeAreaWrapper>
   )
 }

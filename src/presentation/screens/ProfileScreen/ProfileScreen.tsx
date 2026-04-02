@@ -22,7 +22,13 @@ import {
 } from '@/presentation/screens/ProfileScreen/ProfileScreen.styles'
 import { useProfileViewModel } from '@/presentation/viewModels/ProfileViewModel'
 import { tk, useTranslation } from '@/shared/i18n'
-import { Transition } from '@/theme/motion'
+
+const slideUp = (delay: number) =>
+  ({
+    from: { opacity: 0, translateY: 16 },
+    animate: { opacity: 1, translateY: 0 },
+    transition: { type: 'timing', duration: 350, delay },
+  }) as const
 
 export function ProfileScreen() {
   const { t } = useTranslation()
@@ -42,19 +48,15 @@ export function ProfileScreen() {
   const LogoutIcon = AppIcons.logout
 
   return (
-    <MotiView
-      key={animKey}
-      from={{ opacity: 0, translateY: 24 }}
-      animate={{ opacity: 1, translateY: 0 }}
-      transition={Transition.screenEnter}
-      style={{ flex: 1 }}
-    >
-      <SafeAreaWrapper bg={theme.background}>
-        <Container bg={theme.background} testID="profile-scroll-view">
-          <ContentWrapper bg={theme.background}>
+    <SafeAreaWrapper bg={theme.background}>
+      <Container bg={theme.background} testID="profile-scroll-view">
+        <ContentWrapper bg={theme.background}>
+          <MotiView key={`${animKey}-title`} {...slideUp(0)}>
             <PageTitle color={theme.foreground}>{t(tk.profile.title)}</PageTitle>
+          </MotiView>
 
-            {/* Header — perfil do usuário */}
+          {/* Header — perfil do usuário */}
+          <MotiView key={`${animKey}-header`} {...slideUp(80)}>
             <HeaderSection>
               <Card bg={theme.card} testID="profile-header-card">
                 <ListItem
@@ -78,8 +80,10 @@ export function ProfileScreen() {
                 />
               </Card>
             </HeaderSection>
+          </MotiView>
 
-            {/* Seção Conta */}
+          {/* Seção Conta */}
+          <MotiView key={`${animKey}-account`} {...slideUp(160)}>
             <Section>
               <SectionLabel color={theme.mutedForeground} testID="profile-section-account-label">
                 {t(tk.profile.sectionAccount)}
@@ -104,8 +108,10 @@ export function ProfileScreen() {
                 />
               </Card>
             </Section>
+          </MotiView>
 
-            {/* Seção Favoritas */}
+          {/* Seção Favoritas */}
+          <MotiView key={`${animKey}-favorites`} {...slideUp(240)}>
             <Section>
               <SectionLabel color={theme.mutedForeground} testID="profile-section-favorites-label">
                 {t(tk.profile.sectionFavorites)}
@@ -124,8 +130,10 @@ export function ProfileScreen() {
                 ))}
               </Card>
             </Section>
+          </MotiView>
 
-            {/* Seção Alertas */}
+          {/* Seção Alertas */}
+          <MotiView key={`${animKey}-alerts`} {...slideUp(320)}>
             <Section>
               <SectionLabel color={theme.mutedForeground} testID="profile-section-alerts-label">
                 {t(tk.profile.sectionAlerts)}
@@ -162,8 +170,10 @@ export function ProfileScreen() {
                 />
               </Card>
             </Section>
+          </MotiView>
 
-            {/* Botão Tema */}
+          {/* Botão Tema */}
+          <MotiView key={`${animKey}-theme`} {...slideUp(400)}>
             <StandaloneCard bg={theme.card} testID="profile-theme-card">
               <ActionRow
                 onPress={vm.onToggleTheme}
@@ -176,8 +186,10 @@ export function ProfileScreen() {
                 <ActionLabel color={theme.foreground}>{themeLabel}</ActionLabel>
               </ActionRow>
             </StandaloneCard>
+          </MotiView>
 
-            {/* Botão Sair */}
+          {/* Botão Sair */}
+          <MotiView key={`${animKey}-logout`} {...slideUp(460)}>
             <StandaloneCard bg={theme.card} testID="profile-logout-card">
               <ActionRow
                 onPress={vm.onPressLogout}
@@ -190,9 +202,9 @@ export function ProfileScreen() {
                 <ActionLabel color={theme.destructive}>{t(tk.profile.logout)}</ActionLabel>
               </ActionRow>
             </StandaloneCard>
-          </ContentWrapper>
-        </Container>
-      </SafeAreaWrapper>
-    </MotiView>
+          </MotiView>
+        </ContentWrapper>
+      </Container>
+    </SafeAreaWrapper>
   )
 }
