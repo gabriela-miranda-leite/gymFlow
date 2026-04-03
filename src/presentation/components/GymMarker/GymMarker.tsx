@@ -1,4 +1,3 @@
-import { useTheme } from '@/contexts/ThemeContext'
 import { MarkerContainer } from '@/presentation/components/GymMarker/GymMarker.styles'
 import { AppIcons } from '@/presentation/components/icons/AppIcons'
 import type { GymUiModel } from '@/presentation/uiModels/MapUiModel'
@@ -7,20 +6,27 @@ interface Props {
   gym: GymUiModel
   isActive: boolean
   onPress: (gym: GymUiModel) => void
+  primaryColor: string
+  primaryForeground: string
+  cardColor: string
 }
 
-export function GymMarker({ gym, isActive, onPress }: Props) {
-  const { theme } = useTheme()
-
-  const bg = isActive ? theme.card : theme.brand.primary
-  const iconColor = isActive ? theme.brand.primary : theme.brand.primaryForeground
-  const borderColor = theme.brand.primary
+export function GymMarker({
+  gym,
+  isActive,
+  onPress,
+  primaryColor,
+  primaryForeground,
+  cardColor,
+}: Props) {
+  const bg = isActive ? cardColor : primaryColor
+  const iconColor = isActive ? primaryColor : primaryForeground
 
   return (
     <MarkerContainer
       testID="gym-marker"
       bg={bg}
-      borderColor={borderColor}
+      borderColor={primaryColor}
       onPress={() => onPress(gym)}
     >
       <AppIcons.location color={iconColor} size={18} weight="fill" />

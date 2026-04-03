@@ -4,16 +4,6 @@ import React from 'react'
 import { GymMarker } from '@/presentation/components/GymMarker/GymMarker'
 import type { GymUiModel } from '@/presentation/uiModels/MapUiModel'
 
-jest.mock('@/contexts/ThemeContext', () => ({
-  useTheme: () => ({
-    theme: {
-      card: '#FFFFFF',
-      mutedForeground: '#71717A',
-      brand: { primary: '#F97316', primaryForeground: '#FFFFFF' },
-    },
-  }),
-}))
-
 const mockGym: GymUiModel = {
   id: '1',
   name: 'Smart Fit – Paulista',
@@ -28,22 +18,34 @@ const mockGym: GymUiModel = {
   coordinates: { latitude: -23.565, longitude: -46.6525 },
 }
 
+const defaultColors = {
+  primaryColor: '#F97316',
+  primaryForeground: '#FFFFFF',
+  cardColor: '#FFFFFF',
+}
+
 describe('GymMarker', () => {
   it('renders with gym-marker testID', () => {
-    const { getByTestId } = render(<GymMarker gym={mockGym} isActive={false} onPress={jest.fn()} />)
+    const { getByTestId } = render(
+      <GymMarker gym={mockGym} isActive={false} onPress={jest.fn()} {...defaultColors} />,
+    )
     expect(getByTestId('gym-marker')).toBeTruthy()
   })
 
   it('calls onPress with the gym when pressed', () => {
     const onPress = jest.fn()
-    const { getByTestId } = render(<GymMarker gym={mockGym} isActive={false} onPress={onPress} />)
+    const { getByTestId } = render(
+      <GymMarker gym={mockGym} isActive={false} onPress={onPress} {...defaultColors} />,
+    )
     fireEvent.press(getByTestId('gym-marker'))
     expect(onPress).toHaveBeenCalledWith(mockGym)
   })
 
   it('does not call onPress for a different gym when pressing a specific marker', () => {
     const onPress = jest.fn()
-    const { getByTestId } = render(<GymMarker gym={mockGym} isActive={false} onPress={onPress} />)
+    const { getByTestId } = render(
+      <GymMarker gym={mockGym} isActive={false} onPress={onPress} {...defaultColors} />,
+    )
     fireEvent.press(getByTestId('gym-marker'))
     expect(onPress).toHaveBeenCalledTimes(1)
     expect(onPress).toHaveBeenCalledWith(expect.objectContaining({ id: '1' }))
