@@ -60,6 +60,9 @@ export const useMapViewModel = (): MapUiModel => {
           return
         }
 
+        // Permissão concedida: exibe o mapa imediatamente com DEFAULT_CENTER
+        setLoading(false)
+
         subscription = await Location.watchPositionAsync(
           { accuracy: Location.Accuracy.Balanced, distanceInterval: 10 },
           async (location) => {
@@ -72,9 +75,12 @@ export const useMapViewModel = (): MapUiModel => {
 
             if (!gymsLoaded.current) {
               gymsLoaded.current = true
-              const nearbyGyms = await getNearbyGymsUseCase(coords, gymRepository)
-              setGyms(nearbyGyms)
-              setLoading(false)
+              try {
+                const nearbyGyms = await getNearbyGymsUseCase(coords, gymRepository)
+                setGyms(nearbyGyms)
+              } catch {
+                // mapa ainda funciona sem marcadores
+              }
             }
           },
         )
