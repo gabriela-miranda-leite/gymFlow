@@ -1,5 +1,4 @@
 import { render, fireEvent } from '@testing-library/react-native'
-import React from 'react'
 
 import { GymMarker } from '@/presentation/components/GymMarker/GymMarker'
 import type { GymUiModel } from '@/presentation/uiModels/MapUiModel'
@@ -49,5 +48,12 @@ describe('GymMarker', () => {
     fireEvent.press(getByTestId('gym-marker'))
     expect(onPress).toHaveBeenCalledTimes(1)
     expect(onPress).toHaveBeenCalledWith(expect.objectContaining({ id: '1' }))
+  })
+
+  it('renders in active state without crashing', () => {
+    const { getByTestId } = render(
+      <GymMarker gym={mockGym} isActive={true} onPress={jest.fn()} {...defaultColors} />,
+    )
+    expect(getByTestId('gym-marker')).toBeTruthy()
   })
 })
