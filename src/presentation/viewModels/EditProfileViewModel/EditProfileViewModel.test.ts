@@ -20,11 +20,21 @@ jest.mock('@/data/repositories/ProfileRepository', () => ({
   },
 }))
 
+const mockRequestPermission = jest.fn()
+const mockLaunchImageLibrary = jest.fn()
+
+jest.mock('expo-image-picker', () => ({
+  requestMediaLibraryPermissionsAsync: () => mockRequestPermission(),
+  launchImageLibraryAsync: () => mockLaunchImageLibrary(),
+}))
+
 describe('useEditProfileViewModel', () => {
   beforeEach(() => {
     jest.clearAllMocks()
     mockGetProfile.mockResolvedValue({ name: 'Rafael Souza', phone: '(11) 98765-4321' })
     mockUpdateProfile.mockResolvedValue(undefined)
+    mockRequestPermission.mockResolvedValue({ status: 'granted' })
+    mockLaunchImageLibrary.mockResolvedValue({ canceled: true, assets: [] })
   })
 
   describe('initial state', () => {
@@ -183,15 +193,53 @@ describe('useEditProfileViewModel', () => {
   })
 
   describe('onPressCameraBadge', () => {
-    it('does not throw when called', async () => {
+    it('requests media library permission', async () => {
       const { result } = renderHook(() => useEditProfileViewModel())
       await waitFor(() => expect(result.current.name).toBe('Rafael Souza'))
 
-      expect(() => {
-        act(() => {
-          result.current.onPressCameraBadge()
-        })
-      }).not.toThrow()
+      await act(async () => {
+        await result.current.onPressCameraBadge()
+      })
+
+      expect(mockRequestPermission).toHaveBeenCalledTimes(1)
+    })
+
+    it('does not open image picker when permission is denied', async () => {
+      mockRequestPermission.mockResolvedValueOnce({ status: 'denied' })
+      const { result } = renderHook(() => useEditProfileViewModel())
+      await waitFor(() => expect(result.current.name).toBe('Rafael Souza'))
+
+      await act(async () => {
+        await result.current.onPressCameraBadge()
+      })
+
+      expect(mockLaunchImageLibrary).not.toHaveBeenCalled()
+    })
+
+    it('updates imageUri when user selects an image', async () => {
+      mockLaunchImageLibrary.mockResolvedValueOnce({
+        canceled: false,
+        assets: [{ uri: 'file://photo.jpg' }],
+      })
+      const { result } = renderHook(() => useEditProfileViewModel())
+      await waitFor(() => expect(result.current.name).toBe('Rafael Souza'))
+
+      await act(async () => {
+        await result.current.onPressCameraBadge()
+      })
+
+      expect(result.current.imageUri).toBe('file://photo.jpg')
+    })
+
+    it('does not update imageUri when user cancels', async () => {
+      const { result } = renderHook(() => useEditProfileViewModel())
+      await waitFor(() => expect(result.current.name).toBe('Rafael Souza'))
+
+      await act(async () => {
+        await result.current.onPressCameraBadge()
+      })
+
+      expect(result.current.imageUri).toBeUndefined()
     })
   })
 })

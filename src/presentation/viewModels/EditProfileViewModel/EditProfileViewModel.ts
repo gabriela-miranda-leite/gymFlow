@@ -1,5 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import * as ImagePicker from 'expo-image-picker'
 import { useEffect, useState } from 'react'
 
 import { profileRepository } from '@/data/repositories/ProfileRepository'
@@ -23,11 +24,13 @@ export const useEditProfileViewModel = (): EditProfileUiModel => {
 
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
+  const [imageUri, setImageUri] = useState<string | undefined>(undefined)
 
   useEffect(() => {
     getProfileUseCase(profileRepository).then((profile) => {
       setName(profile.name)
       setPhone(profile.phone)
+      setImageUri(profile.imageUri)
     })
   }, [])
 
@@ -41,7 +44,7 @@ export const useEditProfileViewModel = (): EditProfileUiModel => {
 
   const onPressSave = () => {
     if (!name.trim()) return
-    updateProfileUseCase({ name, phone }, profileRepository).then(() => {
+    updateProfileUseCase({ name, phone, imageUri }, profileRepository).then(() => {
       navigation.goBack()
     })
   }
@@ -50,13 +53,26 @@ export const useEditProfileViewModel = (): EditProfileUiModel => {
     navigation.goBack()
   }
 
-  const onPressCameraBadge = () => {
-    // TODO: open image picker (GYM-34)
+  const onPressCameraBadge = async () => {
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync()
+    if (status !== 'granted') return
+
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ['images'],
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 0.8,
+    })
+
+    if (!result.canceled && result.assets[0]) {
+      setImageUri(result.assets[0].uri)
+    }
   }
 
   return {
     name,
     phone,
+    imageUri,
     onChangeName,
     onChangePhone,
     onPressSave,

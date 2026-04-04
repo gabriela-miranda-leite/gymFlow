@@ -46,6 +46,7 @@ export function EditProfileScreen() {
           <AvatarWrapper>
             <Avatar
               name={vm.name}
+              imageUri={vm.imageUri}
               size="lg"
               showCameraBadge
               onCameraPress={vm.onPressCameraBadge}
