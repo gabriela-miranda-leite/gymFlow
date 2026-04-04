@@ -57,7 +57,13 @@ describe('GymDetailCard', () => {
   it('renders gym name and address when gym is provided', () => {
     const ref = React.createRef<React.ComponentRef<typeof import('@gorhom/bottom-sheet').default>>()
     const { getByText } = render(
-      <GymDetailCard ref={ref} gym={mockGym} onDismiss={jest.fn()} onCheckIn={jest.fn()} />,
+      <GymDetailCard
+        ref={ref}
+        gym={mockGym}
+        onDismiss={jest.fn()}
+        onCheckIn={jest.fn()}
+        onViewDetail={jest.fn()}
+      />,
     )
     expect(getByText('Smart Fit – Paulista')).toBeTruthy()
     expect(getByText('Av. Paulista, 1374')).toBeTruthy()
@@ -66,7 +72,13 @@ describe('GymDetailCard', () => {
   it('renders rating and review count', () => {
     const ref = React.createRef<React.ComponentRef<typeof import('@gorhom/bottom-sheet').default>>()
     const { getByText } = render(
-      <GymDetailCard ref={ref} gym={mockGym} onDismiss={jest.fn()} onCheckIn={jest.fn()} />,
+      <GymDetailCard
+        ref={ref}
+        gym={mockGym}
+        onDismiss={jest.fn()}
+        onCheckIn={jest.fn()}
+        onViewDetail={jest.fn()}
+      />,
     )
     expect(getByText('4.2')).toBeTruthy()
     expect(getByText('(214)')).toBeTruthy()
@@ -75,7 +87,13 @@ describe('GymDetailCard', () => {
   it('renders distance and opening hours info cards', () => {
     const ref = React.createRef<React.ComponentRef<typeof import('@gorhom/bottom-sheet').default>>()
     const { getByText } = render(
-      <GymDetailCard ref={ref} gym={mockGym} onDismiss={jest.fn()} onCheckIn={jest.fn()} />,
+      <GymDetailCard
+        ref={ref}
+        gym={mockGym}
+        onDismiss={jest.fn()}
+        onCheckIn={jest.fn()}
+        onViewDetail={jest.fn()}
+      />,
     )
     expect(getByText('350 m')).toBeTruthy()
     expect(getByText('06:00 – 22:00')).toBeTruthy()
@@ -84,7 +102,13 @@ describe('GymDetailCard', () => {
   it('renders occupancy percent and label', () => {
     const ref = React.createRef<React.ComponentRef<typeof import('@gorhom/bottom-sheet').default>>()
     const { getByText } = render(
-      <GymDetailCard ref={ref} gym={mockGym} onDismiss={jest.fn()} onCheckIn={jest.fn()} />,
+      <GymDetailCard
+        ref={ref}
+        gym={mockGym}
+        onDismiss={jest.fn()}
+        onCheckIn={jest.fn()}
+        onViewDetail={jest.fn()}
+      />,
     )
     expect(getByText('22%')).toBeTruthy()
     expect(getByText('VAZIO')).toBeTruthy()
@@ -93,7 +117,13 @@ describe('GymDetailCard', () => {
   it('renders all tags', () => {
     const ref = React.createRef<React.ComponentRef<typeof import('@gorhom/bottom-sheet').default>>()
     const { getByText } = render(
-      <GymDetailCard ref={ref} gym={mockGym} onDismiss={jest.fn()} onCheckIn={jest.fn()} />,
+      <GymDetailCard
+        ref={ref}
+        gym={mockGym}
+        onDismiss={jest.fn()}
+        onCheckIn={jest.fn()}
+        onViewDetail={jest.fn()}
+      />,
     )
     expect(getByText('Musculação')).toBeTruthy()
     expect(getByText('Crossfit')).toBeTruthy()
@@ -103,7 +133,13 @@ describe('GymDetailCard', () => {
     const onCheckIn = jest.fn()
     const ref = React.createRef<React.ComponentRef<typeof import('@gorhom/bottom-sheet').default>>()
     const { getByText } = render(
-      <GymDetailCard ref={ref} gym={mockGym} onDismiss={jest.fn()} onCheckIn={onCheckIn} />,
+      <GymDetailCard
+        ref={ref}
+        gym={mockGym}
+        onDismiss={jest.fn()}
+        onCheckIn={onCheckIn}
+        onViewDetail={jest.fn()}
+      />,
     )
     fireEvent.press(getByText('map.checkIn'))
     expect(onCheckIn).toHaveBeenCalledTimes(1)
@@ -112,7 +148,13 @@ describe('GymDetailCard', () => {
   it('renders nothing inside the sheet when gym is null', () => {
     const ref = React.createRef<React.ComponentRef<typeof import('@gorhom/bottom-sheet').default>>()
     const { queryByText } = render(
-      <GymDetailCard ref={ref} gym={null} onDismiss={jest.fn()} onCheckIn={jest.fn()} />,
+      <GymDetailCard
+        ref={ref}
+        gym={null}
+        onDismiss={jest.fn()}
+        onCheckIn={jest.fn()}
+        onViewDetail={jest.fn()}
+      />,
     )
     expect(queryByText('Smart Fit – Paulista')).toBeNull()
   })

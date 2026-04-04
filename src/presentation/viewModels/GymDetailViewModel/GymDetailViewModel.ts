@@ -159,7 +159,7 @@ export function useGymDetailViewModel(): GymDetailUiModel {
     isFavorite,
     notifyButtonLabel: t(tk.gymDetail.notifyButton),
     updatedAtLabel: gym?.lastUpdatedAt
-      ? formatUpdatedAt(gym.lastUpdatedAt, t)
+      ? formatUpdatedAt(gym.lastUpdatedAt, (key, opts) => String(t(key, opts as never)))
       : t(tk.gymDetail.updatedAtJustNow),
     onSelectDay: setSelectedDayIndex,
     onToggleFavorite,
