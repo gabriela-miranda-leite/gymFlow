@@ -9,8 +9,8 @@ import type { GymCoordinates, GymModel } from '@/domain/models/GymModel'
 import { getNearbyGymsUseCase } from '@/domain/useCases/GetNearbyGymsUseCase'
 import type { GymUiModel, MapUiModel } from '@/presentation/uiModels/MapUiModel'
 import { tk } from '@/shared/i18n'
-import { TabRoutes } from '@/shared/navigation/routes'
-import type { AppTabParamList } from '@/shared/navigation/types'
+import { RootRoutes, TabRoutes } from '@/shared/navigation/routes'
+import type { RootStackParamList } from '@/shared/navigation/types'
 
 const DEFAULT_COORDINATES: GymCoordinates = { latitude: -18.9186, longitude: -48.2772 }
 
@@ -48,7 +48,7 @@ function toGymUiModel(gym: GymModel, t: (key: string) => string): GymUiModel {
 
 export const useMapViewModel = (): MapUiModel => {
   const { t } = useTranslation()
-  const navigation = useNavigation<NavigationProp<AppTabParamList>>()
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>()
 
   const [userCoordinates, setUserCoordinates] = useState<GymCoordinates | null>(null)
   const [gyms, setGyms] = useState<GymModel[]>([])
@@ -114,6 +114,7 @@ export const useMapViewModel = (): MapUiModel => {
     locationError,
     onSelectGym: (gym) => setSelectedGym(gyms.find((g) => g.id === gym.id) ?? null),
     onDismissCard: () => setSelectedGym(null),
-    onCheckIn: () => navigation.navigate(TabRoutes.CheckIn),
+    onCheckIn: () => navigation.navigate(RootRoutes.App, { screen: TabRoutes.CheckIn }),
+    onViewGymDetail: (gym) => navigation.navigate(RootRoutes.GymDetail, { gymId: gym.id }),
   }
 }

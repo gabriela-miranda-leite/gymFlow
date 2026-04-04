@@ -3,7 +3,7 @@ import * as Location from 'expo-location'
 
 import { gymRepository } from '@/data/repositories/GymRepository'
 import { useMapViewModel } from '@/presentation/viewModels/MapViewModel'
-import { TabRoutes } from '@/shared/navigation/routes'
+import { RootRoutes, TabRoutes } from '@/shared/navigation/routes'
 
 const mockNavigate = jest.fn()
 
@@ -11,6 +11,13 @@ jest.mock('@react-navigation/native', () => ({
   ...jest.requireActual('@react-navigation/native'),
   useNavigation: jest.fn(() => ({ navigate: mockNavigate })),
 }))
+
+const emptyWeeklyFlow = Object.fromEntries(
+  Array.from({ length: 7 }, (_, d) => [
+    d,
+    Array.from({ length: 24 }, (__, h) => ({ hour: h, occupancyPercent: 50 })),
+  ]),
+)
 
 const mockGymModels = [
   {
@@ -26,6 +33,9 @@ const mockGymModels = [
     coordinates: { latitude: -23.565, longitude: -46.6525 },
     occupancy: 'empty' as const,
     occupancyPercent: 22,
+    isFavorite: false,
+    lastUpdatedAt: new Date().toISOString(),
+    weeklyFlow: emptyWeeklyFlow,
   },
   {
     id: '2',
@@ -40,6 +50,9 @@ const mockGymModels = [
     coordinates: { latitude: -23.583, longitude: -46.676 },
     occupancy: 'busy' as const,
     occupancyPercent: 78,
+    isFavorite: false,
+    lastUpdatedAt: new Date().toISOString(),
+    weeklyFlow: emptyWeeklyFlow,
   },
 ]
 
@@ -190,7 +203,21 @@ describe('useMapViewModel', () => {
         result.current.onCheckIn()
       })
 
-      expect(mockNavigate).toHaveBeenCalledWith(TabRoutes.CheckIn)
+      expect(mockNavigate).toHaveBeenCalledWith(RootRoutes.App, { screen: TabRoutes.CheckIn })
+    })
+  })
+
+  describe('onViewGymDetail', () => {
+    it('navigates to GymDetail with gymId', async () => {
+      const { result } = renderHook(() => useMapViewModel())
+
+      await waitFor(() => expect(result.current.isLoading).toBe(false))
+
+      act(() => {
+        result.current.onViewGymDetail(result.current.gyms[0])
+      })
+
+      expect(mockNavigate).toHaveBeenCalledWith(RootRoutes.GymDetail, { gymId: '1' })
     })
   })
 })

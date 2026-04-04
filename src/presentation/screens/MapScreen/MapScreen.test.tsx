@@ -81,6 +81,7 @@ const mockViewModel: MapUiModel = {
   onSelectGym: jest.fn(),
   onDismissCard: jest.fn(),
   onCheckIn: jest.fn(),
+  onViewGymDetail: jest.fn(),
 }
 
 const mockUseMapViewModel = jest.fn(() => mockViewModel)

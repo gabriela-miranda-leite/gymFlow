@@ -1,7 +1,13 @@
+import { useNavigation } from '@react-navigation/native'
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useState } from 'react'
 
 import { useTheme } from '@/contexts/ThemeContext'
 import type { FavoriteGymUiModel, ProfileUiModel } from '@/presentation/uiModels/ProfileUiModel'
+import { RootRoutes } from '@/shared/navigation/routes'
+import type { RootStackParamList } from '@/shared/navigation/types'
+
+type NavProps = NativeStackNavigationProp<RootStackParamList>
 
 const MOCK_FAVORITE_GYMS: FavoriteGymUiModel[] = [
   {
@@ -22,6 +28,7 @@ const MOCK_FAVORITE_GYMS: FavoriteGymUiModel[] = [
 
 export const useProfileViewModel = (): ProfileUiModel => {
   const { isDark, setMode } = useTheme()
+  const navigation = useNavigation<NavProps>()
 
   const [idealTimeEnabled, setIdealTimeEnabled] = useState(true)
   const [occupancyLimit, setOccupancyLimit] = useState(40)
@@ -33,8 +40,9 @@ export const useProfileViewModel = (): ProfileUiModel => {
   const onPressProfile = () => {}
   const onPressEmail = () => {}
   const onPressPassword = () => {}
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const onPressFavoriteGym = (gymId: string) => {}
+  const onPressFavoriteGym = (gymId: string) => {
+    navigation.navigate(RootRoutes.GymDetail, { gymId })
+  }
   const onPressLogout = () => {}
 
   return {

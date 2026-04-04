@@ -1,0 +1,1 @@
+export { useGymDetailViewModel } from './GymDetailViewModel'

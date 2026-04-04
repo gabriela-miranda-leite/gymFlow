@@ -26,7 +26,7 @@ export const GymName = styled.Text<{ color: string }>`
   margin-right: ${Spacing.s2}px;
 `
 
-export const RatingContainer = styled.View`
+export const RatingContainer = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
   gap: ${Spacing.s1}px;
