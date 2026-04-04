@@ -1,0 +1,1 @@
+export { GymDetailScreen } from './GymDetailScreen'

@@ -39,6 +39,7 @@ export function MapScreen() {
     onSelectGym,
     onDismissCard,
     onCheckIn,
+    onViewGymDetail,
   } = useMapViewModel()
 
   const bottomSheetRef = useRef<BottomSheet>(null)
@@ -130,6 +131,7 @@ export function MapScreen() {
           gym={selectedGym}
           onDismiss={onDismissCard}
           onCheckIn={onCheckIn}
+          onViewDetail={onViewGymDetail}
         />
       </Container>
     </MotiView>

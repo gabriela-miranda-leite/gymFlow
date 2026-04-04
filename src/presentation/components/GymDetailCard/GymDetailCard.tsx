@@ -32,10 +32,11 @@ interface Props {
   gym: GymUiModel | null
   onDismiss: () => void
   onCheckIn: () => void
+  onViewDetail: (gym: GymUiModel) => void
 }
 
 export const GymDetailCard = forwardRef<BottomSheet, Props>(
-  ({ gym, onDismiss, onCheckIn }, ref) => {
+  ({ gym, onDismiss, onCheckIn, onViewDetail }, ref) => {
     const { theme } = useTheme()
     const { t } = useTranslation()
 
@@ -58,7 +59,12 @@ export const GymDetailCard = forwardRef<BottomSheet, Props>(
           <Content bg={theme.card}>
             <HeaderRow>
               <GymName color={theme.foreground}>{visibleGym.name}</GymName>
-              <RatingContainer>
+              <RatingContainer
+                onPress={() => onViewDetail(visibleGym)}
+                accessibilityRole="button"
+                accessibilityLabel="Ver detalhes da academia"
+                testID="gym-detail-card-view-detail"
+              >
                 <AppIcons.favorite color={theme.brand.primary} size={14} weight="fill" />
                 <RatingText color={theme.foreground}>{visibleGym.ratingLabel}</RatingText>
                 <ReviewCount color={theme.mutedForeground}>{visibleGym.reviewCount}</ReviewCount>

@@ -1,5 +1,53 @@
-import type { GymModel } from '@/domain/models/GymModel'
+import type { GymModel, HourlyFlowEntry } from '@/domain/models/GymModel'
+import type { IGymByIdRepository } from '@/domain/useCases/GetGymByIdUseCase'
 import type { IGymRepository } from '@/domain/useCases/GetNearbyGymsUseCase'
+
+function makeWeeklyFlow(peakPercent: number): Record<number, HourlyFlowEntry[]> {
+  const hours = Array.from({ length: 24 }, (_, h) => h)
+
+  function dayFlow(scale: number): HourlyFlowEntry[] {
+    const curve: Record<number, number> = {
+      0: 2,
+      1: 1,
+      2: 1,
+      3: 1,
+      4: 2,
+      5: 5,
+      6: 35,
+      7: 65,
+      8: 70,
+      9: 60,
+      10: 50,
+      11: 55,
+      12: 45,
+      13: 40,
+      14: 35,
+      15: 40,
+      16: 55,
+      17: 80,
+      18: 90,
+      19: 95,
+      20: 85,
+      21: 60,
+      22: 30,
+      23: 10,
+    }
+    return hours.map((h) => ({
+      hour: h,
+      occupancyPercent: Math.round((curve[h] ?? 0) * scale * (peakPercent / 100)),
+    }))
+  }
+
+  return {
+    0: dayFlow(0.5), // Sunday
+    1: dayFlow(1.0), // Monday
+    2: dayFlow(0.9), // Tuesday
+    3: dayFlow(1.0), // Wednesday
+    4: dayFlow(0.85), // Thursday
+    5: dayFlow(0.8), // Friday
+    6: dayFlow(0.6), // Saturday
+  }
+}
 
 const MOCK_GYMS: GymModel[] = [
   {
@@ -15,6 +63,9 @@ const MOCK_GYMS: GymModel[] = [
     coordinates: { latitude: -18.9042, longitude: -48.2694 },
     occupancy: 'moderate',
     occupancyPercent: 55,
+    isFavorite: true,
+    lastUpdatedAt: new Date(Date.now() - 5 * 60 * 1000).toISOString(),
+    weeklyFlow: makeWeeklyFlow(80),
   },
   {
     id: '2',
@@ -29,6 +80,9 @@ const MOCK_GYMS: GymModel[] = [
     coordinates: { latitude: -18.9186, longitude: -48.2772 },
     occupancy: 'busy',
     occupancyPercent: 78,
+    isFavorite: false,
+    lastUpdatedAt: new Date(Date.now() - 2 * 60 * 1000).toISOString(),
+    weeklyFlow: makeWeeklyFlow(95),
   },
   {
     id: '3',
@@ -43,6 +97,9 @@ const MOCK_GYMS: GymModel[] = [
     coordinates: { latitude: -18.9213, longitude: -48.2801 },
     occupancy: 'empty',
     occupancyPercent: 12,
+    isFavorite: false,
+    lastUpdatedAt: new Date(Date.now() - 18 * 60 * 1000).toISOString(),
+    weeklyFlow: makeWeeklyFlow(60),
   },
   {
     id: '4',
@@ -57,6 +114,9 @@ const MOCK_GYMS: GymModel[] = [
     coordinates: { latitude: -18.9158, longitude: -48.2659 },
     occupancy: 'packed',
     occupancyPercent: 97,
+    isFavorite: true,
+    lastUpdatedAt: new Date(Date.now() - 1 * 60 * 1000).toISOString(),
+    weeklyFlow: makeWeeklyFlow(100),
   },
   {
     id: '5',
@@ -71,13 +131,20 @@ const MOCK_GYMS: GymModel[] = [
     coordinates: { latitude: -18.9097, longitude: -48.2583 },
     occupancy: 'moderate',
     occupancyPercent: 48,
+    isFavorite: false,
+    lastUpdatedAt: new Date(Date.now() - 10 * 60 * 1000).toISOString(),
+    weeklyFlow: makeWeeklyFlow(75),
   },
 ]
 
-export const gymRepository: IGymRepository = {
+export const gymRepository: IGymRepository & IGymByIdRepository = {
   async getNearby(): Promise<GymModel[]> {
     // todo: substituir por chamada real à API
     await new Promise((resolve) => setTimeout(resolve, 600))
     return MOCK_GYMS
+  },
+  async getById(id: string): Promise<GymModel | undefined> {
+    await new Promise((resolve) => setTimeout(resolve, 200))
+    return MOCK_GYMS.find((g) => g.id === id)
   },
 }

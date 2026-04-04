@@ -27,4 +27,5 @@ export interface MapUiModel {
   onSelectGym: (gym: GymUiModel) => void
   onDismissCard: () => void
   onCheckIn: () => void
+  onViewGymDetail: (gym: GymUiModel) => void
 }

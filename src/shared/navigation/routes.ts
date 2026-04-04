@@ -3,6 +3,7 @@ export const RootRoutes = {
   SignUp: 'SignUp',
   App: 'App',
   CheckInFeedback: 'CheckInFeedback',
+  GymDetail: 'GymDetail',
 } as const
 
 export const TabRoutes = {

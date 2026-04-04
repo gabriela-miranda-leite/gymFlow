@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import { useTheme } from '@/contexts/ThemeContext'
 import { CheckInFeedbackScreen } from '@/presentation/screens/CheckInFeedbackScreen'
+import { GymDetailScreen } from '@/presentation/screens/GymDetailScreen'
 import { LoginScreen } from '@/presentation/screens/LoginScreen'
 import { SignUpScreen } from '@/presentation/screens/SignUpScreen'
 import { AppNavigator } from '@/shared/navigation/AppNavigator'
@@ -31,6 +32,7 @@ export function RootNavigator() {
           component={CheckInFeedbackScreen}
           options={{ presentation: 'modal' }}
         />
+        <Stack.Screen name={RootRoutes.GymDetail} component={GymDetailScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   )

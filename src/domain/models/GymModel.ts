@@ -5,6 +5,11 @@ export interface GymCoordinates {
   longitude: number
 }
 
+export interface HourlyFlowEntry {
+  hour: number
+  occupancyPercent: number
+}
+
 export interface GymModel {
   id: string
   name: string
@@ -18,4 +23,7 @@ export interface GymModel {
   coordinates: GymCoordinates
   occupancy: OccupancyLevel
   occupancyPercent: number
+  isFavorite: boolean
+  lastUpdatedAt: string
+  weeklyFlow: Record<number, HourlyFlowEntry[]>
 }

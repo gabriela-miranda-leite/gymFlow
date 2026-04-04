@@ -1,0 +1,86 @@
+appId: com.gymflow.app
+---
+- launchApp
+
+# Navega para a aba de Mapa
+- tapOn:
+    id: "tab-map"
+
+# Aguarda o mapa carregar
+- waitForAnimationToEnd
+
+# Seleciona a primeira academia no mapa (marcador)
+- tapOn:
+    id: "gym-marker-1"
+
+# Aguarda o BottomSheet abrir com os detalhes básicos
+- assertVisible:
+    id: "gym-detail-card-view-detail"
+
+# Navega para a tela de detalhes tocando no chevron
+- tapOn:
+    id: "gym-detail-card-view-detail"
+
+# Verifica que a tela de detalhes carregou
+- assertVisible:
+    id: "gym-detail-safe-wrapper"
+
+# Verifica o nome da academia
+- assertVisible:
+    id: "gym-detail-name"
+
+# Verifica o endereço
+- assertVisible:
+    id: "gym-detail-address"
+
+# Verifica card de lotação atual
+- assertVisible:
+    id: "gym-detail-occupancy-card"
+
+# Verifica card de melhor horário
+- assertVisible:
+    id: "gym-detail-best-time-card"
+
+# Verifica que o seletor de dias está visível
+- assertVisible:
+    id: "gym-detail-day-selector"
+
+# Testa troca de dia — toca em Quarta (dayIndex 3)
+- tapOn:
+    id: "gym-detail-day-3"
+
+# Verifica que o gráfico atualizou (seção do gráfico ainda visível)
+- assertVisible:
+    id: "gym-detail-chart-section"
+
+# Testa troca de dia — volta para Segunda (dayIndex 1)
+- tapOn:
+    id: "gym-detail-day-1"
+
+# Testa toggle de favorito
+- tapOn:
+    id: "gym-detail-favorite-button"
+
+# Toca novamente para desfavoritar
+- tapOn:
+    id: "gym-detail-favorite-button"
+
+# Verifica botão de notificação
+- assertVisible:
+    id: "gym-detail-notify-button"
+
+# Testa o botão de notificação
+- tapOn:
+    id: "gym-detail-notify-button"
+
+# Verifica rodapé com timestamp de atualização
+- assertVisible:
+    id: "gym-detail-updated-at"
+
+# Volta para o mapa
+- tapOn:
+    id: "gym-detail-back-button"
+
+# Verifica que voltou ao mapa
+- assertVisible:
+    id: "tab-map"

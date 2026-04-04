@@ -14,6 +14,9 @@ export type RootStackParamList = {
     occupancyLabel: string
     occupancyColor: string
   }
+  GymDetail: {
+    gymId: string
+  }
 }
 
 export type AppTabParamList = {
