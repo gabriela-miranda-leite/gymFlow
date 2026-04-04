@@ -48,7 +48,9 @@ export const PageTitle = styled.Text<{ color: string }>`
 
 export const AvatarWrapper = styled.View`
   width: 100%;
-  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
   margin-bottom: ${Spacing.s8}px;
 `
 
