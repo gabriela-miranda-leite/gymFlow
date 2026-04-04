@@ -31,7 +31,7 @@ describe('getNearbyGymsUseCase', () => {
     jest.clearAllMocks()
   })
 
-  it('chama repository.getNearby com as coordenadas corretas', async () => {
+  it('calls repository.getNearby with the correct coordinates', async () => {
     ;(mockRepository.getNearby as jest.Mock).mockResolvedValueOnce([mockGym])
 
     await getNearbyGymsUseCase(coordinates, mockRepository)
@@ -39,7 +39,7 @@ describe('getNearbyGymsUseCase', () => {
     expect(mockRepository.getNearby).toHaveBeenCalledWith(coordinates)
   })
 
-  it('retorna a lista de academias do repositório', async () => {
+  it('returns the list of gyms from the repository', async () => {
     ;(mockRepository.getNearby as jest.Mock).mockResolvedValueOnce([mockGym])
 
     const result = await getNearbyGymsUseCase(coordinates, mockRepository)
@@ -47,7 +47,7 @@ describe('getNearbyGymsUseCase', () => {
     expect(result).toEqual([mockGym])
   })
 
-  it('retorna lista vazia quando não há academias próximas', async () => {
+  it('returns an empty list when there are no nearby gyms', async () => {
     ;(mockRepository.getNearby as jest.Mock).mockResolvedValueOnce([])
 
     const result = await getNearbyGymsUseCase(coordinates, mockRepository)
@@ -55,7 +55,7 @@ describe('getNearbyGymsUseCase', () => {
     expect(result).toEqual([])
   })
 
-  it('propaga erros do repositório', async () => {
+  it('propagates errors from the repository', async () => {
     ;(mockRepository.getNearby as jest.Mock).mockRejectedValueOnce(new Error('network error'))
 
     await expect(getNearbyGymsUseCase(coordinates, mockRepository)).rejects.toThrow('network error')

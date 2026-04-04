@@ -15,8 +15,8 @@ describe('loginUseCase', () => {
     jest.clearAllMocks()
   })
 
-  describe('credenciais válidas', () => {
-    it('chama repository.login com as credenciais corretas', async () => {
+  describe('valid credentials', () => {
+    it('calls repository.login with the correct credentials', async () => {
       ;(mockRepository.login as jest.Mock).mockResolvedValueOnce(mockResult)
 
       await loginUseCase({ email: 'gabriela@example.com', password: '123456' }, mockRepository)
@@ -27,7 +27,7 @@ describe('loginUseCase', () => {
       })
     })
 
-    it('retorna user e token do repositório', async () => {
+    it('returns user and token from the repository', async () => {
       ;(mockRepository.login as jest.Mock).mockResolvedValueOnce(mockResult)
 
       const result = await loginUseCase(
@@ -38,7 +38,7 @@ describe('loginUseCase', () => {
       expect(result).toEqual(mockResult)
     })
 
-    it('propaga erros do repositório', async () => {
+    it('propagates errors from the repository', async () => {
       ;(mockRepository.login as jest.Mock).mockRejectedValueOnce(new Error('invalid credentials'))
 
       await expect(
@@ -47,8 +47,8 @@ describe('loginUseCase', () => {
     })
   })
 
-  describe('credenciais inválidas', () => {
-    it('lança erro de validação quando o email é inválido', async () => {
+  describe('invalid credentials', () => {
+    it('throws a validation error when the email is invalid', async () => {
       await expect(
         loginUseCase({ email: 'email-invalido', password: '123456' }, mockRepository),
       ).rejects.toThrow()
@@ -56,7 +56,7 @@ describe('loginUseCase', () => {
       expect(mockRepository.login).not.toHaveBeenCalled()
     })
 
-    it('lança erro de validação quando a senha tem menos de 6 caracteres', async () => {
+    it('throws a validation error when the password has fewer than 6 characters', async () => {
       await expect(
         loginUseCase({ email: 'gabriela@example.com', password: '123' }, mockRepository),
       ).rejects.toThrow()

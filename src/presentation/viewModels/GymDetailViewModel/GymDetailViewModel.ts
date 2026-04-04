@@ -3,7 +3,7 @@ import type { RouteProp } from '@react-navigation/native'
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useEffect, useMemo, useState } from 'react'
 
-import { gymRepository } from '@/data/repositories/GymRepository'
+import { gymRepository } from '@/data/repositories/gym/GymRepository'
 import type { GymModel } from '@/domain/models/GymModel'
 import { getGymByIdUseCase } from '@/domain/useCases/getGymById/GetGymByIdUseCase'
 import type {

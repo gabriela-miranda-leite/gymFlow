@@ -1,8 +1,8 @@
 import { act, renderHook, waitFor } from '@testing-library/react-native'
 
-import { checkInCooldownRepository } from '@/data/repositories/CheckInCooldownRepository'
-import { checkInRepository } from '@/data/repositories/CheckInRepository'
-import { gymRepository } from '@/data/repositories/GymRepository'
+import { checkInRepository } from '@/data/repositories/checkIn/CheckInRepository'
+import { checkInCooldownRepository } from '@/data/repositories/checkInCooldown/CheckInCooldownRepository'
+import { gymRepository } from '@/data/repositories/gym/GymRepository'
 import { CHECKIN_COOLDOWN_MINUTES } from '@/domain/useCases/checkCheckInCooldown/CheckCheckInCooldownUseCase'
 import { useCheckInViewModel } from '@/presentation/viewModels/CheckInViewModel'
 import { RootRoutes } from '@/shared/navigation/routes'
@@ -30,15 +30,15 @@ const mockGymModels = [
   },
 ]
 
-jest.mock('@/data/repositories/GymRepository', () => ({
+jest.mock('@/data/repositories/gym/GymRepository', () => ({
   gymRepository: { getNearby: jest.fn() },
 }))
 
-jest.mock('@/data/repositories/CheckInRepository', () => ({
+jest.mock('@/data/repositories/checkIn/CheckInRepository', () => ({
   checkInRepository: { submit: jest.fn() },
 }))
 
-jest.mock('@/data/repositories/CheckInCooldownRepository', () => ({
+jest.mock('@/data/repositories/checkInCooldown/CheckInCooldownRepository', () => ({
   checkInCooldownRepository: {
     getLastCheckInTimestamp: jest.fn(),
     saveLastCheckInTimestamp: jest.fn(),

@@ -1,7 +1,7 @@
 import { act, renderHook, waitFor } from '@testing-library/react-native'
 import * as Location from 'expo-location'
 
-import { gymRepository } from '@/data/repositories/GymRepository'
+import { gymRepository } from '@/data/repositories/gym/GymRepository'
 import { useMapViewModel } from '@/presentation/viewModels/MapViewModel'
 import { RootRoutes, TabRoutes } from '@/shared/navigation/routes'
 
@@ -56,7 +56,7 @@ const mockGymModels = [
   },
 ]
 
-jest.mock('@/data/repositories/GymRepository', () => ({
+jest.mock('@/data/repositories/gym/GymRepository', () => ({
   gymRepository: {
     getNearby: jest.fn(),
   },

@@ -17,7 +17,7 @@ describe('updateProfileUseCase', () => {
     jest.clearAllMocks()
   })
 
-  it('chama repository.updateProfile com o perfil correto', async () => {
+  it('calls repository.updateProfile with the correct profile', async () => {
     ;(mockRepository.updateProfile as jest.Mock).mockResolvedValueOnce(undefined)
 
     await updateProfileUseCase(mockProfile, mockRepository)
@@ -25,7 +25,7 @@ describe('updateProfileUseCase', () => {
     expect(mockRepository.updateProfile).toHaveBeenCalledWith(mockProfile)
   })
 
-  it('chama repository.updateProfile uma vez', async () => {
+  it('calls repository.updateProfile once', async () => {
     ;(mockRepository.updateProfile as jest.Mock).mockResolvedValueOnce(undefined)
 
     await updateProfileUseCase(mockProfile, mockRepository)
@@ -33,7 +33,7 @@ describe('updateProfileUseCase', () => {
     expect(mockRepository.updateProfile).toHaveBeenCalledTimes(1)
   })
 
-  it('propaga erros do repositório', async () => {
+  it('propagates errors from the repository', async () => {
     ;(mockRepository.updateProfile as jest.Mock).mockRejectedValueOnce(new Error('network error'))
 
     await expect(updateProfileUseCase(mockProfile, mockRepository)).rejects.toThrow('network error')

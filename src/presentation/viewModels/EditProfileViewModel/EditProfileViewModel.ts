@@ -3,7 +3,7 @@ import type { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import * as ImagePicker from 'expo-image-picker'
 import { useEffect, useState } from 'react'
 
-import { profileRepository } from '@/data/repositories/ProfileRepository'
+import { profileRepository } from '@/data/repositories/profile/ProfileRepository'
 import { getProfileUseCase } from '@/domain/useCases/getProfile/GetProfileUseCase'
 import { updateProfileUseCase } from '@/domain/useCases/updateProfile/UpdateProfileUseCase'
 import type { EditProfileUiModel } from '@/presentation/uiModels/EditProfileUiModel'

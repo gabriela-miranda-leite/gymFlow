@@ -29,7 +29,7 @@ describe('getGymByIdUseCase', () => {
     jest.clearAllMocks()
   })
 
-  it('retorna a academia quando o repositório a encontra', async () => {
+  it('returns the gym when the repository finds it', async () => {
     ;(mockRepository.getById as jest.Mock).mockResolvedValueOnce(mockGym)
 
     const result = await getGymByIdUseCase('gym-1', mockRepository)
@@ -37,7 +37,7 @@ describe('getGymByIdUseCase', () => {
     expect(result).toEqual(mockGym)
   })
 
-  it('chama o repositório com o id correto', async () => {
+  it('calls the repository with the correct id', async () => {
     ;(mockRepository.getById as jest.Mock).mockResolvedValueOnce(mockGym)
 
     await getGymByIdUseCase('gym-1', mockRepository)
@@ -45,7 +45,7 @@ describe('getGymByIdUseCase', () => {
     expect(mockRepository.getById).toHaveBeenCalledWith('gym-1')
   })
 
-  it('retorna undefined quando a academia não é encontrada', async () => {
+  it('returns undefined when the gym is not found', async () => {
     ;(mockRepository.getById as jest.Mock).mockResolvedValueOnce(undefined)
 
     const result = await getGymByIdUseCase('gym-inexistente', mockRepository)
@@ -53,7 +53,7 @@ describe('getGymByIdUseCase', () => {
     expect(result).toBeUndefined()
   })
 
-  it('propaga erros do repositório', async () => {
+  it('propagates errors from the repository', async () => {
     ;(mockRepository.getById as jest.Mock).mockRejectedValueOnce(new Error('network error'))
 
     await expect(getGymByIdUseCase('gym-1', mockRepository)).rejects.toThrow('network error')

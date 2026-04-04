@@ -4,7 +4,7 @@ import * as Location from 'expo-location'
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { gymRepository } from '@/data/repositories/GymRepository'
+import { gymRepository } from '@/data/repositories/gym/GymRepository'
 import type { GymCoordinates, GymModel } from '@/domain/models/GymModel'
 import { getNearbyGymsUseCase } from '@/domain/useCases/getNearbyGyms/GetNearbyGymsUseCase'
 import type { GymUiModel, MapUiModel } from '@/presentation/uiModels/MapUiModel'

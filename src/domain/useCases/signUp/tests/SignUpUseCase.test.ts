@@ -15,8 +15,8 @@ describe('signUpUseCase', () => {
     jest.clearAllMocks()
   })
 
-  describe('credenciais válidas', () => {
-    it('chama repository.signUp com as credenciais corretas', async () => {
+  describe('valid credentials', () => {
+    it('calls repository.signUp with the correct credentials', async () => {
       ;(mockRepository.signUp as jest.Mock).mockResolvedValueOnce(mockResult)
 
       await signUpUseCase(
@@ -31,7 +31,7 @@ describe('signUpUseCase', () => {
       })
     })
 
-    it('retorna user e token do repositório', async () => {
+    it('returns user and token from the repository', async () => {
       ;(mockRepository.signUp as jest.Mock).mockResolvedValueOnce(mockResult)
 
       const result = await signUpUseCase(
@@ -42,7 +42,7 @@ describe('signUpUseCase', () => {
       expect(result).toEqual(mockResult)
     })
 
-    it('propaga erros do repositório', async () => {
+    it('propagates errors from the repository', async () => {
       ;(mockRepository.signUp as jest.Mock).mockRejectedValueOnce(new Error('email already in use'))
 
       await expect(
@@ -54,8 +54,8 @@ describe('signUpUseCase', () => {
     })
   })
 
-  describe('credenciais inválidas', () => {
-    it('lança erro de validação quando o nome está vazio', async () => {
+  describe('invalid credentials', () => {
+    it('throws a validation error when the name is empty', async () => {
       await expect(
         signUpUseCase(
           { name: '', email: 'gabriela@example.com', password: '123456' },
@@ -66,7 +66,7 @@ describe('signUpUseCase', () => {
       expect(mockRepository.signUp).not.toHaveBeenCalled()
     })
 
-    it('lança erro de validação quando o email é inválido', async () => {
+    it('throws a validation error when the email is invalid', async () => {
       await expect(
         signUpUseCase(
           { name: 'Gabriela', email: 'email-invalido', password: '123456' },
@@ -77,7 +77,7 @@ describe('signUpUseCase', () => {
       expect(mockRepository.signUp).not.toHaveBeenCalled()
     })
 
-    it('lança erro de validação quando a senha tem menos de 6 caracteres', async () => {
+    it('throws a validation error when the password has fewer than 6 characters', async () => {
       await expect(
         signUpUseCase(
           { name: 'Gabriela', email: 'gabriela@example.com', password: '123' },
