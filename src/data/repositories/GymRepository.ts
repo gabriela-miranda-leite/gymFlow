@@ -1,6 +1,6 @@
 import type { GymModel, HourlyFlowEntry } from '@/domain/models/GymModel'
-import type { IGymByIdRepository } from '@/domain/useCases/GetGymByIdUseCase'
-import type { IGymRepository } from '@/domain/useCases/GetNearbyGymsUseCase'
+import type { IGymByIdRepository } from '@/domain/useCases/getGymById/GetGymByIdUseCase'
+import type { IGymRepository } from '@/domain/useCases/getNearbyGyms/GetNearbyGymsUseCase'
 
 function makeWeeklyFlow(peakPercent: number): Record<number, HourlyFlowEntry[]> {
   const hours = Array.from({ length: 24 }, (_, h) => h)

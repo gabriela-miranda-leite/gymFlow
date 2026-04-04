@@ -7,8 +7,8 @@ import { checkInCooldownRepository } from '@/data/repositories/CheckInCooldownRe
 import { checkInRepository } from '@/data/repositories/CheckInRepository'
 import { gymRepository } from '@/data/repositories/GymRepository'
 import type { GymModel } from '@/domain/models/GymModel'
-import { checkCheckInCooldownUseCase } from '@/domain/useCases/CheckCheckInCooldownUseCase'
-import { submitCheckInUseCase } from '@/domain/useCases/SubmitCheckInUseCase'
+import { checkCheckInCooldownUseCase } from '@/domain/useCases/checkCheckInCooldown/CheckCheckInCooldownUseCase'
+import { submitCheckInUseCase } from '@/domain/useCases/submitCheckIn/SubmitCheckInUseCase'
 import type {
   CheckInGymOption,
   CheckInUiModel,

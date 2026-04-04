@@ -1,5 +1,5 @@
-import type { ICheckInRepository } from '@/domain/useCases/SubmitCheckInUseCase'
-import { submitCheckInUseCase } from '@/domain/useCases/SubmitCheckInUseCase'
+import type { ICheckInRepository } from '@/domain/useCases/submitCheckIn/SubmitCheckInUseCase'
+import { submitCheckInUseCase } from '@/domain/useCases/submitCheckIn/SubmitCheckInUseCase'
 
 const mockRepository: ICheckInRepository = {
   submit: jest.fn(),

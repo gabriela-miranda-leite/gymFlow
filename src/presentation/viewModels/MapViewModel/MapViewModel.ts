@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 
 import { gymRepository } from '@/data/repositories/GymRepository'
 import type { GymCoordinates, GymModel } from '@/domain/models/GymModel'
-import { getNearbyGymsUseCase } from '@/domain/useCases/GetNearbyGymsUseCase'
+import { getNearbyGymsUseCase } from '@/domain/useCases/getNearbyGyms/GetNearbyGymsUseCase'
 import type { GymUiModel, MapUiModel } from '@/presentation/uiModels/MapUiModel'
 import { tk } from '@/shared/i18n'
 import { RootRoutes, TabRoutes } from '@/shared/navigation/routes'

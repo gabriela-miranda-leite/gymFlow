@@ -1,7 +1,7 @@
 import {
   CHECKIN_COOLDOWN_MINUTES,
   checkCheckInCooldownUseCase,
-} from '@/domain/useCases/CheckCheckInCooldownUseCase'
+} from '@/domain/useCases/checkCheckInCooldown/CheckCheckInCooldownUseCase'
 
 const COOLDOWN_MS = CHECKIN_COOLDOWN_MINUTES * 60 * 1000
 

@@ -1,6 +1,6 @@
 import type { ProfileModel } from '@/domain/models/ProfileModel'
-import type { IGetProfileRepository } from '@/domain/useCases/GetProfileUseCase'
-import type { IUpdateProfileRepository } from '@/domain/useCases/UpdateProfileUseCase'
+import type { IGetProfileRepository } from '@/domain/useCases/getProfile/GetProfileUseCase'
+import type { IUpdateProfileRepository } from '@/domain/useCases/updateProfile/UpdateProfileUseCase'
 
 const MOCK_PROFILE: ProfileModel = {
   name: 'Rafael Souza',

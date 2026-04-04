@@ -5,7 +5,7 @@ import { useEffect, useMemo, useState } from 'react'
 
 import { gymRepository } from '@/data/repositories/GymRepository'
 import type { GymModel } from '@/domain/models/GymModel'
-import { getGymByIdUseCase } from '@/domain/useCases/GetGymByIdUseCase'
+import { getGymByIdUseCase } from '@/domain/useCases/getGymById/GetGymByIdUseCase'
 import type {
   GymDetailUiModel,
   HourlyFlowBarUiModel,

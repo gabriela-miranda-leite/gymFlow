@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
-import { SignUpCredentials, signUpSchema } from '@/domain/useCases/SignUpUseCase'
+import { SignUpCredentials, signUpSchema } from '@/domain/useCases/signUp/SignUpUseCase'
 import type { SignUpUiModel } from '@/presentation/uiModels/SignUpUiModel'
 import { tk } from '@/shared/i18n'
 import { useAppNavigation } from '@/shared/navigation/useAppNavigation'

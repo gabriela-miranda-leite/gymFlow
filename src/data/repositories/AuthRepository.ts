@@ -1,4 +1,8 @@
-import type { IAuthRepository, LoginCredentials, LoginResult } from '@/domain/useCases/LoginUseCase'
+import type {
+  IAuthRepository,
+  LoginCredentials,
+  LoginResult,
+} from '@/domain/useCases/login/LoginUseCase'
 
 export const authRepository: IAuthRepository = {
   async login(credentials: LoginCredentials): Promise<LoginResult> {

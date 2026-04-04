@@ -1,4 +1,8 @@
-import { ISignUpRepository, SignUpResult, SignUpCredentials } from '@/domain/useCases/SignUpUseCase'
+import {
+  ISignUpRepository,
+  SignUpResult,
+  SignUpCredentials,
+} from '@/domain/useCases/signUp/SignUpUseCase'
 
 export const signUpRepository: ISignUpRepository = {
   async signUp(credentials: SignUpCredentials): Promise<SignUpResult> {

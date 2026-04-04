@@ -1,5 +1,5 @@
 import type { CheckInModel } from '@/domain/models/CheckInModel'
-import type { ICheckInRepository } from '@/domain/useCases/SubmitCheckInUseCase'
+import type { ICheckInRepository } from '@/domain/useCases/submitCheckIn/SubmitCheckInUseCase'
 
 export const checkInRepository: ICheckInRepository = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
