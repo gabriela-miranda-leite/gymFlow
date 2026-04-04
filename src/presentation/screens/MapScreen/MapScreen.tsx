@@ -91,6 +91,7 @@ export function MapScreen() {
             {userCoordinates && (
               <MarkerView coordinate={[userCoordinates.longitude, userCoordinates.latitude]}>
                 <UserLocationDot
+                  testID="user-location-dot"
                   color={theme.brand.primary}
                   borderColor={theme.brand.primaryForeground}
                 />
@@ -102,7 +103,14 @@ export function MapScreen() {
                 key={gym.id}
                 coordinate={[gym.coordinates.longitude, gym.coordinates.latitude]}
               >
-                <GymMarker gym={gym} isActive={selectedGym?.id === gym.id} onPress={onSelectGym} />
+                <GymMarker
+                  gym={gym}
+                  isActive={selectedGym?.id === gym.id}
+                  onPress={onSelectGym}
+                  primaryColor={theme.brand.primary}
+                  primaryForeground={theme.brand.primaryForeground}
+                  cardColor={theme.card}
+                />
               </MarkerView>
             ))}
           </MapView>

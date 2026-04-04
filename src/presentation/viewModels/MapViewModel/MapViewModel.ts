@@ -5,12 +5,14 @@ import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { gymRepository } from '@/data/repositories/GymRepository'
-import type { GymModel } from '@/domain/models/GymModel'
+import type { GymCoordinates, GymModel } from '@/domain/models/GymModel'
 import { getNearbyGymsUseCase } from '@/domain/useCases/GetNearbyGymsUseCase'
 import type { GymUiModel, MapUiModel } from '@/presentation/uiModels/MapUiModel'
 import { tk } from '@/shared/i18n'
 import { TabRoutes } from '@/shared/navigation/routes'
 import type { AppTabParamList } from '@/shared/navigation/types'
+
+const DEFAULT_COORDINATES: GymCoordinates = { latitude: -18.9186, longitude: -48.2772 }
 
 function toGymUiModel(gym: GymModel, t: (key: string) => string): GymUiModel {
   const distanceLabel =
@@ -37,10 +39,7 @@ export const useMapViewModel = (): MapUiModel => {
   const { t } = useTranslation()
   const navigation = useNavigation<NavigationProp<AppTabParamList>>()
 
-  const [userCoordinates, setUserCoordinates] = useState<{
-    latitude: number
-    longitude: number
-  } | null>(null)
+  const [userCoordinates, setUserCoordinates] = useState<GymCoordinates | null>(null)
   const [gyms, setGyms] = useState<GymModel[]>([])
   const [selectedGym, setSelectedGym] = useState<GymModel | null>(null)
   const [isLoading, setLoading] = useState(true)
@@ -49,6 +48,17 @@ export const useMapViewModel = (): MapUiModel => {
 
   useEffect(() => {
     let subscription: Location.LocationSubscription | null = null
+
+    async function loadGyms(coords: GymCoordinates) {
+      if (gymsLoaded.current) return
+      gymsLoaded.current = true
+      try {
+        const nearbyGyms = await getNearbyGymsUseCase(coords, gymRepository)
+        setGyms(nearbyGyms)
+      } catch {
+        // mapa ainda funciona sem marcadores
+      }
+    }
 
     async function init() {
       try {
@@ -60,22 +70,18 @@ export const useMapViewModel = (): MapUiModel => {
           return
         }
 
+        // Carrega academias com coordenadas default sem esperar o GPS
+        setLoading(false)
+        loadGyms(DEFAULT_COORDINATES)
+
         subscription = await Location.watchPositionAsync(
           { accuracy: Location.Accuracy.Balanced, distanceInterval: 10 },
-          async (location) => {
+          (location) => {
             const coords = {
               latitude: location.coords.latitude,
               longitude: location.coords.longitude,
             }
-
             setUserCoordinates(coords)
-
-            if (!gymsLoaded.current) {
-              gymsLoaded.current = true
-              const nearbyGyms = await getNearbyGymsUseCase(coords, gymRepository)
-              setGyms(nearbyGyms)
-              setLoading(false)
-            }
           },
         )
       } catch {
