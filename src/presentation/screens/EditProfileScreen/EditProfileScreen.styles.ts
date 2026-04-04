@@ -47,6 +47,7 @@ export const PageTitle = styled.Text<{ color: string }>`
 `
 
 export const AvatarWrapper = styled.View`
+  width: 100%;
   align-items: center;
   margin-bottom: ${Spacing.s8}px;
 `
