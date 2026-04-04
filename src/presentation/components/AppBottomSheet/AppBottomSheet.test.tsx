@@ -35,7 +35,7 @@ describe('AppBottomSheet', () => {
   it('renders children inside the sheet', () => {
     const ref = React.createRef<React.ComponentRef<typeof import('@gorhom/bottom-sheet').default>>()
     const { getByText } = render(
-      <AppBottomSheet ref={ref} snapPoints={['50%']} onDismiss={jest.fn()}>
+      <AppBottomSheet ref={ref} onDismiss={jest.fn()}>
         <Text>Conteúdo do sheet</Text>
       </AppBottomSheet>,
     )
@@ -45,7 +45,7 @@ describe('AppBottomSheet', () => {
   it('renders the bottom sheet container', () => {
     const ref = React.createRef<React.ComponentRef<typeof import('@gorhom/bottom-sheet').default>>()
     const { getByTestId } = render(
-      <AppBottomSheet ref={ref} snapPoints={['50%']} onDismiss={jest.fn()}>
+      <AppBottomSheet ref={ref} onDismiss={jest.fn()}>
         <Text>Conteúdo</Text>
       </AppBottomSheet>,
     )

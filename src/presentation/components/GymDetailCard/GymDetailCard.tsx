@@ -34,8 +34,6 @@ interface Props {
   onCheckIn: () => void
 }
 
-const SNAP_POINTS = ['52%']
-
 export const GymDetailCard = forwardRef<BottomSheet, Props>(
   ({ gym, onDismiss, onCheckIn }, ref) => {
     const { theme } = useTheme()
@@ -45,7 +43,7 @@ export const GymDetailCard = forwardRef<BottomSheet, Props>(
     const occupancyCardBg = `${statusColor}20`
 
     return (
-      <AppBottomSheet ref={ref} snapPoints={SNAP_POINTS} onDismiss={onDismiss}>
+      <AppBottomSheet ref={ref} onDismiss={onDismiss}>
         {gym && (
           <Content bg={theme.card}>
             <HeaderRow>
