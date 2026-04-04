@@ -48,8 +48,16 @@ const ptBR = {
     closed: 'Fechada',
     checkIn: 'Fazer check-in',
     km: 'km',
+    distance: 'Distância',
+    hours: 'Horário',
     locationError: 'Não foi possível obter sua localização.',
     locationPermissionDenied: 'Permissão de localização negada. Habilite nas configurações.',
+    occupancy: {
+      empty: 'VAZIO',
+      moderate: 'MODERADO',
+      busy: 'CHEIO',
+      packed: 'LOTADO',
+    },
   },
   checkIn: {
     placeholder: 'Tela de Check-in',

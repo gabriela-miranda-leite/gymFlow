@@ -1,15 +1,21 @@
+import type { OccupancyLevel } from '@/tokens'
+
 export interface GymUiModel {
   id: string
   name: string
   address: string
   rating: number
   ratingLabel: string
+  reviewCount: string
   distanceLabel: string
   openingHours: string
   isOpen: boolean
   statusLabel: string
   tags: string[]
   coordinates: { latitude: number; longitude: number }
+  occupancy: OccupancyLevel
+  occupancyPercent: string
+  occupancyLabel: string
 }
 
 export interface MapUiModel {

@@ -9,12 +9,16 @@ const mockGym: GymUiModel = {
   address: 'Av. Paulista, 1374',
   rating: 4.2,
   ratingLabel: '4.2',
+  reviewCount: '(214)',
   distanceLabel: '350 m',
   openingHours: '06:00 – 22:00',
   isOpen: true,
   statusLabel: 'Aberto',
   tags: ['Musculação'],
   coordinates: { latitude: -23.565, longitude: -46.6525 },
+  occupancy: 'empty',
+  occupancyPercent: '22%',
+  occupancyLabel: 'VAZIO',
 }
 
 const defaultColors = {

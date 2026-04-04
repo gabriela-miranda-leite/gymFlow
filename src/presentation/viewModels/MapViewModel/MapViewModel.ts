@@ -20,18 +20,29 @@ function toGymUiModel(gym: GymModel, t: (key: string) => string): GymUiModel {
       ? `${gym.distanceMeters} m`
       : `${(gym.distanceMeters / 1000).toFixed(1)} ${t(tk.map.km)}`
 
+  const occupancyLabelMap: Record<string, string> = {
+    empty: t(tk.map.occupancy.empty),
+    moderate: t(tk.map.occupancy.moderate),
+    busy: t(tk.map.occupancy.busy),
+    packed: t(tk.map.occupancy.packed),
+  }
+
   return {
     id: gym.id,
     name: gym.name,
     address: gym.address,
     rating: gym.rating,
     ratingLabel: gym.rating.toFixed(1),
+    reviewCount: `(${gym.reviewCount})`,
     distanceLabel,
     openingHours: gym.openingHours,
     isOpen: gym.isOpen,
     statusLabel: gym.isOpen ? t(tk.map.open) : t(tk.map.closed),
     tags: gym.tags,
     coordinates: gym.coordinates,
+    occupancy: gym.occupancy,
+    occupancyPercent: `${gym.occupancyPercent}%`,
+    occupancyLabel: occupancyLabelMap[gym.occupancy] ?? gym.occupancy,
   }
 }
 
@@ -70,18 +81,16 @@ export const useMapViewModel = (): MapUiModel => {
           return
         }
 
-        // Carrega academias com coordenadas default sem esperar o GPS
         setLoading(false)
         loadGyms(DEFAULT_COORDINATES)
 
         subscription = await Location.watchPositionAsync(
           { accuracy: Location.Accuracy.Balanced, distanceInterval: 10 },
           (location) => {
-            const coords = {
+            setUserCoordinates({
               latitude: location.coords.latitude,
               longitude: location.coords.longitude,
-            }
-            setUserCoordinates(coords)
+            })
           },
         )
       } catch {
