@@ -135,4 +135,11 @@ describe('MapScreen', () => {
     const { getByText } = render(<MapScreen />)
     expect(getByText('Smart Fit – Paulista')).toBeTruthy()
   })
+
+  it('renders map without user dot when userCoordinates is null', () => {
+    mockUseMapViewModel.mockReturnValue({ ...mockViewModel, userCoordinates: null })
+    const { getByTestId, queryByTestId } = render(<MapScreen />)
+    expect(getByTestId('map-view')).toBeTruthy()
+    expect(queryByTestId('user-location-dot')).toBeNull()
+  })
 })

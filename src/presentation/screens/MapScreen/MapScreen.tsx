@@ -91,6 +91,7 @@ export function MapScreen() {
             {userCoordinates && (
               <MarkerView coordinate={[userCoordinates.longitude, userCoordinates.latitude]}>
                 <UserLocationDot
+                  testID="user-location-dot"
                   color={theme.brand.primary}
                   borderColor={theme.brand.primaryForeground}
                 />
