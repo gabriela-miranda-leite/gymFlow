@@ -37,7 +37,9 @@ export const useProfileViewModel = (): ProfileUiModel => {
     setMode(isDark ? 'light' : 'dark')
   }
 
-  const onPressProfile = () => {}
+  const onPressProfile = () => {
+    navigation.navigate(RootRoutes.EditProfile)
+  }
   const onPressEmail = () => {}
   const onPressPassword = () => {}
   const onPressFavoriteGym = (gymId: string) => {

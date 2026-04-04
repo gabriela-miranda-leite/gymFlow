@@ -1,0 +1,94 @@
+appId: com.gymflow.app
+---
+- launchApp
+
+# Navega para a aba de Perfil
+- tapOn:
+    id: "tab-profile"
+
+# Verifica que a tela de perfil carregou
+- assertVisible:
+    id: "profile-header-card"
+
+# Abre a tela de edição de perfil via card do usuário
+- tapOn:
+    id: "profile-user-row"
+
+# Verifica que a tela de edição carregou
+- assertVisible:
+    id: "edit-profile-screen"
+
+- assertVisible:
+    id: "edit-profile-title"
+
+# Verifica que o avatar está visível com badge de câmera
+- assertVisible:
+    id: "edit-profile-avatar"
+
+- assertVisible:
+    id: "edit-profile-avatar-camera-badge"
+
+# Verifica campos do formulário
+- assertVisible:
+    id: "edit-profile-name-input"
+
+- assertVisible:
+    id: "edit-profile-phone-input"
+
+# Happy path — edita o nome
+- tapOn:
+    id: "edit-profile-name-input"
+
+- clearText:
+    id: "edit-profile-name-input"
+
+- inputText: "João Silva"
+
+# Edita o telefone
+- tapOn:
+    id: "edit-profile-phone-input"
+
+- clearText:
+    id: "edit-profile-phone-input"
+
+- inputText: "11912345678"
+
+# Salva as alterações e volta para a tela de perfil
+- tapOn:
+    id: "edit-profile-save-button"
+
+- assertVisible:
+    id: "profile-header-card"
+
+# Re-abre a tela de edição e testa o botão Voltar (sai sem salvar)
+- tapOn:
+    id: "profile-user-row"
+
+- assertVisible:
+    id: "edit-profile-screen"
+
+- tapOn:
+    id: "edit-profile-back-button"
+
+- assertVisible:
+    id: "profile-header-card"
+
+# Fluxo de erro — tenta salvar com nome vazio
+- tapOn:
+    id: "profile-user-row"
+
+- assertVisible:
+    id: "edit-profile-screen"
+
+- tapOn:
+    id: "edit-profile-name-input"
+
+- clearText:
+    id: "edit-profile-name-input"
+
+# Presiona salvar com nome vazio (espera permanência na tela)
+- tapOn:
+    id: "edit-profile-save-button"
+
+- assertVisible:
+    id: "edit-profile-screen"
