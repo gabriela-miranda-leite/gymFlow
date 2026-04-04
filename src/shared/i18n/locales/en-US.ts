@@ -135,6 +135,15 @@ const enUS = {
       packed: 'Packed',
     },
   },
+  editProfile: {
+    title: 'Edit profile',
+    back: 'Back',
+    labelName: 'Name',
+    labelPhone: 'Phone',
+    placeholderName: 'Your name',
+    placeholderPhone: 'Your phone number',
+    saveButton: 'Save changes',
+  },
   errors: {
     generic: 'Something went wrong. Please try again.',
     loginFailed: 'Incorrect email or password.',

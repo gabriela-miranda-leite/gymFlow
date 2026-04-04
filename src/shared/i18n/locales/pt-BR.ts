@@ -135,6 +135,15 @@ const ptBR = {
       packed: 'Lotado',
     },
   },
+  editProfile: {
+    title: 'Editar perfil',
+    back: 'Voltar',
+    labelName: 'Nome',
+    labelPhone: 'Telefone',
+    placeholderName: 'Seu nome',
+    placeholderPhone: '(11) 99999-9999',
+    saveButton: 'Salvar alterações',
+  },
   errors: {
     generic: 'Algo deu errado. Tente novamente.',
     loginFailed: 'Email ou senha incorretos.',

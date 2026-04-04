@@ -17,6 +17,7 @@ export type RootStackParamList = {
   GymDetail: {
     gymId: string
   }
+  EditProfile: undefined
 }
 
 export type AppTabParamList = {
