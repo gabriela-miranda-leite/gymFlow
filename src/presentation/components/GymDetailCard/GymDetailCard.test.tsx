@@ -12,7 +12,7 @@ jest.mock('@/contexts/ThemeContext', () => ({
       mutedForeground: '#71717A',
       muted: '#F4F4F5',
       brand: { primary: '#F97316', primaryForeground: '#FFFFFF' },
-      status: { empty: '#22C55E', packed: '#EF4444' },
+      status: { empty: '#22C55E', moderate: '#EAB308', busy: '#F97316', packed: '#EF4444' },
     },
   }),
 }))
@@ -41,12 +41,16 @@ const mockGym: GymUiModel = {
   address: 'Av. Paulista, 1374',
   rating: 4.2,
   ratingLabel: '4.2',
+  reviewCount: '(214)',
   distanceLabel: '350 m',
   openingHours: '06:00 – 22:00',
   isOpen: true,
-  statusLabel: 'Aberto',
+  statusLabel: 'Aberta',
   tags: ['Musculação', 'Crossfit'],
   coordinates: { latitude: -23.565, longitude: -46.6525 },
+  occupancy: 'empty',
+  occupancyPercent: '22%',
+  occupancyLabel: 'VAZIO',
 }
 
 describe('GymDetailCard', () => {
@@ -59,14 +63,31 @@ describe('GymDetailCard', () => {
     expect(getByText('Av. Paulista, 1374')).toBeTruthy()
   })
 
-  it('renders rating, distance and opening hours', () => {
+  it('renders rating and review count', () => {
     const ref = React.createRef<React.ComponentRef<typeof import('@gorhom/bottom-sheet').default>>()
     const { getByText } = render(
       <GymDetailCard ref={ref} gym={mockGym} onDismiss={jest.fn()} onCheckIn={jest.fn()} />,
     )
     expect(getByText('4.2')).toBeTruthy()
+    expect(getByText('(214)')).toBeTruthy()
+  })
+
+  it('renders distance and opening hours info cards', () => {
+    const ref = React.createRef<React.ComponentRef<typeof import('@gorhom/bottom-sheet').default>>()
+    const { getByText } = render(
+      <GymDetailCard ref={ref} gym={mockGym} onDismiss={jest.fn()} onCheckIn={jest.fn()} />,
+    )
     expect(getByText('350 m')).toBeTruthy()
     expect(getByText('06:00 – 22:00')).toBeTruthy()
+  })
+
+  it('renders occupancy percent and label', () => {
+    const ref = React.createRef<React.ComponentRef<typeof import('@gorhom/bottom-sheet').default>>()
+    const { getByText } = render(
+      <GymDetailCard ref={ref} gym={mockGym} onDismiss={jest.fn()} onCheckIn={jest.fn()} />,
+    )
+    expect(getByText('22%')).toBeTruthy()
+    expect(getByText('VAZIO')).toBeTruthy()
   })
 
   it('renders all tags', () => {

@@ -48,8 +48,16 @@ const enUS = {
     closed: 'Closed',
     checkIn: 'Check in',
     km: 'km',
+    distance: 'Distance',
+    hours: 'Hours',
     locationError: 'Could not get your location.',
     locationPermissionDenied: 'Location permission denied. Please enable it in settings.',
+    occupancy: {
+      empty: 'EMPTY',
+      moderate: 'MODERATE',
+      busy: 'BUSY',
+      packed: 'PACKED',
+    },
   },
   checkIn: {
     placeholder: 'Check-in Screen',

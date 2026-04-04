@@ -5,12 +5,14 @@ import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { gymRepository } from '@/data/repositories/GymRepository'
-import type { GymModel } from '@/domain/models/GymModel'
+import type { GymCoordinates, GymModel } from '@/domain/models/GymModel'
 import { getNearbyGymsUseCase } from '@/domain/useCases/GetNearbyGymsUseCase'
 import type { GymUiModel, MapUiModel } from '@/presentation/uiModels/MapUiModel'
 import { tk } from '@/shared/i18n'
 import { TabRoutes } from '@/shared/navigation/routes'
 import type { AppTabParamList } from '@/shared/navigation/types'
+
+const DEFAULT_COORDINATES: GymCoordinates = { latitude: -18.9186, longitude: -48.2772 }
 
 function toGymUiModel(gym: GymModel, t: (key: string) => string): GymUiModel {
   const distanceLabel =
@@ -18,18 +20,29 @@ function toGymUiModel(gym: GymModel, t: (key: string) => string): GymUiModel {
       ? `${gym.distanceMeters} m`
       : `${(gym.distanceMeters / 1000).toFixed(1)} ${t(tk.map.km)}`
 
+  const occupancyLabelMap: Record<string, string> = {
+    empty: t(tk.map.occupancy.empty),
+    moderate: t(tk.map.occupancy.moderate),
+    busy: t(tk.map.occupancy.busy),
+    packed: t(tk.map.occupancy.packed),
+  }
+
   return {
     id: gym.id,
     name: gym.name,
     address: gym.address,
     rating: gym.rating,
     ratingLabel: gym.rating.toFixed(1),
+    reviewCount: `(${gym.reviewCount})`,
     distanceLabel,
     openingHours: gym.openingHours,
     isOpen: gym.isOpen,
     statusLabel: gym.isOpen ? t(tk.map.open) : t(tk.map.closed),
     tags: gym.tags,
     coordinates: gym.coordinates,
+    occupancy: gym.occupancy,
+    occupancyPercent: `${gym.occupancyPercent}%`,
+    occupancyLabel: occupancyLabelMap[gym.occupancy] ?? gym.occupancy,
   }
 }
 
@@ -37,10 +50,7 @@ export const useMapViewModel = (): MapUiModel => {
   const { t } = useTranslation()
   const navigation = useNavigation<NavigationProp<AppTabParamList>>()
 
-  const [userCoordinates, setUserCoordinates] = useState<{
-    latitude: number
-    longitude: number
-  } | null>(null)
+  const [userCoordinates, setUserCoordinates] = useState<GymCoordinates | null>(null)
   const [gyms, setGyms] = useState<GymModel[]>([])
   const [selectedGym, setSelectedGym] = useState<GymModel | null>(null)
   const [isLoading, setLoading] = useState(true)
@@ -49,6 +59,17 @@ export const useMapViewModel = (): MapUiModel => {
 
   useEffect(() => {
     let subscription: Location.LocationSubscription | null = null
+
+    async function loadGyms(coords: GymCoordinates) {
+      if (gymsLoaded.current) return
+      gymsLoaded.current = true
+      try {
+        const nearbyGyms = await getNearbyGymsUseCase(coords, gymRepository)
+        setGyms(nearbyGyms)
+      } catch {
+        // mapa ainda funciona sem marcadores
+      }
+    }
 
     async function init() {
       try {
@@ -60,22 +81,16 @@ export const useMapViewModel = (): MapUiModel => {
           return
         }
 
+        setLoading(false)
+        loadGyms(DEFAULT_COORDINATES)
+
         subscription = await Location.watchPositionAsync(
           { accuracy: Location.Accuracy.Balanced, distanceInterval: 10 },
-          async (location) => {
-            const coords = {
+          (location) => {
+            setUserCoordinates({
               latitude: location.coords.latitude,
               longitude: location.coords.longitude,
-            }
-
-            setUserCoordinates(coords)
-
-            if (!gymsLoaded.current) {
-              gymsLoaded.current = true
-              const nearbyGyms = await getNearbyGymsUseCase(coords, gymRepository)
-              setGyms(nearbyGyms)
-              setLoading(false)
-            }
+            })
           },
         )
       } catch {

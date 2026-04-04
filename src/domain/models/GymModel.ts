@@ -10,10 +10,12 @@ export interface GymModel {
   name: string
   address: string
   rating: number
+  reviewCount: number
   distanceMeters: number
   openingHours: string
   isOpen: boolean
   tags: string[]
   coordinates: GymCoordinates
   occupancy: OccupancyLevel
+  occupancyPercent: number
 }
