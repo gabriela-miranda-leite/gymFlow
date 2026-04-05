@@ -6,6 +6,7 @@ export const RootRoutes = {
   GymDetail: 'GymDetail',
   EditProfile: 'EditProfile',
   ChangeEmail: 'ChangeEmail',
+  ChangePassword: 'ChangePassword',
 } as const
 
 export const TabRoutes = {

@@ -152,6 +152,18 @@ const ptBR = {
     confirmButton: 'Confirmar alteração',
     placeholderEmail: 'novo@email.com',
   },
+  changePassword: {
+    title: 'Alterar senha',
+    back: 'Voltar',
+    labelCurrentPassword: 'Senha atual',
+    labelNewPassword: 'Nova senha',
+    labelConfirmPassword: 'Confirmar nova senha',
+    placeholderPassword: '······',
+    placeholderNewPassword: 'Mínimo 6 caracteres',
+    saveButton: 'Alterar senha',
+    errorPasswordsNotMatch: 'As senhas não coincidem',
+    errorPasswordTooShort: 'A senha deve ter no mínimo 6 caracteres',
+  },
   errors: {
     generic: 'Algo deu errado. Tente novamente.',
     loginFailed: 'Email ou senha incorretos.',
