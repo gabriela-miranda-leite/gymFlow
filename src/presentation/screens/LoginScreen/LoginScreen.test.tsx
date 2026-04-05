@@ -33,8 +33,17 @@ jest.mock('react-native-safe-area-context', () => ({
   SafeAreaView: ({ children }: { children: React.ReactNode }) => <>{children}</>,
 }))
 
-jest.mock('@/domain/useCases/LoginUseCase', () => ({
-  ...jest.requireActual('@/domain/useCases/LoginUseCase'),
+jest.mock('@/domain/useCases/login/LoginUseCase', () => ({
+  ...jest.requireActual('@/domain/useCases/login/LoginUseCase'),
+}))
+
+jest.mock('@/data/repositories/auth/AuthRepository', () => ({
+  authRepository: {
+    login: jest.fn().mockResolvedValue({
+      user: { id: '1', name: 'Test', email: 'test@email.com' },
+      token: 'mock-token',
+    }),
+  },
 }))
 
 describe('LoginScreen', () => {

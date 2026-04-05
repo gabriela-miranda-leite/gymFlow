@@ -37,6 +37,20 @@ jest.mock('react-native-gesture-handler', () => {
   }
 })
 
+jest.mock('@maplibre/maplibre-react-native', () => ({
+  MapView: 'MapView',
+  Camera: 'Camera',
+  MarkerView: 'MarkerView',
+  UserLocation: 'UserLocation',
+  setAccessToken: jest.fn(),
+}))
+
+jest.mock('expo-image-picker', () => ({
+  requestMediaLibraryPermissionsAsync: jest.fn().mockResolvedValue({ status: 'granted' }),
+  launchImageLibraryAsync: jest.fn().mockResolvedValue({ canceled: true, assets: [] }),
+  MediaTypeOptions: { Images: 'Images' },
+}))
+
 jest.mock('expo-location', () => ({
   requestForegroundPermissionsAsync: jest.fn().mockResolvedValue({ status: 'granted' }),
   watchPositionAsync: jest

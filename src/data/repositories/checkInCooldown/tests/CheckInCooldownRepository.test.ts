@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
-import { checkInCooldownRepository } from '@/data/repositories/CheckInCooldownRepository'
+import { checkInCooldownRepository } from '@/data/repositories/checkInCooldown/CheckInCooldownRepository'
 
 jest.mock('@react-native-async-storage/async-storage', () => ({
   getItem: jest.fn(),

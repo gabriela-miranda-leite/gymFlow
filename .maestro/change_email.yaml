@@ -1,0 +1,75 @@
+appId: com.gymflow.app
+---
+- launchApp
+
+# Navega para a aba de Perfil
+- tapOn:
+    id: "tab-profile"
+
+# Verifica que a tela de perfil carregou
+- assertVisible:
+    id: "profile-header-card"
+
+# Abre a tela de alteração de email via linha de email
+- tapOn:
+    id: "profile-email-row"
+
+# Verifica que a tela de alteração de email carregou
+- assertVisible:
+    id: "change-email-screen"
+
+- assertVisible:
+    id: "change-email-title"
+
+# Verifica que o campo de novo email está visível
+- assertVisible:
+    id: "change-email-new-email-input"
+
+# Verifica que o botão está desabilitado com campo vazio
+- assertVisible:
+    id: "change-email-save-button"
+
+# Happy path — digita um email válido e confirma
+- tapOn:
+    id: "change-email-new-email-input"
+
+- inputText: "novo@email.com"
+
+- tapOn:
+    id: "change-email-save-button"
+
+# Após salvar, volta para a tela de perfil
+- assertVisible:
+    id: "profile-header-card"
+
+# Re-abre a tela e testa o botão Voltar
+- tapOn:
+    id: "profile-email-row"
+
+- assertVisible:
+    id: "change-email-screen"
+
+- tapOn:
+    id: "change-email-back-button"
+
+- assertVisible:
+    id: "profile-header-card"
+
+# Fluxo de erro — digita email inválido
+- tapOn:
+    id: "profile-email-row"
+
+- assertVisible:
+    id: "change-email-screen"
+
+- tapOn:
+    id: "change-email-new-email-input"
+
+- inputText: "emailinvalido"
+
+- tapOn:
+    id: "change-email-save-button"
+
+# Erro de validação deve aparecer e permanecer na tela
+- assertVisible:
+    id: "change-email-screen"

@@ -5,6 +5,7 @@ export const RootRoutes = {
   CheckInFeedback: 'CheckInFeedback',
   GymDetail: 'GymDetail',
   EditProfile: 'EditProfile',
+  ChangeEmail: 'ChangeEmail',
 } as const
 
 export const TabRoutes = {

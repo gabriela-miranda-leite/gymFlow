@@ -1,6 +1,6 @@
 import { act, renderHook, waitFor } from '@testing-library/react-native'
 
-import { gymRepository } from '@/data/repositories/GymRepository'
+import { gymRepository } from '@/data/repositories/gym/GymRepository'
 import { useGymDetailViewModel } from '@/presentation/viewModels/GymDetailViewModel'
 
 const mockGoBack = jest.fn()
@@ -38,7 +38,7 @@ const mockGym = {
   weeklyFlow: MOCK_WEEKLY_FLOW,
 }
 
-jest.mock('@/data/repositories/GymRepository', () => ({
+jest.mock('@/data/repositories/gym/GymRepository', () => ({
   gymRepository: {
     getById: jest.fn(),
   },

@@ -17,7 +17,7 @@ describe('getProfileUseCase', () => {
     jest.clearAllMocks()
   })
 
-  it('retorna o perfil do repositório', async () => {
+  it('returns the profile from the repository', async () => {
     ;(mockRepository.getProfile as jest.Mock).mockResolvedValueOnce(mockProfile)
 
     const result = await getProfileUseCase(mockRepository)
@@ -25,7 +25,7 @@ describe('getProfileUseCase', () => {
     expect(result).toEqual(mockProfile)
   })
 
-  it('chama repository.getProfile uma vez', async () => {
+  it('calls repository.getProfile once', async () => {
     ;(mockRepository.getProfile as jest.Mock).mockResolvedValueOnce(mockProfile)
 
     await getProfileUseCase(mockRepository)
@@ -33,7 +33,7 @@ describe('getProfileUseCase', () => {
     expect(mockRepository.getProfile).toHaveBeenCalledTimes(1)
   })
 
-  it('propaga erros do repositório', async () => {
+  it('propagates errors from the repository', async () => {
     ;(mockRepository.getProfile as jest.Mock).mockRejectedValueOnce(new Error('unauthorized'))
 
     await expect(getProfileUseCase(mockRepository)).rejects.toThrow('unauthorized')

@@ -14,8 +14,8 @@ jest.mock('@/shared/navigation/useAppNavigation', () => ({
   }),
 }))
 
-jest.mock('@/domain/useCases/LoginUseCase', () => ({
-  ...jest.requireActual('@/domain/useCases/LoginUseCase'),
+jest.mock('@/domain/useCases/login/LoginUseCase', () => ({
+  ...jest.requireActual('@/domain/useCases/login/LoginUseCase'),
 }))
 
 describe('useLoginViewModel', () => {

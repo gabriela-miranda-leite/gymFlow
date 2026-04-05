@@ -144,6 +144,14 @@ const ptBR = {
     placeholderPhone: '(11) 99999-9999',
     saveButton: 'Salvar alterações',
   },
+  editEmail: {
+    title: 'Alterar email',
+    back: 'Voltar',
+    emailActual: 'Email atual:',
+    labelEmail: 'Novo email',
+    confirmButton: 'Confirmar alteração',
+    placeholderEmail: 'novo@email.com',
+  },
   errors: {
     generic: 'Algo deu errado. Tente novamente.',
     loginFailed: 'Email ou senha incorretos.',

@@ -13,7 +13,7 @@ jest.mock('@react-navigation/native', () => ({
 const mockGetProfile = jest.fn()
 const mockUpdateProfile = jest.fn()
 
-jest.mock('@/data/repositories/ProfileRepository', () => ({
+jest.mock('@/data/repositories/profile/ProfileRepository', () => ({
   profileRepository: {
     getProfile: () => mockGetProfile(),
     updateProfile: (...args: unknown[]) => mockUpdateProfile(...args),

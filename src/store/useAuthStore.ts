@@ -19,9 +19,9 @@ interface AuthState {
 export const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
-      user: null,
-      token: null,
-      isAuthenticated: false,
+      user: { id: '1', name: 'Gabriela', email: 'gabriela@email.com' },
+      token: 'mock-token',
+      isAuthenticated: true,
 
       setAuth: (user, token) => set({ user, token, isAuthenticated: true }),
       clearAuth: () => set({ user: null, token: null, isAuthenticated: false }),

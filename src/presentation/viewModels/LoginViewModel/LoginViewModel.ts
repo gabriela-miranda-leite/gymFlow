@@ -3,17 +3,19 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
-import { loginSchema } from '@/domain/useCases/login/LoginUseCase'
+import { authRepository } from '@/data/repositories/auth/AuthRepository'
 import type { LoginCredentials } from '@/domain/useCases/login/LoginUseCase'
+import { loginSchema, loginUseCase } from '@/domain/useCases/login/LoginUseCase'
 import type { LoginUiModel } from '@/presentation/uiModels/LoginUiModel'
 import { tk } from '@/shared/i18n'
 import { useAppNavigation } from '@/shared/navigation/useAppNavigation'
 
 export const useLoginViewModel = (): LoginUiModel => {
   const { t } = useTranslation()
+  const { toSignUp, toApp } = useAppNavigation()
 
-  const [isLoading] = useState<boolean>(false)
-  const [isPasswordVisible, setPasswordVisible] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [isPasswordVisible, setPasswordVisible] = useState(false)
 
   const {
     watch,
@@ -24,6 +26,9 @@ export const useLoginViewModel = (): LoginUiModel => {
     resolver: zodResolver(loginSchema),
     defaultValues: { email: '', password: '' },
   })
+
+  const email = watch('email')
+  const password = watch('password')
 
   const emailError = errors.email?.message ? t(tk.validation.emailInvalid) : null
 
@@ -36,39 +41,39 @@ export const useLoginViewModel = (): LoginUiModel => {
     }
   }
 
-  const email = watch('email')
-  const password = watch('password')
-
-  const onSubmit = handleSubmit(async () => {
-    toApp()
-  })
-
-  const onForgotPassword = () => {
-    //todo implementar função
-  }
-
-  const { toSignUp, toApp } = useAppNavigation()
-
-  const onSignup = () => {
-    toSignUp()
-  }
-
-  const onGoogleLogin = () => {
-    //todo implementar função
-  }
-
-  const onAppleLogin = () => {
-    //todo implementar função
-  }
-
-  const onTogglePasswordVisibility = () => setPasswordVisible((prev) => !prev)
-
   const onEmailChange = (value: string) => {
     setValue('email', value, { shouldValidate: Boolean(errors.email) })
   }
 
-  const onPasswordChange = (value: string) =>
+  const onPasswordChange = (value: string) => {
     setValue('password', value, { shouldValidate: Boolean(errors.password) })
+  }
+
+  const onSubmit = handleSubmit(async (data) => {
+    setIsLoading(true)
+    try {
+      await loginUseCase(data, authRepository)
+      toApp()
+    } finally {
+      setIsLoading(false)
+    }
+  })
+
+  const onTogglePasswordVisibility = () => setPasswordVisible((prev) => !prev)
+
+  const onForgotPassword = () => {
+    // todo: implementar
+  }
+
+  const onSignup = () => toSignUp()
+
+  const onGoogleLogin = () => {
+    // todo: implementar
+  }
+
+  const onAppleLogin = () => {
+    // todo: implementar
+  }
 
   return {
     email,
