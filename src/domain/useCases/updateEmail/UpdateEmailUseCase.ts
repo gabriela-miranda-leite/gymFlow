@@ -1,17 +1,19 @@
 import { z } from 'zod'
 
-export const emailSchema = z.email()
+export const emailSchema = z.object({
+  email: z.email(),
+})
 
 export type EmailCredentials = z.infer<typeof emailSchema>
 
 export interface IUpdateEmailRepository {
-  updateEmail(email: EmailCredentials): Promise<void>
+  updateEmail(email: string): Promise<void>
 }
 
 export const updateEmailUseCase = async (
-  email: EmailCredentials,
+  credentials: EmailCredentials,
   repository: IUpdateEmailRepository,
 ): Promise<void> => {
-  emailSchema.parse(email)
+  const { email } = emailSchema.parse(credentials)
   return repository.updateEmail(email)
 }

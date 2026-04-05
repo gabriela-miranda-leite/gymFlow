@@ -40,7 +40,11 @@ export const useProfileViewModel = (): ProfileUiModel => {
   const onPressProfile = () => {
     navigation.navigate(RootRoutes.EditProfile)
   }
-  const onPressEmail = () => {}
+
+  const onPressEmail = () => {
+    navigation.navigate(RootRoutes.ChangeEmail)
+  }
+
   const onPressPassword = () => {}
   const onPressFavoriteGym = (gymId: string) => {
     navigation.navigate(RootRoutes.GymDetail, { gymId })

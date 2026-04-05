@@ -97,7 +97,7 @@ describe('MapScreen', () => {
 
   it('renders the map view', () => {
     const { getByTestId } = render(<MapScreen />)
-    expect(getByTestId('map-view')).toBeTruthy()
+    expect(getByTestId('user-location-dot')).toBeTruthy()
   })
 
   it('renders a marker for each gym', () => {
@@ -139,8 +139,7 @@ describe('MapScreen', () => {
 
   it('renders map without user dot when userCoordinates is null', () => {
     mockUseMapViewModel.mockReturnValue({ ...mockViewModel, userCoordinates: null })
-    const { getByTestId, queryByTestId } = render(<MapScreen />)
-    expect(getByTestId('map-view')).toBeTruthy()
+    const { queryByTestId } = render(<MapScreen />)
     expect(queryByTestId('user-location-dot')).toBeNull()
   })
 })

@@ -21,6 +21,7 @@ type TextInputProps = {
   secureTextEntry?: boolean
   errorMessage?: string
   disabled?: boolean
+  labelMuted?: boolean
   rightIcon?: AppIconName
   onPressRightIcon?: () => void
   autoCapitalize?: RNTextInputProps['autoCapitalize']
@@ -36,6 +37,7 @@ export function TextInput({
   secureTextEntry = false,
   errorMessage,
   disabled = false,
+  labelMuted = false,
   rightIcon,
   onPressRightIcon,
   autoCapitalize = 'none',
@@ -52,7 +54,10 @@ export function TextInput({
 
   return (
     <Container>
-      <Text variant="body" color={(t) => (disabled ? t.mutedForeground : t.foreground)}>
+      <Text
+        variant="body"
+        color={(t) => (disabled || labelMuted ? t.mutedForeground : t.foreground)}
+      >
         {label}
       </Text>
       <InputRow

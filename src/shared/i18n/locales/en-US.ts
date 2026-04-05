@@ -144,6 +144,14 @@ const enUS = {
     placeholderPhone: 'Your phone number',
     saveButton: 'Save changes',
   },
+  editEmail: {
+    title: 'Change email',
+    back: 'Back',
+    emailActual: 'Current email:',
+    labelEmail: 'New email',
+    confirmButton: 'Confirm change',
+    placeholderEmail: 'new@email.com',
+  },
   errors: {
     generic: 'Something went wrong. Please try again.',
     loginFailed: 'Incorrect email or password.',

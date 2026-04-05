@@ -2,6 +2,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import { useTheme } from '@/contexts/ThemeContext'
+import { ChangeEmailScreen } from '@/presentation/screens/ChangeEmailScreen'
 import { CheckInFeedbackScreen } from '@/presentation/screens/CheckInFeedbackScreen'
 import { EditProfileScreen } from '@/presentation/screens/EditProfileScreen'
 import { GymDetailScreen } from '@/presentation/screens/GymDetailScreen'
@@ -35,6 +36,7 @@ export function RootNavigator() {
         />
         <Stack.Screen name={RootRoutes.GymDetail} component={GymDetailScreen} />
         <Stack.Screen name={RootRoutes.EditProfile} component={EditProfileScreen} />
+        <Stack.Screen name={RootRoutes.ChangeEmail} component={ChangeEmailScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   )

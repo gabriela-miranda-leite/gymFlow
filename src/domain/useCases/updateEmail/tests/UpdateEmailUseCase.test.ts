@@ -10,41 +10,43 @@ describe('updateEmailUseCase', () => {
     jest.clearAllMocks()
   })
 
-  describe('email válido', () => {
-    it('chama repository.updateEmail com o email correto', async () => {
+  describe('valid email', () => {
+    it('calls repository.updateEmail with the correct email', async () => {
       ;(mockRepository.updateEmail as jest.Mock).mockResolvedValueOnce(undefined)
 
-      await updateEmailUseCase('novo@email.com', mockRepository)
+      await updateEmailUseCase({ email: 'novo@email.com' }, mockRepository)
 
       expect(mockRepository.updateEmail).toHaveBeenCalledWith('novo@email.com')
     })
 
-    it('chama repository.updateEmail uma vez', async () => {
+    it('calls repository.updateEmail once', async () => {
       ;(mockRepository.updateEmail as jest.Mock).mockResolvedValueOnce(undefined)
 
-      await updateEmailUseCase('novo@email.com', mockRepository)
+      await updateEmailUseCase({ email: 'novo@email.com' }, mockRepository)
 
       expect(mockRepository.updateEmail).toHaveBeenCalledTimes(1)
     })
 
-    it('propaga erros do repositório', async () => {
-      ;(mockRepository.updateEmail as jest.Mock).mockRejectedValueOnce(new Error('email já em uso'))
+    it('propagates errors from the repository', async () => {
+      ;(mockRepository.updateEmail as jest.Mock).mockRejectedValueOnce(
+        new Error('email already in use'),
+      )
 
-      await expect(updateEmailUseCase('novo@email.com', mockRepository)).rejects.toThrow(
-        'email já em uso',
+      await expect(updateEmailUseCase({ email: 'novo@email.com' }, mockRepository)).rejects.toThrow(
+        'email already in use',
       )
     })
   })
 
-  describe('email inválido', () => {
-    it('lança erro de validação quando o email é inválido', async () => {
-      await expect(updateEmailUseCase('email-invalido', mockRepository)).rejects.toThrow()
+  describe('invalid email', () => {
+    it('throws a validation error when the email is invalid', async () => {
+      await expect(updateEmailUseCase({ email: 'invalid-email' }, mockRepository)).rejects.toThrow()
 
       expect(mockRepository.updateEmail).not.toHaveBeenCalled()
     })
 
-    it('lança erro de validação quando o email está vazio', async () => {
-      await expect(updateEmailUseCase('', mockRepository)).rejects.toThrow()
+    it('throws a validation error when the email is empty', async () => {
+      await expect(updateEmailUseCase({ email: '' }, mockRepository)).rejects.toThrow()
 
       expect(mockRepository.updateEmail).not.toHaveBeenCalled()
     })
