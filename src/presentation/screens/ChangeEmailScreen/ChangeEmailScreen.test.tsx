@@ -126,9 +126,9 @@ describe('ChangeEmailScreen', () => {
     expect(mockOnChangeEmail).toHaveBeenCalledWith('novo@email.com')
   })
 
-  it('renders the current email subtitle', () => {
+  it('renders the current email', () => {
     const { getByText } = render(<ChangeEmailScreen />)
 
-    expect(getByText('editEmail.emailActual')).toBeTruthy()
+    expect(getByText('rafael@email.com')).toBeTruthy()
   })
 })
