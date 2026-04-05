@@ -19,6 +19,7 @@ export type RootStackParamList = {
   }
   EditProfile: undefined
   ChangeEmail: undefined
+  ChangePassword: undefined
 }
 
 export type AppTabParamList = {

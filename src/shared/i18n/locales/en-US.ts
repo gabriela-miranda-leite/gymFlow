@@ -152,6 +152,18 @@ const enUS = {
     confirmButton: 'Confirm change',
     placeholderEmail: 'new@email.com',
   },
+  changePassword: {
+    title: 'Change password',
+    back: 'Back',
+    labelCurrentPassword: 'Current password',
+    labelNewPassword: 'New password',
+    labelConfirmPassword: 'Confirm new password',
+    placeholderPassword: '······',
+    placeholderNewPassword: 'Minimum 6 characters',
+    saveButton: 'Change password',
+    errorPasswordsNotMatch: 'Passwords do not match',
+    errorPasswordTooShort: 'Password must be at least 6 characters',
+  },
   errors: {
     generic: 'Something went wrong. Please try again.',
     loginFailed: 'Incorrect email or password.',

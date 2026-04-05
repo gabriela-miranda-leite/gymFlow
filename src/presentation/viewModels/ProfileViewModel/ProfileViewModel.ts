@@ -45,7 +45,9 @@ export const useProfileViewModel = (): ProfileUiModel => {
     navigation.navigate(RootRoutes.ChangeEmail)
   }
 
-  const onPressPassword = () => {}
+  const onPressPassword = () => {
+    navigation.navigate(RootRoutes.ChangePassword)
+  }
   const onPressFavoriteGym = (gymId: string) => {
     navigation.navigate(RootRoutes.GymDetail, { gymId })
   }
