@@ -1,5 +1,6 @@
 import { act, renderHook } from '@testing-library/react-native'
 
+import { authRepository } from '@/data/repositories/auth/AuthRepository'
 import { useChangeEmailViewModel } from '@/presentation/viewModels/ChangeEmailViewModel'
 
 const mockGoBack = jest.fn()
@@ -20,6 +21,7 @@ jest.mock('@/data/repositories/auth/AuthRepository', () => ({
 describe('useChangeEmailViewModel', () => {
   beforeEach(() => {
     jest.clearAllMocks()
+    jest.mocked(authRepository.updateEmail).mockResolvedValue(undefined)
   })
 
   describe('initial state', () => {
@@ -29,6 +31,7 @@ describe('useChangeEmailViewModel', () => {
       expect(result.current.email).toBe('')
       expect(result.current.emailError).toBeNull()
       expect(result.current.isLoading).toBe(false)
+      expect(result.current.submitError).toBeNull()
     })
 
     it('exposes the current email from the store', () => {
@@ -103,6 +106,75 @@ describe('useChangeEmailViewModel', () => {
       })
 
       expect(mockGoBack).toHaveBeenCalledTimes(1)
+      expect(result.current.submitError).toBeNull()
+    })
+
+    it('sets isLoading to false after success', async () => {
+      const { result } = renderHook(() => useChangeEmailViewModel())
+
+      act(() => {
+        result.current.onChangeEmail('novo@email.com')
+      })
+
+      await act(async () => {
+        await result.current.onPressSave()
+      })
+
+      expect(result.current.isLoading).toBe(false)
+    })
+  })
+
+  describe('onPressSave — error', () => {
+    it('sets submitError when repository throws', async () => {
+      jest.mocked(authRepository.updateEmail).mockRejectedValueOnce(new Error('server error'))
+      const { result } = renderHook(() => useChangeEmailViewModel())
+
+      act(() => {
+        result.current.onChangeEmail('novo@email.com')
+      })
+
+      await act(async () => {
+        await result.current.onPressSave()
+      })
+
+      expect(result.current.submitError).not.toBeNull()
+      expect(mockGoBack).not.toHaveBeenCalled()
+    })
+
+    it('sets isLoading to false after error', async () => {
+      jest.mocked(authRepository.updateEmail).mockRejectedValueOnce(new Error('server error'))
+      const { result } = renderHook(() => useChangeEmailViewModel())
+
+      act(() => {
+        result.current.onChangeEmail('novo@email.com')
+      })
+
+      await act(async () => {
+        await result.current.onPressSave()
+      })
+
+      expect(result.current.isLoading).toBe(false)
+    })
+
+    it('clears submitError when email changes after a failed submit', async () => {
+      jest.mocked(authRepository.updateEmail).mockRejectedValueOnce(new Error('server error'))
+      const { result } = renderHook(() => useChangeEmailViewModel())
+
+      act(() => {
+        result.current.onChangeEmail('novo@email.com')
+      })
+
+      await act(async () => {
+        await result.current.onPressSave()
+      })
+
+      expect(result.current.submitError).not.toBeNull()
+
+      act(() => {
+        result.current.onChangeEmail('outro@email.com')
+      })
+
+      expect(result.current.submitError).toBeNull()
     })
   })
 })

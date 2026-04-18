@@ -4,16 +4,13 @@ import type { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
+import { authRepository } from '@/data/repositories/auth/AuthRepository'
 import type { EmailCredentials } from '@/domain/useCases/updateEmail/UpdateEmailUseCase'
 import { emailSchema, updateEmailUseCase } from '@/domain/useCases/updateEmail/UpdateEmailUseCase'
 import type { ChangeEmailUiModel } from '@/presentation/uiModels/ChangeEmailUiModel'
 import { tk, useTranslation } from '@/shared/i18n'
 import type { RootStackParamList } from '@/shared/navigation/types'
 import { useAuthStore } from '@/store'
-
-const mockEmailRepository = {
-  updateEmail: async () => {},
-}
 
 export const useChangeEmailViewModel = (): ChangeEmailUiModel => {
   const { t } = useTranslation()
@@ -44,7 +41,7 @@ export const useChangeEmailViewModel = (): ChangeEmailUiModel => {
     setIsLoading(true)
     setSubmitError(null)
     try {
-      await updateEmailUseCase(data, mockEmailRepository)
+      await updateEmailUseCase(data, authRepository)
       navigation.goBack()
     } catch {
       setSubmitError(t(tk.errors.generic))
