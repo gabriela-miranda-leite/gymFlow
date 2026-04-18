@@ -7,7 +7,7 @@
 <p align="center">
   <a href="https://github.com/gabriela-miranda-leite/gymflow/actions/workflows/ci.yml"><img src="https://github.com/gabriela-miranda-leite/gymflow/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
   <a href="https://codecov.io/gh/gabriela-miranda-leite/gymflow"><img src="https://codecov.io/gh/gabriela-miranda-leite/gymflow/branch/main/graph/badge.svg" alt="codecov" /></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" /></a>
+  <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg" alt="License: CC BY-NC-SA 4.0" /></a>
   <a href="https://expo.dev"><img src="https://img.shields.io/badge/Expo-55-blue" alt="Expo SDK" /></a>
   <a href="https://reactnative.dev"><img src="https://img.shields.io/badge/React%20Native-0.83-blue" alt="React Native" /></a>
   <a href="https://www.typescriptlang.org"><img src="https://img.shields.io/badge/TypeScript-5.9%20strict-blue" alt="TypeScript" /></a>
@@ -194,3 +194,16 @@ Tipos aceitos: `feat` · `fix` · `chore` · `docs` · `refactor` · `test` · `
 2. Faça suas alterações seguindo as convenções do projeto
 3. Abra um PR descrevendo o que foi feito e por quê
 4. Nunca commite diretamente na `main`
+
+---
+
+## Licença
+
+Este projeto está licenciado sob [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+
+Você pode visualizar, estudar e adaptar o código, desde que:
+- Dê crédito à autora (**Gabriela Miranda Leite**)
+- Não use para fins comerciais
+- Distribua sob a mesma licença
+
+Para uso comercial, entre em contato.
