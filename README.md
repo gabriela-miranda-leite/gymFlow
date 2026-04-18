@@ -1,11 +1,17 @@
-# GymFlow
+<p align="center">
+  <img src="assets/icon.png" alt="GymFlow" width="120" />
+</p>
 
-[![CI](https://github.com/gabriela-miranda-leite/gymflow/actions/workflows/ci.yml/badge.svg)](https://github.com/gabriela-miranda-leite/gymflow/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/gabriela-miranda-leite/gymflow/branch/main/graph/badge.svg)](https://codecov.io/gh/gabriela-miranda-leite/gymflow)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Expo SDK](https://img.shields.io/badge/Expo-55-blue)](https://expo.dev)
-[![React Native](https://img.shields.io/badge/React%20Native-0.83-blue)](https://reactnative.dev)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.9%20strict-blue)](https://www.typescriptlang.org)
+<h1 align="center">GymFlow</h1>
+
+<p align="center">
+  <a href="https://github.com/gabriela-miranda-leite/gymflow/actions/workflows/ci.yml"><img src="https://github.com/gabriela-miranda-leite/gymflow/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
+  <a href="https://codecov.io/gh/gabriela-miranda-leite/gymflow"><img src="https://codecov.io/gh/gabriela-miranda-leite/gymflow/branch/main/graph/badge.svg" alt="codecov" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" /></a>
+  <a href="https://expo.dev"><img src="https://img.shields.io/badge/Expo-55-blue" alt="Expo SDK" /></a>
+  <a href="https://reactnative.dev"><img src="https://img.shields.io/badge/React%20Native-0.83-blue" alt="React Native" /></a>
+  <a href="https://www.typescriptlang.org"><img src="https://img.shields.io/badge/TypeScript-5.9%20strict-blue" alt="TypeScript" /></a>
+</p>
 
 ## Links
 
@@ -17,6 +23,35 @@ Aplicativo mobile que resolve um problema cotidiano de quem frequenta academia: 
 O GymFlow une dados de check-ins colaborativos com histórico de fluxo por horário e academia para entregar uma recomendação inteligente de quando e onde ir treinar.
 
 > **Projeto desenvolvido com IA.** O código, a documentação no Confluence e o gerenciamento de sprint no Jira são inteiramente produzidos com auxílio do [Claude Code](https://claude.ai/code) (Anthropic).
+
+---
+
+## Screenshots
+
+### iOS
+
+<!-- Adicione capturas de tela do iOS abaixo -->
+<!-- Exemplo: <img src="docs/screenshots/ios-home.png" width="250" /> -->
+
+| Tela | Tela | Tela |
+|------|------|------|
+| _em breve_ | _em breve_ | _em breve_ |
+
+### Android
+
+<!-- Adicione capturas de tela do Android abaixo -->
+<!-- Exemplo: <img src="docs/screenshots/android-home.png" width="250" /> -->
+
+| Tela | Tela | Tela |
+|------|------|------|
+| _em breve_ | _em breve_ | _em breve_ |
+
+### Vídeo
+
+<!-- Adicione um vídeo demo aqui -->
+<!-- Exemplo: [![Demo](docs/screenshots/thumb.png)](https://link-do-video) -->
+
+_em breve_
 
 ---
 
