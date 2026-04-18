@@ -1,34 +1,160 @@
-# gymflow
+# GymFlow
 
-[![CI](https://github.com/gabriela-miranda-leite/gymtime/actions/workflows/ci.yml/badge.svg)](https://github.com/gabriela-miranda-leite/gymtime/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/gabriela-miranda-leite/gymtime/branch/main/graph/badge.svg)](https://codecov.io/gh/gabriela-miranda-leite/gymtime)
+[![CI](https://github.com/gabriela-miranda-leite/gymflow/actions/workflows/ci.yml/badge.svg)](https://github.com/gabriela-miranda-leite/gymflow/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/gabriela-miranda-leite/gymflow/branch/main/graph/badge.svg)](https://codecov.io/gh/gabriela-miranda-leite/gymflow)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Expo SDK](https://img.shields.io/badge/Expo-55-blue)](https://expo.dev)
+[![React Native](https://img.shields.io/badge/React%20Native-0.83-blue)](https://reactnative.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.9%20strict-blue)](https://www.typescriptlang.org)
+
+## Links
+
+- [Jira — quadro do projeto](https://gabrielamiranda1110.atlassian.net/jira/software/projects/GYM/boards)
+- [Confluence — documentação técnica](https://gabrielamiranda1110.atlassian.net/wiki/spaces/~70121ce29acf9e1ac44ce861c845ebdfb12d4/pages/393217/Produto+-+Documenta+o+t+cnica+geral)
+
+Aplicativo mobile que resolve um problema cotidiano de quem frequenta academia: chegar e encontrar a academia lotada, sem equipamentos disponíveis e com espera longa.
+
+O GymFlow une dados de check-ins colaborativos com histórico de fluxo por horário e academia para entregar uma recomendação inteligente de quando e onde ir treinar.
+
+---
+
+## Stack
+
+| Tecnologia | Versão | Uso |
+|---|---|---|
+| Expo | 55 | Plataforma mobile |
+| React Native | 0.83 | Framework de UI |
+| TypeScript | 5.9 (strict) | Tipagem estática |
+| Zustand | latest | Estado global |
+| TanStack Query | latest | Cache e estados assíncronos |
+| React Navigation | latest | Navegação (native-stack + bottom-tabs) |
+| styled-components | latest | Estilização via tokens |
+
+---
+
+## Como rodar localmente
+
+### Pré-requisitos
+
+- [Node.js](https://nodejs.org) v24+ (recomendado via [nvm](https://github.com/nvm-sh/nvm))
+- [Expo CLI](https://docs.expo.dev/get-started/installation/)
+- iOS: Xcode + Simulator
+- Android: Android Studio + Emulator
+
+### Passos
+
+```bash
+# 1. Clone o repositório
+git clone https://github.com/gabriela-miranda-leite/gymflow.git
+cd gymflow
+
+# 2. Ative a versão correta do Node
+nvm use
+
+# 3. Instale as dependências
+npm install
+
+# 4. Inicie o app
+npx expo start
+```
+
+Após o passo 4, escaneie o QR code com o Expo Go (celular) ou pressione `i` (iOS Simulator) / `a` (Android Emulator).
+
+---
+
+## Estrutura de pastas
+
+O projeto segue **Clean Architecture**, separando domínio, apresentação e infraestrutura:
+
+```
+src/
+  domain/               # Regras de negócio puras (zero deps de UI ou infra)
+    models/             # Entidades (WorkoutModel, ExerciseModel…)
+    useCases/           # Casos de uso (StartWorkoutUseCase…)
+
+  presentation/         # Camada de UI — renderiza, nunca decide
+    screens/            # Telas (WorkoutScreen.tsx)
+    components/         # Componentes reutilizáveis
+    uiModels/           # Tipos que as telas consomem (WorkoutUiModel.ts)
+    viewModels/         # Contextos e hooks: domain → uiModel → tela
+
+  data/                 # Camada de infraestrutura
+    repositories/       # Abstrações de acesso a dados
+    services/           # Implementações externas (API, AsyncStorage…)
+
+  shared/               # Utilitários transversais
+    hooks/              # Hooks genéricos
+    utils/              # Funções puras
+    types/              # Tipos TypeScript compartilhados
+    constants/          # Constantes globais
+    navigation/         # Configuração do React Navigation
+    assets/             # Assets estáticos
+    i18n/               # Internacionalização
+```
+
+### Fluxo de dados
+
+```
+domain/models → useCase → viewModel → uiModel → screen
+```
+
+- `domain/` nunca importa de `presentation/` ou `data/`
+- Screens importam apenas de `presentation/uiModels/`
+- `viewModels/` é a única ponte entre domain e UI
+
+---
 
 ## Testes
 
-### Unitario (Jest + React Native Testing Library)
+### Unitários (Jest + React Native Testing Library)
 
-1. Instale dependencias:
-	- `npm install`
-2. Rode os testes:
-	- `npm run test`
-3. Rode cobertura:
-	- `npm run test:coverage`
+```bash
+npm install          # instale dependências
+npm run test         # rode os testes
+npm run test:coverage  # gere relatório de cobertura
+```
 
 ### E2E (Maestro)
 
-1. Instale o Maestro CLI (macOS):
-	- `curl -Ls 'https://get.maestro.mobile.dev' | bash`
-2. Garanta que o CLI esta no PATH da sessao atual:
-	- `export PATH="$HOME/.maestro/bin:$PATH"`
-3. Inicie o app no simulador/emulador:
-	- iOS: `npm run ios`
-	- Android: `npm run android`
-4. Em outro terminal, execute os fluxos:
-	- Todos: `npm run e2e:test`
-	- Onboarding: `maestro test .maestro/onboarding.yaml`
-	- Check-in: `maestro test .maestro/checkin.yaml`
+```bash
+# 1. Instale o Maestro CLI (macOS)
+curl -Ls 'https://get.maestro.mobile.dev' | bash
+export PATH="$HOME/.maestro/bin:$PATH"
 
-### Estado atual dos fluxos E2E
+# 2. Inicie o app
+npm run ios      # ou npm run android
 
-Os fluxos em `.maestro/` estao em modo scaffold para preparar a automacao.
-As etapas reais de login, selecao de academia e check-in dependem da implementacao das telas e de `testID` nos elementos interativos.
+# 3. Em outro terminal, execute os fluxos
+npm run e2e:test
+```
+
+---
+
+## Contribuição
+
+### Branches
+
+```
+feat/GYM-<número>    nova funcionalidade
+fix/GYM-<número>     correção de bug
+chore/GYM-<número>   configuração, tooling, refactor
+```
+
+### Commits
+
+Padrão [Conventional Commits](https://www.conventionalcommits.org) em inglês:
+
+```
+feat: add workout creation screen
+fix: correct max load calculation
+chore: update babel config
+```
+
+Tipos aceitos: `feat` · `fix` · `chore` · `docs` · `refactor` · `test` · `style`
+
+### Pull Requests
+
+1. Crie uma branch a partir de `main`
+2. Faça suas alterações seguindo as convenções do projeto
+3. Abra um PR descrevendo o que foi feito e por quê
+4. Nunca commite diretamente na `main`
