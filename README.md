@@ -7,6 +7,11 @@
 [![React Native](https://img.shields.io/badge/React%20Native-0.83-blue)](https://reactnative.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9%20strict-blue)](https://www.typescriptlang.org)
 
+## Links
+
+- [Jira — quadro do projeto](https://gabrielamiranda1110.atlassian.net/jira/software/projects/GYM/boards)
+- [Confluence — documentação técnica](https://gabrielamiranda1110.atlassian.net/wiki/spaces/~70121ce29acf9e1ac44ce861c845ebdfb12d4/pages/393217/Produto+-+Documenta+o+t+cnica+geral)
+
 Aplicativo mobile que resolve um problema cotidiano de quem frequenta academia: chegar e encontrar a academia lotada, sem equipamentos disponíveis e com espera longa.
 
 O GymFlow une dados de check-ins colaborativos com histórico de fluxo por horário e academia para entregar uma recomendação inteligente de quando e onde ir treinar.
