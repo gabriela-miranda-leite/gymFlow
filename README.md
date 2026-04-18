@@ -7,7 +7,9 @@
 [![React Native](https://img.shields.io/badge/React%20Native-0.83-blue)](https://reactnative.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9%20strict-blue)](https://www.typescriptlang.org)
 
-Aplicativo mobile para gerenciamento de treinos na academia. Permite que alunos registrem seus treinos, acompanhem sua evolução e gerenciem seu perfil de forma prática.
+Aplicativo mobile que resolve um problema cotidiano de quem frequenta academia: chegar e encontrar a academia lotada, sem equipamentos disponíveis e com espera longa.
+
+O GymFlow une dados de check-ins colaborativos com histórico de fluxo por horário e academia para entregar uma recomendação inteligente de quando e onde ir treinar.
 
 ---
 
