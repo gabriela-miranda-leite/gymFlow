@@ -44,6 +44,7 @@ module.exports = {
     // serviços de infra — apiClient, queryClient
     '!src/data/services/**',
   ],
+  coverageReporters: ['lcov', 'text', 'text-summary'],
   coverageThreshold: {
     global: {
       branches: 20,
