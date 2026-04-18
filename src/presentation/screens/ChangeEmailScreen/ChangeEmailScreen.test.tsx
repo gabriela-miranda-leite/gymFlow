@@ -11,6 +11,7 @@ const defaultViewModel = {
   currentEmail: 'rafael@email.com',
   email: '',
   emailError: null,
+  submitError: null,
   isLoading: false,
   onChangeEmail: mockOnChangeEmail,
   onPressSave: mockOnPressSave,
@@ -23,42 +24,29 @@ jest.mock('@/presentation/viewModels/ChangeEmailViewModel', () => ({
   useChangeEmailViewModel: () => mockUseChangeEmailViewModel(),
 }))
 
-jest.mock('@/contexts/ThemeContext', () => ({
-  useTheme: () => ({
-    theme: {
-      background: '#FFFFFF',
-      card: '#F7F7F8',
-      foreground: '#18181B',
-      mutedForeground: '#A1A1AA',
-      border: '#E4E4E7',
-      input: '#F2F2F7',
-      destructive: '#EF4444',
-      brand: {
-        primary: '#FF6A00',
-        primaryForeground: '#FFFFFF',
-        subtle: 'rgba(255, 106, 0, 0.10)',
-      },
+const mockTheme = {
+  theme: {
+    background: '#FFFFFF',
+    card: '#F7F7F8',
+    foreground: '#18181B',
+    mutedForeground: '#A1A1AA',
+    border: '#E4E4E7',
+    input: '#F2F2F7',
+    destructive: '#EF4444',
+    brand: {
+      primary: '#FF6A00',
+      primaryForeground: '#FFFFFF',
+      subtle: 'rgba(255, 106, 0, 0.10)',
     },
-  }),
-}))
+  },
+}
 
 jest.mock('@/contexts', () => ({
-  useTheme: () => ({
-    theme: {
-      background: '#FFFFFF',
-      card: '#F7F7F8',
-      foreground: '#18181B',
-      mutedForeground: '#A1A1AA',
-      border: '#E4E4E7',
-      input: '#F2F2F7',
-      destructive: '#EF4444',
-      brand: {
-        primary: '#FF6A00',
-        primaryForeground: '#FFFFFF',
-        subtle: 'rgba(255, 106, 0, 0.10)',
-      },
-    },
-  }),
+  useTheme: () => mockTheme,
+}))
+
+jest.mock('@/contexts/ThemeContext', () => ({
+  useTheme: () => mockTheme,
 }))
 
 jest.mock('react-native-safe-area-context', () => ({
@@ -101,6 +89,25 @@ describe('ChangeEmailScreen', () => {
     expect(getByTestId('change-email-save-button')).toBeTruthy()
   })
 
+  it('renders the current email', () => {
+    const { getByText } = render(<ChangeEmailScreen />)
+
+    expect(getByText('rafael@email.com')).toBeTruthy()
+  })
+
+  it('save button is disabled when email is empty', () => {
+    const { getByTestId } = render(<ChangeEmailScreen />)
+
+    expect(getByTestId('change-email-save-button')).toBeDisabled()
+  })
+
+  it('save button is enabled when email is filled', () => {
+    mockUseChangeEmailViewModel.mockReturnValue({ ...defaultViewModel, email: 'novo@email.com' })
+    const { getByTestId } = render(<ChangeEmailScreen />)
+
+    expect(getByTestId('change-email-save-button')).not.toBeDisabled()
+  })
+
   it('calls onPressBack when back button is pressed', () => {
     const { getByTestId } = render(<ChangeEmailScreen />)
 
@@ -126,9 +133,23 @@ describe('ChangeEmailScreen', () => {
     expect(mockOnChangeEmail).toHaveBeenCalledWith('novo@email.com')
   })
 
-  it('renders the current email', () => {
+  it('displays inline email validation error', () => {
+    mockUseChangeEmailViewModel.mockReturnValue({
+      ...defaultViewModel,
+      emailError: 'Insira um email válido.',
+    })
     const { getByText } = render(<ChangeEmailScreen />)
 
-    expect(getByText('rafael@email.com')).toBeTruthy()
+    expect(getByText('Insira um email válido.')).toBeTruthy()
+  })
+
+  it('displays submit error message', () => {
+    mockUseChangeEmailViewModel.mockReturnValue({
+      ...defaultViewModel,
+      submitError: 'Algo deu errado. Tente novamente.',
+    })
+    const { getByTestId } = render(<ChangeEmailScreen />)
+
+    expect(getByTestId('change-email-submit-error')).toBeTruthy()
   })
 })

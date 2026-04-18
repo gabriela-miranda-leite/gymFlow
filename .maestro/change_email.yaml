@@ -73,3 +73,5 @@ appId: com.gymflow.app
 # Erro de validação deve aparecer e permanecer na tela
 - assertVisible:
     id: "change-email-screen"
+
+- assertVisible: "Insira um email válido."

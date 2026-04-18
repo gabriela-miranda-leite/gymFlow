@@ -50,7 +50,7 @@ export const CurrentEmailRow = styled.Text<{ color: string }>`
 `
 
 export const CurrentEmailBold = styled.Text<{ color: string }>`
-  font-family: ${FontFamily.regular};
+  font-family: ${FontFamily.medium};
   font-weight: ${FontWeight.medium};
   color: ${({ color }) => color};
 `
