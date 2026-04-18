@@ -18,6 +18,9 @@
   <a href="https://gabrielamiranda1110.atlassian.net/wiki/spaces/~70121ce29acf9e1ac44ce861c845ebdfb12d4/pages/393217/Produto+-+Documenta+o+t+cnica+geral">Confluence</a>
 </p>
 
+> [!WARNING]
+> **Este projeto está em desenvolvimento ativo.** Funcionalidades podem estar incompletas ou sujeitas a mudanças.
+
 ---
 
 Aplicativo mobile que resolve um problema cotidiano de quem frequenta academia: chegar e encontrar a academia lotada, sem equipamentos disponíveis e com espera longa.
