@@ -16,6 +16,8 @@ Aplicativo mobile que resolve um problema cotidiano de quem frequenta academia: 
 
 O GymFlow une dados de check-ins colaborativos com histórico de fluxo por horário e academia para entregar uma recomendação inteligente de quando e onde ir treinar.
 
+> **Projeto desenvolvido com IA.** O código, a documentação no Confluence e o gerenciamento de sprint no Jira são inteiramente produzidos com auxílio do [Claude Code](https://claude.ai/code) (Anthropic).
+
 ---
 
 ## Stack
