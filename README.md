@@ -205,7 +205,7 @@ Tipos aceitos: `feat` · `fix` · `chore` · `docs` · `refactor` · `test` · `
 Este projeto está licenciado sob [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
 Você pode visualizar, estudar e adaptar o código, desde que:
-- Dê crédito à autora (**Gabriela Miranda Leite**)
+- Dê crédito à autora (**Gabriela Miranda de Souza Leite**)
 - Não use para fins comerciais
 - Distribua sob a mesma licença
 
